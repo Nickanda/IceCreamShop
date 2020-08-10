@@ -1,4 +1,5 @@
-const { Client } = require('discord.js');
+const { Client, Collection } = require('discord.js');
+const Sequelize = require('sequelize');
 
 module.exports = class DiscordClient extends Client {
     constructor(options) {
@@ -14,39 +15,53 @@ module.exports = class DiscordClient extends Client {
         this.commands = new Collection();
         this.aliases = new Collection();
 
-        // Now we integrate the use of Evie's awesome Enhanced Map module, which
-        // essentially saves a collection to disk. This is great for per-server configs,
-        // and makes things extremely easy for this purpose.
-        this.settings = new Enmap({ name: "settings", cloneLevel: "deep", fetchAll: false, autoFetch: true });
+        this.database = new Sequelize('iceCreamShop', this.config.database.username, this.config.database.password, {
+            host: 'localhost',
+            dialect: 'mysql',
+            logging: false
+        });
+
+        this.settings = this.database.define('settings', {
+            guildId: {
+                type: Sequelize.STRING,
+                primaryKey: true,
+            },
+            prefix: {
+                type: Sequelize.STRING,
+                defaultValue: 'i!'
+            },
+            premiumBoost: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            }
+        });
+
+        this.shops = this.database.define('shops', {
+            userId: {
+                type: Sequelize.STRING,
+                primaryKey: true,
+            },
+            name: {
+                type: Sequelize.STRING,
+                defaultValue: 'Ice Cream Shop'
+            },
+            money: {
+                type: Sequelize.INTEGER,
+                defaultValue: 1000
+            }
+        });
+
+        this.botStaff = {
+            developers: ["190966781760765952", "386572401141481482"],
+            administrators: [],
+            support: []
+        };
 
         //requiring the Logger class for easy console logging
-        this.logger = require("./modules/Logger");
+        this.logger = require("./Logger");
 
         // Basically just an async shortcut to using a setTimeout. Nothing fancy!
         this.wait = require("util").promisify(setTimeout);
-    }
-
-    /*
-    PERMISSION LEVEL FUNCTION
-    This is a very basic permission system for commands which uses "levels"
-    "spaces" are intentionally left black so you can add them if you want.
-    NEVER GIVE ANYONE BUT OWNER THE LEVEL 10! By default this can run any
-    command including the VERY DANGEROUS `eval` command!
-    */
-    permlevel(message) {
-        let permlvl = 0;
-
-        const permOrder = this.config.permLevels.slice(0).sort((p, c) => p.level < c.level ? 1 : -1);
-
-        while (permOrder.length) {
-            const currentLevel = permOrder.shift();
-            if (message.guild && currentLevel.guildOnly) continue;
-            if (currentLevel.check(message)) {
-                permlvl = currentLevel.level;
-                break;
-            }
-        }
-        return permlvl;
     }
 
     /* 
