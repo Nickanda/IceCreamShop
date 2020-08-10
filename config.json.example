@@ -1,3 +1,7 @@
 {
-    "token": ""
+    "token": "",
+    "database": {
+        "username": "",
+        "password": ""
+    }
 }
