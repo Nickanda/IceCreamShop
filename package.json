@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Nickanda/IceCreamShop#readme",
   "dependencies": {
+    "chalk": "^4.1.0",
     "discord.js": "^12.2.0",
     "klaw": "^3.0.0",
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.4"
   }
 }
