@@ -5,13 +5,8 @@ module.exports = class DiscordClient extends Client {
     constructor(options) {
         super(options);
 
-        // Here we load the config.js file that contains our token and our prefix values.
         this.config = require("../../config.json");
-        // client.config.token contains the bot's token
-        // client.config.prefix contains the message prefix
 
-        // Aliases and commands are put in collections where they can be read from,
-        // catalogued, listed, etc.
         this.commands = new Collection();
         this.aliases = new Collection();
 
