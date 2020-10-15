@@ -14,6 +14,8 @@ module.exports = class PingCommand extends Command {
         try {
             const msg = await message.channel.send("🏓 Ping!");
             msg.edit(`🏓 Pong! (Roundtrip took: ${msg.createdTimestamp - message.createdTimestamp}ms. 💙: ${Math.round(this.client.ws.ping)}ms.)`);
-        } catch (e) { }
+        } catch (e) { 
+            msg.send("We seem to be having some trouble with this command right now, please send the error below to a developer.\n\n" + e);
+        }
     }
 }
