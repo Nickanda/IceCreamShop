@@ -19,7 +19,7 @@ module.exports = class DiscordClient extends Client {
             logging: false
         });
 
-        this.settings = this.database.init({
+        this.settings = this.database.define('settings', {
             guildId: {
                 type: Sequelize.STRING,
                 primaryKey: true,
@@ -32,12 +32,9 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false
             }
-        }, {
-            sequelize: this.database,
-            modelName: 'settings'
         });
 
-        this.shops = this.database.define({
+        this.shops = this.database.define('shops', {
             userId: {
                 type: Sequelize.STRING,
                 primaryKey: true,
@@ -54,9 +51,6 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW
             }
-        }, {
-            sequelize: this.database,
-            modelName: 'shops'
         });
 
         this.botStaff = {
@@ -119,7 +113,7 @@ module.exports = class DiscordClient extends Client {
 
     async getSettings(guild) {
         if (!guild) return this.settings.find("default");
-        const [settings, created] = await client.settings.findOrCreate({ where: { guildId: guild.id } })
+        const [settings, created] = await this.settings.findOrCreate({ where: { guildId: guild.id } })
         return settings;
     }
 
