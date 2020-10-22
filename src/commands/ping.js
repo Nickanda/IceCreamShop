@@ -1,7 +1,7 @@
 const Command = require('../structures/Command');
 
 module.exports = class PingCommand extends Command {
-    constructor() {
+    constructor(client) {
         super(client, {
             name: "ping",
             description: "Latency and API response times.",

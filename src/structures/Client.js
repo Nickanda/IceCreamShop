@@ -112,7 +112,7 @@ module.exports = class DiscordClient extends Client {
     }
 
     async getSettings(guild) {
-        if (!guild) return this.settings.find("default");
+        if (!guild) return await this.settings.findOne("default");
         const [settings, created] = await this.settings.findOrCreate({ where: { guildId: guild.id } })
         return settings;
     }

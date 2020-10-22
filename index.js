@@ -15,16 +15,6 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-setTimeout(() => {
-  try {
-    foo();
-  } catch (e) {
-    Sentry.captureException(e);
-  } finally {
-    transaction.finish();
-  }
-}, 99);
-
 const init = async () => {
     klaw("./src/commands").on("data", (item) => {
         const cmdFile = path.parse(item.path);
