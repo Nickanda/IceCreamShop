@@ -131,13 +131,13 @@ module.exports = class DiscordClient extends Client {
     // getSettings merges the client defaults with the guild settings. guild settings in
     // enmap should only have *unique* overrides that are different from defaults.
     getSettings(guild) {
-        const defaults = this.settings.get("default") || {};
-        const guildData = guild ? this.settings.get(guild.id) || {} : {};
-        const returnObject = {};
-        Object.keys(defaults).forEach((key) => {
-            returnObject[key] = guildData[key] ? guildData[key] : defaults[key];
-        });
-        return returnObject;
+        if (guild) {
+            const [settings, created] = await client.settings.findOrCreate( { where: { guildId: guild.id } } )
+            return (settings);
+        } else {
+            const settings = {}
+            return (settings);
+        }
     }
 
     // writeSettings overrides, or adds, any configuration item that is different

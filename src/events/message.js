@@ -9,22 +9,15 @@ module.exports = class {
 
         if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
 
-        // Grab the settings for this server from the Enmap
-        // If there is no guild, get default conf (DMs)
         const settings = this.client.getSettings(message.guild);
 
-        // For ease of use in commands and functions, we'll attach the settings
-        // to the message object, so `message.settings` is accessible.
         message.settings = settings;
 
-        // Checks if the bot was mentioned, with no message after it, returns the prefix.
         const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
         if (message.content.match(prefixMention)) {
             return message.reply(`My prefix on this guild is \`${settings.prefix}\``);
         }
 
-        // Also good practice to ignore any message that does not start with our prefix,
-        // which is set in the configuration file.
         if (message.content.indexOf(settings.prefix) !== 0) return;
 
         // Here we separate our "command" name, and our "arguments" for the command.
