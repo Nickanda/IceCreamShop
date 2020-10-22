@@ -1,21 +1,18 @@
 const { Client, Collection } = require('discord.js');
 const Sequelize = require('sequelize');
 
+const Logger = require('./Logger');
+
 module.exports = class DiscordClient extends Client {
     constructor(options) {
         super(options);
 
-        // Here we load the config.js file that contains our token and our prefix values.
-        this.config = require("../../config.json");
-        // client.config.token contains the bot's token
-        // client.config.prefix contains the message prefix
+        this.settings = require('../../settings.json');
 
-        // Aliases and commands are put in collections where they can be read from,
-        // catalogued, listed, etc.
         this.commands = new Collection();
         this.aliases = new Collection();
 
-        this.database = new Sequelize('iceCreamShop', this.config.database.username, this.config.database.password, {
+        this.database = new Sequelize('iceCreamShop', this.settings.database.username, this.settings.database.password, {
             host: 'localhost',
             dialect: 'mysql',
             logging: false
@@ -57,20 +54,9 @@ module.exports = class DiscordClient extends Client {
             support: []
         };
 
-        //requiring the Logger class for easy console logging
-        this.logger = require("./Logger");
-
-        // Basically just an async shortcut to using a setTimeout. Nothing fancy!
+        this.logger = new Logger();
         this.wait = require("util").promisify(setTimeout);
     }
-
-    /* 
-    COMMAND LOAD AND UNLOAD
-    
-    To simplify the loading and unloading of commands from multiple locations
-    including the index.js load loop, and the reload function, these 2 ensure
-    that unloading happens in a consistent manner across the board.
-    */
 
     loadCommand(commandPath, commandName) {
         try {
@@ -106,13 +92,6 @@ module.exports = class DiscordClient extends Client {
         return false;
     }
 
-    /*
-    MESSAGE CLEAN FUNCTION
-    "Clean" removes @everyone pings, as well as tokens, and makes code blocks
-    escaped so they're shown more easily. As a bonus it resolves promises
-    and stringifies objects!
-    This is mostly only used by the Eval and Exec commands.
-    */
     async clean(text) {
         if (text && text.constructor.name == "Promise")
             text = await text;
@@ -127,48 +106,26 @@ module.exports = class DiscordClient extends Client {
         return text;
     }
 
-    /* SETTINGS FUNCTIONS
-    These functions are used by any and all location in the bot that wants to either
-    read the current *complete* guild settings (default + overrides, merged) or that
-    wants to change settings for a specific guild.
-    */
-
-    // getSettings merges the client defaults with the guild settings. guild settings in
-    // enmap should only have *unique* overrides that are different from defaults.
     getSettings(guild) {
-        const defaults = this.settings.get("default") || {};
-        const guildData = guild ? this.settings.get(guild.id) || {} : {};
-        const returnObject = {};
-        Object.keys(defaults).forEach((key) => {
-            returnObject[key] = guildData[key] ? guildData[key] : defaults[key];
-        });
-        return returnObject;
+        if (!guild) return this.settings.find("default");
+        const [settings, created] = await client.settings.findOrCreate( { where: { guildId: guild.id } } )
+		return settings;
     }
 
-    // writeSettings overrides, or adds, any configuration item that is different
-    // than the defaults. This ensures less storage wasted and to detect overrides.
     writeSettings(id, newSettings) {
-        const defaults = this.settings.get("default");
-        let settings = this.settings.get(id);
-        if (typeof settings != "object") settings = {};
-        for (const key in newSettings) {
-            if (defaults[key] !== newSettings[key]) {
-                settings[key] = newSettings[key];
-            } else {
-                delete settings[key];
-            }
-        }
-        this.settings.set(id, settings);
+        // const defaults = this.settings.get("default");
+        // let settings = this.settings.get(id);
+        // if (typeof settings != "object") settings = {};
+        // for (const key in newSettings) {
+        //     if (defaults[key] !== newSettings[key]) {
+        //         settings[key] = newSettings[key];
+        //     } else {
+        //         delete settings[key];
+        //     }
+        // }
+        // this.settings.set(id, settings);
     }
 
-    /*
-    SINGLE-LINE AWAITMESSAGE
-    A simple way to grab a single reply, from the user that initiated
-    the command. Useful to get "precisions" on certain things...
-    USAGE
-    const response = await client.awaitReply(msg, "Favourite Color?");
-    msg.reply(`Oh, I really love ${response} too!`);
-    */
     async awaitReply(msg, question, limit = 60000) {
         const filter = m => m.author.id === msg.author.id;
         await msg.channel.send(question);
