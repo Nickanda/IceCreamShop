@@ -8,7 +8,7 @@ module.exports = class DiscordClient extends Client {
     constructor(options) {
         super(options);
 
-        this.config = require(path.join(process.cwd(), './settings.json'));
+        this.config = require(path.join(process.cwd(), './config.json'));
 
         this.commands = new Collection();
         this.aliases = new Collection();
