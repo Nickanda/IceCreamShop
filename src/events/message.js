@@ -5,6 +5,7 @@ module.exports = class {
 
     async run(message) {
         if (message.author.bot) return;
+        if (message.system) return;
 
         if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
 
