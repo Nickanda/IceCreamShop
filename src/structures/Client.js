@@ -1,4 +1,5 @@
 const { Client, Collection } = require('discord.js');
+const path = require('path');
 const Sequelize = require('sequelize');
 
 const Logger = require('./Logger');
@@ -7,18 +8,18 @@ module.exports = class DiscordClient extends Client {
     constructor(options) {
         super(options);
 
-        this.settings = require('../../settings.json');
+        this.config = require(path.join(process.cwd(), './settings.json'));
 
         this.commands = new Collection();
         this.aliases = new Collection();
 
-        this.database = new Sequelize('iceCreamShop', this.settings.database.username, this.settings.database.password, {
+        this.database = new Sequelize('iceCreamShop', this.config.database.username, this.config.database.password, {
             host: 'localhost',
             dialect: 'mysql',
             logging: false
         });
 
-        this.settings = this.database.define('settings', {
+        this.settings = this.database.init({
             guildId: {
                 type: Sequelize.STRING,
                 primaryKey: true,
@@ -31,9 +32,12 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false
             }
+        }, {
+            sequelize: this.database,
+            modelName: 'settings'
         });
 
-        this.shops = this.database.define('shops', {
+        this.shops = this.database.define({
             userId: {
                 type: Sequelize.STRING,
                 primaryKey: true,
@@ -45,7 +49,14 @@ module.exports = class DiscordClient extends Client {
             money: {
                 type: Sequelize.INTEGER,
                 defaultValue: 1000
+            },
+            lastCheck: {
+                type: Sequelize.DATE,
+                defaultValue: Sequelize.NOW
             }
+        }, {
+            sequelize: this.database,
+            modelName: 'shops'
         });
 
         this.botStaff = {
@@ -60,7 +71,7 @@ module.exports = class DiscordClient extends Client {
 
     loadCommand(commandPath, commandName) {
         try {
-            const props = new (require(`${commandPath}${path.sep}${commandName}`))(this);
+            const props = new (require(`${commandPath}/${commandName}`))(this);
             this.logger.log(`Loading Command: ${props.help.name}. 👌`, "log");
             props.conf.location = commandPath;
             if (props.init) {
@@ -106,10 +117,10 @@ module.exports = class DiscordClient extends Client {
         return text;
     }
 
-    getSettings(guild) {
+    async getSettings(guild) {
         if (!guild) return this.settings.find("default");
-        const [settings, created] = await client.settings.findOrCreate( { where: { guildId: guild.id } } )
-		return settings;
+        const [settings, created] = await client.settings.findOrCreate({ where: { guildId: guild.id } })
+        return settings;
     }
 
     writeSettings(id, newSettings) {

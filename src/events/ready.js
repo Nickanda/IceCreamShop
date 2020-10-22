@@ -12,12 +12,14 @@ module.exports = class ReadyEvent {
         }, 60000);
 
         await this.client.settings.sync();
+        await this.client.shops.sync();
 
-        if (!this.client.settings.has("default")) {
+        const defaultSetting = await this.client.settings.findOne({ where: { guildId: "default" } });
+        if (!defaultSetting) {
             throw new Error("No default setting available in the settings database.")
         }
 
-        this.client.user.setActivity(`${this.client.settings.get("default").get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
+        this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
 
         this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.users.cache.size} users in ${this.client.guilds.cache.size} servers.`, "ready");
     }
