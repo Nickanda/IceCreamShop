@@ -6,7 +6,7 @@ module.exports = class RefillCommand extends Command {
     constructor(client) {
         super(client, {
             name: "refill",
-            description: "Shows your current balance",
+            description: "Refills all of your ice cream",
             category: "Economy",
             usage: "refill"
         });

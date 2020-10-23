@@ -6,7 +6,7 @@ module.exports = class AdsCommand extends Command {
     constructor(client) {
         super(client, {
             name: "ads",
-            description: "Shows your current balance",
+            description: "Shows the ads that you are currently running",
             category: "Economy",
             usage: "ads"
         });
