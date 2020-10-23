@@ -2,13 +2,13 @@ const Discord = require('discord.js');
 
 const Command = require('../structures/Command');
 
-module.exports = class BalanceCommand extends Command {
+module.exports = class RefillCommand extends Command {
     constructor(client) {
         super(client, {
-            name: "balance",
+            name: "refill",
             description: "Shows your current balance",
             category: "Economy",
-            usage: "balance"
+            usage: "refill"
         });
     }
 
