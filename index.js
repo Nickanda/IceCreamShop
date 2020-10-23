@@ -5,7 +5,7 @@ const path = require("path");
 
 const Client = require('./src/structures/Client');
 
-const client = new Client({ ws: { intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] } });
+const client = new Client({ fetchAllMembers: true, ws: { intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"] } });
 
 const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");

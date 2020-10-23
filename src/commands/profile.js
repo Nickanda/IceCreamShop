@@ -36,6 +36,7 @@ module.exports = class ProfileCommand extends Command {
         }
 
         const embed = new Discord.MessageEmbed()
+            .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.get('name'))
             .setDescription(`💰 $${profile.get('money')}
                 Maximum customers in your shop: ${profile.get('customerMax')}
@@ -44,7 +45,6 @@ module.exports = class ProfileCommand extends Command {
 
                 Advertisements: ${advertisements}`)
             .setColor(0x00FF00)
-            .setThumbnail(message.author.displayAvatarURL())
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
