@@ -1,6 +1,6 @@
 const Command = require('../structures/Command');
 
-class Eval extends Command {
+module.exports = class EvalCommand extends Command {
     constructor(client) {
         super(client, {
             name: "eval",
@@ -11,7 +11,7 @@ class Eval extends Command {
         });
     }
 
-    async run(message, args, level) {
+    async run(message, args) {
         const msg = message
         const code = args.join(" ");
         try {
@@ -28,5 +28,3 @@ class Eval extends Command {
         }
     }
 }
-
-module.exports = Eval;

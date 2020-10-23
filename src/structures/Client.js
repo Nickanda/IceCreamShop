@@ -3,6 +3,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 
 const Logger = require('./Logger');
+const ShopHandler = require('./ShopHandler');
 
 module.exports = class DiscordClient extends Client {
     constructor(options) {
@@ -47,11 +48,32 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.INTEGER,
                 defaultValue: 1000
             },
-            lastCheck: {
+            customerMax: {
+                type: Sequelize.INTEGER,
+                defaultValue: 10
+            },
+            lastRefill: {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW
+            },
+            flavors: {
+                type: Sequelize.STRING,
+                defaultValue: JSON.stringify(["vanilla"])
+            },
+            advertisements: {
+                type: Sequelize.STRING,
+                defaultValue: JSON.stringify({})
             }
         });
+
+        this.cooldowns = this.database.define('cooldowns', {
+            userId: {
+                type: Sequelize.STRING
+            },
+            action: {
+                type: Sequelize.STRING
+            }
+        })
 
         this.botStaff = {
             developers: ["190966781760765952", "386572401141481482"],
@@ -60,6 +82,7 @@ module.exports = class DiscordClient extends Client {
         };
 
         this.logger = new Logger();
+        this.shopHandler = new ShopHandler(this);
         this.wait = require("util").promisify(setTimeout);
     }
 

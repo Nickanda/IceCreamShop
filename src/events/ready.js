@@ -13,6 +13,7 @@ module.exports = class ReadyEvent {
 
         await this.client.settings.sync();
         await this.client.shops.sync();
+        await this.client.cooldowns.sync();
 
         const defaultSetting = await this.client.settings.findOne({ where: { guildId: "default" } });
         if (!defaultSetting) {
