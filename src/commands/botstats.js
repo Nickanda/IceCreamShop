@@ -20,5 +20,11 @@ module.exports = class BotStatsCommand extends Command {
             .addField("Support Link", "https://discord.gg/sXkpG2J", true)
             .addField("Memory Usage", `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`)
             .addField("Library", `Discord.JS v${Discord.version}`, true)
+            .setColor(0x00FF00)
+            .setThumbnail(message.author.displayAvatarURL())
+            .setFooter('i!help', this.client.user.displayAvatarURL())
+            .setTimestamp();
+        
+        message.channel.send(embed);
     }
 }
