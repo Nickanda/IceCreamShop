@@ -6,7 +6,7 @@ module.exports = class ServeCommand extends Command {
     constructor(client) {
         super(client, {
             name: "serve",
-            description: "Serves all fo the customers in your shop right now",
+            description: "Serves all of the customers in your shop right now",
             category: "Economy",
             usage: "serve"
         });
