@@ -41,6 +41,10 @@ module.exports = class {
         //     }
         // }
 
+        if (cmd.conf.permLevel !== "") {
+            if (!this.client.botStaff[cmd.conf.permLevel].includes(message.author.id)) return message.channel.send('You do not have permission to use this command.');
+        }
+
         this.client.logger.log(`${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");
         
         try {

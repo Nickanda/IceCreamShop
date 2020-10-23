@@ -6,10 +6,11 @@ module.exports = class Command {
         usage = "No usage provided.",
         enabled = true,
         guildOnly = false,
-        aliases = new Array()
+        aliases = new Array(),
+        permLevel = ""
     }) {
         this.client = client;
-        this.conf = { enabled, guildOnly, aliases };
+        this.conf = { enabled, guildOnly, aliases, permLevel };
         this.help = { name, description, category, usage };
     }
 }
