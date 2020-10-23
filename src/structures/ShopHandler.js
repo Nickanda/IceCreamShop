@@ -36,34 +36,34 @@ module.exports = class ShopHandler {
     }
 
     async claimDaily(message) {
-        try {
-            const profile = await this.getProfile(message);
-            const cooldown = await this.getCooldowns(message, "daily");
+        return new Promise(async (res, rej) => {
+            try {
+                const profile = await this.getProfile(message);
+                const cooldown = await this.getCooldowns(message, "daily");
 
-            if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > 79200000 && Date.now() - Date.parse(cooldown.createdAt) < 172800000)) { // between 22 hrs and 48 hrs
-                await profile.increment("money", {
-                    where: {
-                        userId: message.author.id
-                    },
-                    by: 50
-                });
+                if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > 79200000 && Date.now() - Date.parse(cooldown.createdAt) < 172800000)) { // between 22 hrs and 48 hrs
+                    await profile.increment("money", {
+                        where: {
+                            userId: message.author.id
+                        },
+                        by: 50
+                    });
 
-                if (cooldown) await cooldown.destroy();
+                    if (cooldown) await cooldown.destroy();
 
-                await this.client.cooldowns.create({
-                    userId: message.author.id,
-                    action: "daily"
-                });
+                    await this.client.cooldowns.create({
+                        userId: message.author.id,
+                        action: "daily"
+                    });
 
-                return true;
-            } else {
-                return false, "Daily reward has already been claimed. Please wait ";
+                    res(true);
+                } else {
+                    rej("Daily reward has already been claimed. Please wait xxx hours");
+                }
+            } catch (e) {
+                console.log(e)
+                rej(e);
             }
-        } catch (e) {
-            console.log(e)
-            return false, e;
-        }
+        })
     }
-
-
 }

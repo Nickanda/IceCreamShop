@@ -3,21 +3,13 @@ module.exports = class ReadyEvent {
         this.client = client;
     }
 
-    getMembers() {
-        let total = 0;
-        this.client.guilds.cache.forEach(guild => {
-            total += guild.memberCount;
-        });
-        return total;
-    }
-
     async run() {
         await this.client.wait(1000);
 
-        this.client.appInfo = await this.client.fetchApplication();
-        setInterval(async () => {
-            this.client.appInfo = await this.client.fetchApplication();
-        }, 60000);
+        // this.client.appInfo = await this.client.fetchApplication();
+        // setInterval(async () => {
+        //     this.client.appInfo = await this.client.fetchApplication();
+        // }, 60000);
 
         await this.client.settings.sync();
         await this.client.shops.sync();
@@ -30,6 +22,6 @@ module.exports = class ReadyEvent {
 
         this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
 
-        this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.getMembers()} users in ${this.client.guilds.cache.size} servers.`, "ready");
+        this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.users.cache.size} users in ${this.client.guilds.cache.size} servers.`, "ready");
     }
 };

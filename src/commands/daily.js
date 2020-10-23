@@ -13,26 +13,29 @@ module.exports = class DailyCommand extends Command {
     }
 
     async run(message, args) {
-        const success, reason = await this.client.shopHandler.claimDaily(message);
         const profile = await this.client.shopHandler.getProfile(message);
+        
+        try {
+            const success = await this.client.shopHandler.claimDaily(message);
+            
+            if (success) {
+                const embed = new Discord.MessageEmbed()
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                    .setTitle(profile.get('name'))
+                    .setDescription("Your daily reward of $50 has been claimed!")
+                    .setColor(0x00FF00)
+                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                    .setTimestamp();
 
-        if (success) {
-            const embed = new Discord.MessageEmbed()
-                .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
-                .setDescription("Your daily reward of $50 has been claimed!")
-                .setColor(0x00FF00)
-                .setFooter('i!help', this.client.user.displayAvatarURL())
-                .setTimestamp();
-
-            message.channel.send(embed);
-        } else {
+                message.channel.send(embed);
+            }
+        } catch (e) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTitle(profile.get('name'))
                 .setDescription(`Error while claiming your daily reward:
                 
-                    ${reason}`)
+                    ${e}`)
                 .setColor(0xFF0000)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
                 .setTimestamp();
