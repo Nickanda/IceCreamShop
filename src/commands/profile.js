@@ -18,9 +18,9 @@ module.exports = class ProfileCommand extends Command {
         milliseconds = Math.floor(milliseconds / 1000);
         const seconds = milliseconds % 60;
         milliseconds /= 60;
-        const minutes = milliseconds % 60;
-        milliseconds /= 60
-        const hours = milliseconds % 24;
+        const minutes = Math.floor(milliseconds % 60);
+        milliseconds /= 60;
+        const hours = Math.floor(milliseconds % 24);
 
         return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds " : ""}`;
     }
@@ -48,7 +48,7 @@ module.exports = class ProfileCommand extends Command {
                 Maximum customers in your shop: ${profile.get('customerMax')}
 
                 Machine Capacity: ${machineCap}
-                
+
                 Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
 
                 Advertisements: ${advertisements == "" && "none active" || advertisements}`)
