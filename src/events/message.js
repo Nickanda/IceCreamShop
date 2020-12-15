@@ -18,7 +18,7 @@ module.exports = class {
             return message.reply(`My prefix on this server is \`${settings.get('prefix')}\``);
         }
 
-        if (message.content.indexOf(settings.get('prefix')) !== 0) return;
+        if (message.content.toLowerCase().indexOf(settings.get('prefix')) !== 0) return;
 
         const args = message.content.slice(settings.get('prefix').length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
