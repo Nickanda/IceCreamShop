@@ -13,6 +13,7 @@ module.exports = class NameCommand extends Command {
     }
 
     async run(message, args) {
+        const profile = await this.client.shopHandler.getProfile(message);
         const name = args.join(" ");
 
         if (name.length < 30) {
