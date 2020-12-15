@@ -14,6 +14,7 @@ module.exports = class MachinesCommand extends Command {
 
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
+        const capacity = await this.client.shopHandler.refreshMachineCapacity(message);
 
         let machineCap = "";
         for (const [key, val] of Object.entries(capacity)) {
