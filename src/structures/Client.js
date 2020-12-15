@@ -29,7 +29,7 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.STRING,
                 defaultValue: 'i!'
             },
-            premiumBoost: {
+            premiumServer: {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false
             }
@@ -52,6 +52,10 @@ module.exports = class DiscordClient extends Client {
                 type: Sequelize.INTEGER,
                 defaultValue: 10
             },
+            machineCapacity: {
+                type: Sequelize.STRING,
+                defaultValue: JSON.stringify({"Basic Machine 1": 100})
+            },
             lastRefill: {
                 type: Sequelize.DATE,
                 defaultValue: Sequelize.NOW
@@ -63,6 +67,10 @@ module.exports = class DiscordClient extends Client {
             advertisements: {
                 type: Sequelize.STRING,
                 defaultValue: JSON.stringify({})
+            },
+            premiumExpiration: {
+                type: Sequelize.DATE,
+                defaultValue: null
             }
         });
 
@@ -72,6 +80,9 @@ module.exports = class DiscordClient extends Client {
             },
             action: {
                 type: Sequelize.STRING
+            },
+            duration: {
+                type: Sequelize.INTEGER
             }
         })
 

@@ -3,10 +3,24 @@ module.exports = class ShopHandler {
         this.client = client;
     }
 
+    formatDate(milliseconds) {
+        milliseconds = Math.floor(milliseconds / 1000);
+        const seconds = milliseconds % 60;
+        milliseconds /= 60;
+        const minutes = milliseconds % 60;
+        milliseconds /= 60;
+        const hours = milliseconds % 24;
+
+        return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds " : ""}`;
+    }
+
     async getProfile(message) {
         try {
             const profile = await this.client.shops.findOrCreate({
-                where: { userId: message.author.id }, defaults: {
+                where: {
+                    userId: message.author.id
+                },
+                defaults: {
                     userId: message.author.id
                 }
             });
@@ -19,7 +33,9 @@ module.exports = class ShopHandler {
     async getCooldowns(message, filter) {
         try {
             const cooldowns = await this.client.cooldowns.findAll({
-                where: { userId: message.author.id }
+                where: {
+                    userId: message.author.id
+                }
             });
 
             let cooldown = "";
@@ -41,7 +57,7 @@ module.exports = class ShopHandler {
                 const profile = await this.getProfile(message);
                 const cooldown = await this.getCooldowns(message, "daily");
 
-                if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > 79200000 && Date.now() - Date.parse(cooldown.createdAt) < 172800000)) { // between 22 hrs and 48 hrs
+                if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration && Date.now() - Date.parse(cooldown.createdAt) < (cooldown.duration + 86400000))) { // between 22 hrs and 48 hrs
                     await profile.increment("money", {
                         where: {
                             userId: message.author.id
@@ -53,13 +69,56 @@ module.exports = class ShopHandler {
 
                     await this.client.cooldowns.create({
                         userId: message.author.id,
-                        action: "daily"
+                        action: "daily",
+                        duration: 72000000
                     });
 
                     res(true);
                 } else {
-                    rej("Daily reward has already been claimed. Please wait xxx hours");
+                    rej("Daily reward has already been claimed. Please wait " + this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt))));
                 }
+            } catch (e) {
+                console.log(e)
+                rej(e);
+            }
+        })
+    }
+
+    async refreshMachineCapacity(message) {
+        return new Promise(async (res, rej) => {
+            try {
+                const profile = await this.getProfile(message);
+
+                const parsedMachines = JSON.parse(profile.machineCapacity)
+                const timeDifference = Date.now() - Date.parse(profile.lastRefill);
+                let capacityDifference = Math.floor(timeDifference / 3600000) * 12.5;
+
+                let newMachines = {};
+                let decreased = false;
+                for (let machine in parsedMachines) {
+                    if (!decreased) {
+                        if (parsedMachines[machine] - capacityDifference < 0) {
+                            capacityDifference -= parsedMachines;
+                            newMachines[machine] = 0;
+                        } else {
+                            newMachines[machine] = parsedMachines[machine] - capacityDifference;
+                            decreased = true;
+                        }
+                    } else {
+                        newMachines[machine] = parsedMachines[machine];
+                    }
+                }
+
+                this.client.shops.update({
+                    machineCapacity: JSON.stringify(newMachines),
+                    lastRefill: Date()
+                }, {
+                    where: {
+                        userId: message.author.id
+                    }
+                })
+
+                res(newMachines);
             } catch (e) {
                 console.log(e)
                 rej(e);

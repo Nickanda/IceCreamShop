@@ -35,15 +35,21 @@ module.exports = class ProfileCommand extends Command {
             }
         }
 
+        let machineCap = "";
+        for (const [key, val] of Object.entries(JSON.parse(profile.get('machineCapacity')))) {
+            machineCap += `\n${key}: ${val}%`
+        }
+
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.get('name'))
             .setDescription(`💰 $${profile.get('money')}
                 Maximum customers in your shop: ${profile.get('customerMax')}
 
+                Machine Capacity: ${machineCap}
                 Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
 
-                Advertisements: ${advertisements}`)
+                Advertisements: ${advertisements == "" && "none active" || advertisements}`)
             .setColor(0x00FF00)
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
