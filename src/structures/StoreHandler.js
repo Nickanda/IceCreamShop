@@ -5,22 +5,22 @@ module.exports = class StoreHandler {
         this.ads = {
             "Newspaper Ad": {
                 cost: 200,
-                duration: 1000 * 60 * 60 * 4, // 4 hours
+                duration: 1000 * 60 * 60 * 4,
                 boost: 1.1
             },
             "Radio Ad": {
                 cost: 350,
-                duration: 1000 * 60 * 60 * 6, // 12 hours
+                duration: 1000 * 60 * 60 * 6,
                 boost: 1.15
             },
             "TV Ad": {
                 cost: 500,
-                duration: 1000 * 60 * 60 * 12, // 12 hours
+                duration: 1000 * 60 * 60 * 12,
                 boost: 1.25
             },
             "Digital Ad": {
                 cost: 1000,
-                duration: 1000 * 60 * 60 * 18, // 18 hours
+                duration: 1000 * 60 * 60 * 18,
                 boost: 1.5
             },
             "Billboard Ad": {
