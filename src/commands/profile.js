@@ -45,13 +45,13 @@ module.exports = class ProfileCommand extends Command {
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.get('name'))
             .setDescription(`💰 $${profile.get('money')}
-                Maximum customers in your shop: ${profile.get('customerMax')}
+Maximum customers in your shop: ${profile.get('customerMax')}
 
-                Machine Capacity: ${machineCap}
+Machine Capacity: ${machineCap}
 
-                Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
+Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
 
-                Advertisements: ${advertisements == "" && "none active" || advertisements}`)
+Advertisements: ${advertisements == "" && "none active" || advertisements}`)
             .setColor(0x00FF00)
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();

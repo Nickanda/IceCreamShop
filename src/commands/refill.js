@@ -46,7 +46,7 @@ module.exports = class RefillCommand extends Command {
                 .setTitle(profile.get('name'))
                 .setDescription(`Error while refilling:
                 
-                ${e}`)
+${e}`)
                 .setColor(0xFF0000)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
                 .setTimestamp();

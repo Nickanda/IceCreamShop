@@ -35,7 +35,7 @@ module.exports = class DailyCommand extends Command {
                 .setTitle(profile.get('name'))
                 .setDescription(`Error while claiming your daily reward:
                 
-                    ${e}`)
+${e}`)
                 .setColor(0xFF0000)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
                 .setTimestamp();

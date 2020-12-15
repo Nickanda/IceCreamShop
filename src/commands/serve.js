@@ -79,7 +79,7 @@ module.exports = class ServeCommand extends Command {
                         .setTitle(profile.get('name'))
                         .setDescription(`Error while serving your customers:
                 
-                        Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
+Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
@@ -92,7 +92,7 @@ module.exports = class ServeCommand extends Command {
                     .setTitle(profile.get('name'))
                     .setDescription(`Error while serving your customers:
                 
-                    Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
+Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -105,7 +105,7 @@ module.exports = class ServeCommand extends Command {
                 .setTitle(profile.get('name'))
                 .setDescription(`Error while serving your customers:
                 
-                ${e}`)
+${e}`)
                 .setColor(0xFF0000)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
                 .setTimestamp();
