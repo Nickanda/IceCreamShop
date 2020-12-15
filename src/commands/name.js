@@ -13,16 +13,38 @@ module.exports = class NameCommand extends Command {
     }
 
     async run(message, args) {
-        const profile = await this.client.shopHandler.getProfile(message);
+        const name = args.join(" ");
 
-        const embed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setTitle(profile.get('name'))
-            .setDescription(`💰 $${profile.get('money')}`)
-            .setColor(0x00FF00)
-            .setFooter('i!help', this.client.user.displayAvatarURL())
-            .setTimestamp();
+        if (name.length < 30) {
+            await this.client.shops.update({
+                name: name
+            }, {
+                where: {
+                    userId: message.author.id
+                }
+            });
 
-        message.channel.send(embed);
+            const embed = new Discord.MessageEmbed()
+                .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                .setTitle(profile.get('name'))
+                .setDescription(`Your shop name has successfully been updated to ${name}!`)
+                .setColor(0x00FF00)
+                .setFooter('i!help', this.client.user.displayAvatarURL())
+                .setTimestamp();
+
+            message.channel.send(embed);
+        } else {
+            const embed = new Discord.MessageEmbed()
+                .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                .setTitle(profile.get('name'))
+                .setDescription(`Please keep your new shop name under 30 characters!`)
+                .setColor(0xFF0000)
+                .setFooter('i!help', this.client.user.displayAvatarURL())
+                .setTimestamp();
+
+            message.channel.send(embed);
+        }
+
+
     }
 }
