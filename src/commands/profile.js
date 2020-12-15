@@ -38,7 +38,7 @@ module.exports = class ProfileCommand extends Command {
 
         let machineCap = "";
         for (const [key, val] of Object.entries(capacity)) {
-            machineCap += `\n${key}: ${val}%`
+            machineCap += `\n${val.type} Machine ${key}: ${val.capacity}%`
         }
 
         const embed = new Discord.MessageEmbed()

@@ -33,13 +33,13 @@ module.exports = class ServeCommand extends Command {
 
                 let enoughCapacity = false;
                 for (let machine in capacity) {
-                    if (capacity[machine] !== 0 && capacity[machine] - 5 > 0) {
+                    if (capacity[machine] !== 0 && capacity[machine]["capacity"] - 5 > 0) {
                         enoughCapacity = machine;
                     }
                 }
 
                 if (enoughCapacity) {
-                    capacity[enoughCapacity] -= 5;
+                    capacity[enoughCapacity]["capacity"] -= 5;
 
                     await profile.update({
                         machineCapacity: JSON.stringify(capacity)

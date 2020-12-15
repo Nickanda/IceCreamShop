@@ -99,11 +99,17 @@ module.exports = class ShopHandler extends StoreHandler {
                 let decreased = false;
                 for (let machine in parsedMachines) {
                     if (!decreased) {
-                        if (parsedMachines[machine] - capacityDifference < 0) {
-                            capacityDifference -= parsedMachines;
-                            newMachines[machine] = 0;
+                        if (parsedMachines[machine]["capacity"] - capacityDifference < 0) {
+                            capacityDifference["capacity"] -= parsedMachines;
+                            newMachines[machine] = {
+                                type: parsedMachines[machine]["type"],
+                                capacity: 0
+                            };
                         } else {
-                            newMachines[machine] = parsedMachines[machine] - capacityDifference;
+                            newMachines[machine] = {
+                                type: parsedMachines[machine]["type"],
+                                capacity: parsedMachines[machine]["capacity"] - capacityDifference
+                            };
                             decreased = true;
                         }
                     } else {

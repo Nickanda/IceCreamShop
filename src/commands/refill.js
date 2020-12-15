@@ -19,7 +19,7 @@ module.exports = class RefillCommand extends Command {
             const parsedMachines = JSON.parse(profile.machineCapacity)
             let newMachines = {};
             for (let machine in parsedMachines) {
-                newMachines[machine] = 100;
+                newMachines[machine]["capacity"] = 100;
             }
 
             await this.client.shops.update({
