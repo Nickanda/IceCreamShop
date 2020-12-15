@@ -1,6 +1,8 @@
-module.exports = class ShopHandler {
+const StoreHandler = require('./StoreHandler');
+
+module.exports = class ShopHandler extends StoreHandler {
     constructor(client) {
-        this.client = client;
+        super(client);
     }
 
     formatDate(milliseconds) {
