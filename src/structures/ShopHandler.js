@@ -13,7 +13,7 @@ module.exports = class ShopHandler extends StoreHandler {
         milliseconds /= 60;
         const hours = Math.floor(milliseconds % 24);
 
-        return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds " : ""}`;
+        return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds" : ""}`;
     }
 
     async getProfile(message) {
