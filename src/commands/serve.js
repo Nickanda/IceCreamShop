@@ -28,7 +28,7 @@ module.exports = class ServeCommand extends Command {
         const cooldown = await this.client.shopHandler.getCooldowns(message, "serve");
 
         try {
-            if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) < cooldown.duration) {
+            if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration) {
                 let capacity = await this.client.shopHandler.refreshMachineCapacity(message);
 
                 let enoughCapacity = false;
