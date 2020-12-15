@@ -24,8 +24,6 @@ module.exports = class BalanceCommand extends Command {
         let lbInsert = "";
         leaderboards.forEach(async (shop, ind) => {
             const user = await this.client.users.fetch(shop.get("userId"));
-            
-
             lbInsert = lbInsert + `\n${ind + 1}. ${user.tag} - $${shop.get("money")}`;
         })
 
