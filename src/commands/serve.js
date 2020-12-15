@@ -92,7 +92,7 @@ module.exports = class ServeCommand extends Command {
                     .setTitle(profile.get('name'))
                     .setDescription(`Error while serving your customers:
                 
-                    Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}`)
+                    Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
