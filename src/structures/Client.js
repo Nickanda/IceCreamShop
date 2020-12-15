@@ -54,7 +54,7 @@ module.exports = class DiscordClient extends Client {
             },
             machineCapacity: {
                 type: Sequelize.STRING,
-                defaultValue: JSON.stringify({"Basic Machine 1": 100})
+                defaultValue: JSON.stringify({1: {type: "Basic", capacity: 100}})
             },
             lastRefill: {
                 type: Sequelize.DATE,
