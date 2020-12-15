@@ -7,7 +7,7 @@ module.exports = class AdsCommand extends Command {
         super(client, {
             name: "ads",
             description: "Shows the ads that you are currently running",
-            category: "Economy",
+            category: "Shop",
             usage: "ads",
             aliases: ["advertisements", "advertisement", "ad"]
         });

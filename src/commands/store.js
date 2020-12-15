@@ -7,7 +7,7 @@ module.exports = class StoreCommand extends Command {
         super(client, {
             name: "store",
             description: "Shows the store for you to buy new items",
-            category: "Economy",
+            category: "Shop",
             usage: "store"
         });
     }

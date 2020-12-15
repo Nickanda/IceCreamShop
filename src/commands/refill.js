@@ -7,7 +7,7 @@ module.exports = class RefillCommand extends Command {
         super(client, {
             name: "refill",
             description: "Refills all of your ice cream",
-            category: "Economy",
+            category: "Shop",
             usage: "refill"
         });
     }
