@@ -61,7 +61,7 @@ module.exports = class ServeCommand extends Command {
                     await this.client.cooldowns.create({
                         userId: message.author.id,
                         action: "serve",
-                        duration: 15000
+                        duration: 10000
                     });
 
                     const embed = new Discord.MessageEmbed()
