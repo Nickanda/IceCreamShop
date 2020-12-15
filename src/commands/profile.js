@@ -27,6 +27,7 @@ module.exports = class ProfileCommand extends Command {
 
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
+        const capacity = await this.client.shopHandler.refreshMachineCapacity(message);
 
         let advertisements = "";
         for (const [key, val] of Object.entries(JSON.parse(profile.get('advertisements')))) {
@@ -36,7 +37,7 @@ module.exports = class ProfileCommand extends Command {
         }
 
         let machineCap = "";
-        for (const [key, val] of Object.entries(JSON.parse(profile.get('machineCapacity')))) {
+        for (const [key, val] of Object.entries(capacity)) {
             machineCap += `\n${key}: ${val}%`
         }
 
@@ -47,6 +48,7 @@ module.exports = class ProfileCommand extends Command {
                 Maximum customers in your shop: ${profile.get('customerMax')}
 
                 Machine Capacity: ${machineCap}
+                
                 Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
 
                 Advertisements: ${advertisements == "" && "none active" || advertisements}`)
