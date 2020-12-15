@@ -8,7 +8,8 @@ module.exports = class AdsCommand extends Command {
             name: "ads",
             description: "Shows the ads that you are currently running",
             category: "Economy",
-            usage: "ads"
+            usage: "ads",
+            aliases: ["advertisements", "advertisement", "ad"]
         });
     }
 

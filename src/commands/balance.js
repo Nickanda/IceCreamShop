@@ -8,7 +8,8 @@ module.exports = class BalanceCommand extends Command {
             name: "balance",
             description: "Shows your current balance",
             category: "Economy",
-            usage: "balance"
+            usage: "balance",
+            aliases: ["bal"]
         });
     }
 
