@@ -16,9 +16,9 @@ module.exports = class ServeCommand extends Command {
         milliseconds = Math.floor(milliseconds / 1000);
         const seconds = milliseconds % 60;
         milliseconds /= 60;
-        const minutes = milliseconds % 60;
+        const minutes = Math.floor(milliseconds % 60);
         milliseconds /= 60;
-        const hours = milliseconds % 24;
+        const hours = Math.floor(milliseconds % 24);
 
         return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds " : ""}`;
     }
