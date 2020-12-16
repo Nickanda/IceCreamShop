@@ -12,7 +12,7 @@ module.exports = class EvalCommand extends Command {
     }
 
     async run(message, args) {
-        const msg = message
+        const msg = message;
         const code = args.join(" ");
         try {
             const evaled = eval(code);

@@ -16,7 +16,7 @@ module.exports = class RefillCommand extends Command {
         const profile = await this.client.shopHandler.getProfile(message);
 
         try {
-            const parsedMachines = JSON.parse(profile.machineCapacity)
+            const parsedMachines = JSON.parse(profile.machineCapacity);
             let newMachines = {};
             for (let machine in parsedMachines) {
                 newMachines[machine] = {

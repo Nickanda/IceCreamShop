@@ -45,7 +45,5 @@ module.exports = class NameCommand extends Command {
 
             message.channel.send(embed);
         }
-
-
     }
 }

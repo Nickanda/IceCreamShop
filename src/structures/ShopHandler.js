@@ -80,10 +80,10 @@ module.exports = class ShopHandler extends StoreHandler {
                     rej("Daily reward has already been claimed. Please wait " + this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt))));
                 }
             } catch (e) {
-                console.log(e)
+                console.log(e);
                 rej(e);
             }
-        })
+        });
     }
 
     async refreshMachineCapacity(message) {
@@ -91,7 +91,7 @@ module.exports = class ShopHandler extends StoreHandler {
             try {
                 const profile = await this.getProfile(message);
 
-                const parsedMachines = JSON.parse(profile.machineCapacity)
+                const parsedMachines = JSON.parse(profile.machineCapacity);
                 const timeDifference = Date.now() - Date.parse(profile.lastRefill);
                 let capacityDifference = Math.floor(timeDifference / 288000) * 1;
 
@@ -124,13 +124,13 @@ module.exports = class ShopHandler extends StoreHandler {
                     where: {
                         userId: message.author.id
                     }
-                })
+                });
 
                 res(newMachines);
             } catch (e) {
-                console.log(e)
+                console.log(e);
                 rej(e);
             }
-        })
+        });
     }
 }
