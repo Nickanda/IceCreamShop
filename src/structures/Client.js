@@ -66,7 +66,12 @@ module.exports = class DiscordClient extends Client {
             },
             advertisements: {
                 type: Sequelize.STRING,
-                defaultValue: JSON.stringify({})
+                defaultValue: JSON.stringify([])
+                // [{
+                //     type: "Basic Ad",
+                //     duration: 1000000,
+                //     start: Date()
+                // }]
             },
             premiumExpiration: {
                 type: Sequelize.DATE,

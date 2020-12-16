@@ -26,8 +26,8 @@ module.exports = class ProfileCommand extends Command {
     }
 
     async run(message, args) {
-        const profile = await this.client.shopHandler.getProfile(message);
         const capacity = await this.client.shopHandler.refreshMachineCapacity(message);
+        const profile = await this.client.shopHandler.getProfile(message);
 
         let advertisements = "";
         for (const [key, val] of Object.entries(JSON.parse(profile.get('advertisements')))) {
