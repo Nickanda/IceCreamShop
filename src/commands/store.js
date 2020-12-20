@@ -34,7 +34,7 @@ module.exports = class StoreCommand extends Command {
             case "ad": case "ads": case "advertisement": case "advertisements":
                 let advertisements = "";
                 for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
-                    advertisements += `\n${key} Ad: $${val.cost} (${Math.floor(100 * (val.boost - 1))}% boost for ${this.formatDate(val.duration)})\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+                    advertisements += `\n${key} Ad: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost for ${this.formatDate(val.duration)})\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
                 }
 
                 embed = new Discord.MessageEmbed()
@@ -49,7 +49,7 @@ module.exports = class StoreCommand extends Command {
             case "flavor": case "flavors":
                 let flavors = "";
                 for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
-                    flavors += `\n${key.toProperCase()}: $${val.cost} (${Math.floor(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+                    flavors += `\n${key.toProperCase()}: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
                 }
 
                 embed = new Discord.MessageEmbed()
@@ -64,7 +64,7 @@ module.exports = class StoreCommand extends Command {
             case "machine": case "machines":
                 let machines = "";
                 for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
-                    machines += `\n${key} Machine: $${val.cost} (${Math.floor(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+                    machines += `\n${key} Machine: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
                 }
 
                 embed = new Discord.MessageEmbed()
