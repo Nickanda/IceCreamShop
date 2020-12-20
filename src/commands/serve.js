@@ -52,7 +52,6 @@ module.exports = class ServeCommand extends Command {
                     const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
                     const median = Math.floor(25 * boost);
                     const addAmount = Math.floor(Math.random() * ((median + 10) - (median - 10)) + (median - 10));
-                    console.log(Math.random() * (median + 10), Math.random() * ((median + 10) - (median - 10)), Math.random() * ((median + 10) - (median - 10)) + (median - 10))
 
                     await profile.increment("money", {
                         where: {
@@ -72,7 +71,7 @@ module.exports = class ServeCommand extends Command {
                     const embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`You earned $25 for serving your customers.`)
+                        .setDescription(`You earned $${addAmount} for serving your customers.`)
                         .setColor(0x00FF00)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
