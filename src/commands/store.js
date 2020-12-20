@@ -28,6 +28,8 @@ module.exports = class StoreCommand extends Command {
 
         const profile = await this.client.shopHandler.getProfile(message);
 
+        let embed;
+
         switch(category) {
             case "ad": case "ads": case "advertisement": case "advertisements":
                 let advertisements = "";
@@ -87,6 +89,7 @@ module.exports = class StoreCommand extends Command {
                     .setTimestamp();
 
                 message.channel.send(embed);
+                break;
         }
     }
 }
