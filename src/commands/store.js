@@ -138,8 +138,7 @@ module.exports = class StoreCommand extends Command {
 
                                 if (!profileFlavors.includes(selected)) {
                                     if (profile.money > this.client.shopHandler.flavors[selected].cost) {
-                                        const newFlavors = profileFlavors.push(selected);
-                                        console.log(newFlavors, profileFlavors)
+                                        profileFlavors.push(selected);
 
                                         await this.client.shops.decrement("money", {
                                             where: {
@@ -149,7 +148,7 @@ module.exports = class StoreCommand extends Command {
                                         })
 
                                         await this.client.shops.update({
-                                            flavors: JSON.stringify(newFlavors)
+                                            flavors: JSON.stringify(profileFlavors)
                                         }, {
                                             where: {
                                                 userId: message.author.id
