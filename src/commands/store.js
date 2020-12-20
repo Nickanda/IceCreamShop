@@ -91,10 +91,8 @@ module.exports = class StoreCommand extends Command {
                                 } 
                             }
 
-                            console.log(selected);
-
                             if (selected !== "") {
-                                if (profile.money > this.client.shopHandler.ads[selected].price) {
+                                if (profile.money > this.client.shopHandler.ads[selected].cost) {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
@@ -108,7 +106,7 @@ module.exports = class StoreCommand extends Command {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
-                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
                                         .setTimestamp();
@@ -136,7 +134,7 @@ module.exports = class StoreCommand extends Command {
                             }
 
                             if (selected !== "") {
-                                if (profile.money > this.client.shopHandler.flavors[selected].price) {
+                                if (profile.money > this.client.shopHandler.flavors[selected].cost) {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
@@ -150,7 +148,7 @@ module.exports = class StoreCommand extends Command {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
-                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
                                         .setTimestamp();
@@ -178,7 +176,7 @@ module.exports = class StoreCommand extends Command {
                             }
 
                             if (selected !== "") {
-                                if (profile.money > this.client.shopHandler.machines[selected].price) {
+                                if (profile.money > this.client.shopHandler.machines[selected].cost) {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
@@ -192,7 +190,7 @@ module.exports = class StoreCommand extends Command {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
-                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
                                         .setTimestamp();
