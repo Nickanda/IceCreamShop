@@ -49,13 +49,14 @@ module.exports = class ServeCommand extends Command {
                         }
                     });
 
-                    let addAmount = 25 * this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity)
+                    const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
+                    let addAmount = 25 * boost;
 
                     await profile.increment("money", {
                         where: {
                             userId: message.author.id
                         },
-                        by: 25
+                        by: addAmount
                     });
 
                     if (cooldown) await cooldown.destroy();
