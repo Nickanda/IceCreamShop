@@ -80,9 +80,11 @@ module.exports = class StoreCommand extends Command {
                 const id = args[1];
 
                 if (id) {
+                    let selected;
+
                     switch(id.toLowerCase().substring(0, 1)) {
                         case "a":
-                            let selected = "";
+                            selected = "";
                             for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
@@ -124,7 +126,7 @@ module.exports = class StoreCommand extends Command {
                             }
                             break;
                         case "f":
-                            let selected = "";
+                            selected = "";
                             for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
@@ -166,7 +168,7 @@ module.exports = class StoreCommand extends Command {
                             }
                             break;
                         case "m":
-                            let selected = "";
+                            selected = "";
                             for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
