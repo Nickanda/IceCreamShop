@@ -84,7 +84,9 @@ module.exports = class StoreCommand extends Command {
                     .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
-                    .setTimestamp();  
+                    .setTimestamp();
+
+                message.channel.send(embed);
         }
 
         const embed = new Discord.MessageEmbed()
