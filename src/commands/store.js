@@ -39,7 +39,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Advertisements")
-                    .setDescription("The advertisements that we offer at this time are:${advertisements}")
+                    .setDescription(`The advertisements that we offer at this time are:${advertisements}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -54,7 +54,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Machines")
-                    .setDescription("The machines that we offer at this time are:${machines}")
+                    .setDescription(`The machines that we offer at this time are:${machines}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -69,7 +69,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Flavors")
-                    .setDescription("The flavors that we offer at this time are:${flavors}")
+                    .setDescription(`The flavors that we offer at this time are:${flavors}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
