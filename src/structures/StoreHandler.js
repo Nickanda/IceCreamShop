@@ -102,12 +102,12 @@ module.exports = class StoreHandler {
     async calculateBoosts(ads, machines) {
         ads = JSON.parse(ads);
         machines = JSON.parse(machines);
-        
+
         let currentBoost = 1
 
-        ads.forEach(ad => {
+        for (let ad in ads) {
             currentBoost += 1 - this.ads[ad["type"]]["boost"];
-        });
+        };
 
         for (let machine in machines) {
             const flavor = machines[machine]["flavor"];
