@@ -77,7 +77,148 @@ module.exports = class StoreCommand extends Command {
                 message.channel.send(embed);
                 break;
             case "buy":
-                
+                const id = args[1];
+
+                if (id) {
+                    switch(id.toLowerCase().substring(0, 1)) {
+                        case "a":
+                            let selected = "";
+                            for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
+                                if (val.id.toLowerCase() == id.toLowerCase()) {
+                                    selected = key;
+                                } 
+                            }
+
+                            if (selected !== "") {
+                                if (profile.money > this.client.shopHandler.ads[selected].price) {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`WIP`)
+                                        .setColor(0x00FF00)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                } else {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setColor(0xFF0000)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                }
+                            } else {
+                                embed = new Discord.MessageEmbed()
+                                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                    .setTitle(profile.get('name'))
+                                    .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
+                                    .setColor(0xFF0000)
+                                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                                    .setTimestamp();
+
+                                message.channel.send(embed);
+                            }
+                            break;
+                        case "f":
+                            let selected = "";
+                            for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
+                                if (val.id.toLowerCase() == id.toLowerCase()) {
+                                    selected = key;
+                                } 
+                            }
+
+                            if (selected !== "") {
+                                if (profile.money > this.client.shopHandler.flavors[selected].price) {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`WIP`)
+                                        .setColor(0x00FF00)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                } else {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setColor(0xFF0000)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                }
+                            } else {
+                                embed = new Discord.MessageEmbed()
+                                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                    .setTitle(profile.get('name'))
+                                    .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
+                                    .setColor(0xFF0000)
+                                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                                    .setTimestamp();
+
+                                message.channel.send(embed);
+                            }
+                            break;
+                        case "m":
+                            let selected = "";
+                            for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
+                                if (val.id.toLowerCase() == id.toLowerCase()) {
+                                    selected = key;
+                                } 
+                            }
+
+                            if (selected !== "") {
+                                if (profile.money > this.client.shopHandler.machines[selected].price) {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`WIP`)
+                                        .setColor(0x00FF00)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                } else {
+                                    embed = new Discord.MessageEmbed()
+                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                        .setTitle(profile.get('name'))
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].price}`)
+                                        .setColor(0xFF0000)
+                                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                                        .setTimestamp();
+
+                                    message.channel.send(embed);
+                                }
+                            } else {
+                                embed = new Discord.MessageEmbed()
+                                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                    .setTitle(profile.get('name'))
+                                    .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
+                                    .setColor(0xFF0000)
+                                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                                    .setTimestamp();
+
+                                message.channel.send(embed);
+                            }
+                            break;
+                    }
+                } else {
+                    embed = new Discord.MessageEmbed()
+                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                        .setTitle(profile.get('name'))
+                        .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                        .setColor(0xFF0000)
+                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                        .setTimestamp();
+
+                    message.channel.send(embed);
+                }
                 break;
             default:
                 embed = new Discord.MessageEmbed()
