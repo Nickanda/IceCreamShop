@@ -111,6 +111,7 @@ module.exports = class ShopHandler extends StoreHandler {
                 const parsedMachines = JSON.parse(profile.machineCapacity);
                 const timeDifference = Date.now() - Date.parse(profile.lastRefill);
                 let capacityDifference = Math.floor(timeDifference / 288000) * 1;
+                let idleMoney = Math.floor(capacityDifference * .15);
 
                 let newMachines = {};
                 let decreased = false;
@@ -133,6 +134,13 @@ module.exports = class ShopHandler extends StoreHandler {
                         newMachines[machine] = parsedMachines[machine];
                     }
                 }
+
+                await profile.increment("money", {
+                    where: {
+                        userId: message.author.id
+                    },
+                    by: idleMoney
+                });
 
                 this.client.shops.update({
                     machineCapacity: JSON.stringify(newMachines),
