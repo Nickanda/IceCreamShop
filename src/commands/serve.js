@@ -49,6 +49,8 @@ module.exports = class ServeCommand extends Command {
                         }
                     });
 
+                    let addAmount = 25 * this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity)
+
                     await profile.increment("money", {
                         where: {
                             userId: message.author.id

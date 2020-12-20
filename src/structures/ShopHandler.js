@@ -111,7 +111,7 @@ module.exports = class ShopHandler extends StoreHandler {
                 const parsedMachines = JSON.parse(profile.machineCapacity);
                 const timeDifference = Date.now() - Date.parse(profile.lastRefill);
                 let capacityDifference = Math.floor(timeDifference / 288000) * 1;
-                let idleMoney = Math.floor(capacityDifference * .15);
+                let idleMoney = Math.floor(capacityDifference * .15 * this.calculateBoosts(profile.advertisements, profile.machineCapacity));
 
                 let newMachines = {};
                 let decreased = false;
