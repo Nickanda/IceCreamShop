@@ -116,6 +116,7 @@ module.exports = class DiscordClient extends Client {
             });
             return false;
         } catch (e) {
+            console.log(e)
             return `Unable to load command ${commandName}: ${e}`;
         }
     }
@@ -154,20 +155,6 @@ module.exports = class DiscordClient extends Client {
         if (!guild) return await this.settings.findOne("default");
         const [settings, created] = await this.settings.findOrCreate({ where: { guildId: guild.id } })
         return settings;
-    }
-
-    writeSettings(id, newSettings) {
-        // const defaults = this.settings.get("default");
-        // let settings = this.settings.get(id);
-        // if (typeof settings != "object") settings = {};
-        // for (const key in newSettings) {
-        //     if (defaults[key] !== newSettings[key]) {
-        //         settings[key] = newSettings[key];
-        //     } else {
-        //         delete settings[key];
-        //     }
-        // }
-        // this.settings.set(id, settings);
     }
 
     async awaitReply(msg, question, limit = 60000) {
