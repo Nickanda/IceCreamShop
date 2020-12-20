@@ -49,7 +49,6 @@ module.exports = class ServeCommand extends Command {
                         }
                     });
 
-                    console.log(profile.machineCapacity);
                     const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
                     let addAmount = 25 * boost;
 
