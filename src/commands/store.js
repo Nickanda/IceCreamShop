@@ -158,7 +158,7 @@ module.exports = class StoreCommand extends Command {
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                             .setTitle(profile.get('name'))
-                                            .setDescription(`${flavor.toProperCase()} flavor has successfully been bought!`)
+                                            .setDescription(`${selected.toProperCase()} flavor has successfully been bought!`)
                                             .setColor(0x00FF00)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
                                             .setTimestamp();
