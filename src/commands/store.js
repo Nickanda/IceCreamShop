@@ -46,21 +46,6 @@ module.exports = class StoreCommand extends Command {
 
                 message.channel.send(embed);
                 break;
-            case "machine": case "machines":
-                let machines = "";
-                for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
-                    machines += `\n${key} Machine: $${val.cost} (${Math.floor(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
-                }
-
-                embed = new Discord.MessageEmbed()
-                    .setTitle("Store - Machines")
-                    .setDescription(`The machines that we offer at this time are:${machines}`)
-                    .setColor(0x00FF00)
-                    .setFooter('i!help', this.client.user.displayAvatarURL())
-                    .setTimestamp();
-
-                message.channel.send(embed);
-                break;
             case "flavor": case "flavors":
                 let flavors = "";
                 for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
@@ -70,6 +55,21 @@ module.exports = class StoreCommand extends Command {
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Flavors")
                     .setDescription(`The flavors that we offer at this time are:${flavors}`)
+                    .setColor(0x00FF00)
+                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                    .setTimestamp();
+
+                message.channel.send(embed);
+                break;
+            case "machine": case "machines":
+                let machines = "";
+                for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
+                    machines += `\n${key} Machine: $${val.cost} (${Math.floor(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+                }
+
+                embed = new Discord.MessageEmbed()
+                    .setTitle("Store - Machines")
+                    .setDescription(`The machines that we offer at this time are:${machines}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
