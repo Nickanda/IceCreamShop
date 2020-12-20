@@ -55,22 +55,22 @@ module.exports = class StoreHandler {
             },
             "chocolate": {
                 id: "F02",
-                cost: 50,
+                cost: 500,
                 boost: 1.05
             },
             "strawberry": {
                 id: "F03",
-                cost: 50,
+                cost: 500,
                 boost: 1.05
             },
             "chocolate chip": {
                 id: "F04",
-                cost: 100,
+                cost: 1000,
                 boost: 1.1
             },
             "cookie & cream": {
                 id: "F05",
-                cost: 100,
+                cost: 1000,
                 boost: 1.1
             }
         };

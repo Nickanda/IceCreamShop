@@ -50,7 +50,7 @@ module.exports = class ServeCommand extends Command {
                     });
 
                     const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
-                    const median = Math.floor(25 * boost);
+                    const median = Math.floor(20 * boost);
                     const addAmount = Math.floor(Math.random() * ((median + 5) - (median - 15)) + (median - 15));
 
                     await profile.increment("money", {

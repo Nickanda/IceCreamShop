@@ -26,6 +26,8 @@ module.exports = class RefillCommand extends Command {
                 };
             }
 
+            await this.client.wait(50);
+
             await this.client.shops.update({
                 machineCapacity: JSON.stringify(newMachines),
                 lastRefill: Date()
