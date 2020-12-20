@@ -30,7 +30,7 @@ module.exports = class StoreCommand extends Command {
 
         let embed;
 
-        switch(category) {
+        switch (category) {
             case "ad": case "ads": case "advertisement": case "advertisements":
                 let advertisements = "";
                 for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
@@ -43,7 +43,7 @@ module.exports = class StoreCommand extends Command {
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
-                
+
                 message.channel.send(embed);
                 break;
             case "machine": case "machines":
@@ -58,7 +58,7 @@ module.exports = class StoreCommand extends Command {
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
-                
+
                 message.channel.send(embed);
                 break;
             case "flavor": case "flavors":
@@ -73,7 +73,7 @@ module.exports = class StoreCommand extends Command {
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
-                
+
                 message.channel.send(embed);
                 break;
             case "buy":
@@ -82,13 +82,13 @@ module.exports = class StoreCommand extends Command {
                 if (id) {
                     let selected;
 
-                    switch(id.toLowerCase().substring(0, 1)) {
+                    switch (id.toLowerCase().substring(0, 1)) {
                         case "a":
                             selected = "";
                             for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
-                                } 
+                                }
                             }
 
                             if (selected !== "") {
@@ -130,25 +130,56 @@ module.exports = class StoreCommand extends Command {
                             for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
-                                } 
+                                }
                             }
 
                             if (selected !== "") {
-                                if (profile.money > this.client.shopHandler.flavors[selected].cost) {
-                                    embed = new Discord.MessageEmbed()
-                                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                        .setTitle(profile.get('name'))
-                                        .setDescription(`WIP`)
-                                        .setColor(0x00FF00)
-                                        .setFooter('i!help', this.client.user.displayAvatarURL())
-                                        .setTimestamp();
+                                const profileFlavors = JSON.parse(profile.flavors);
 
-                                    message.channel.send(embed);
+                                if (!profileFlavors.includes(selected)) {
+                                    if (profile.money > this.client.shopHandler.flavors[selected].cost) {
+                                        const newFlavors = profileFlavors.insert(selected);
+
+                                        await this.client.shops.decrement("money", {
+                                            where: {
+                                                userId: message.author.id
+                                            },
+                                            by: this.client.shopHandler.flavors[selected].cost
+                                        })
+
+                                        await this.client.shops.update({
+                                            flavors: JSON.stringify(newFlavors)
+                                        }, {
+                                            where: {
+                                                userId: message.author.id
+                                            }
+                                        });
+
+                                        embed = new Discord.MessageEmbed()
+                                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                            .setTitle(profile.get('name'))
+                                            .setDescription(`${flavor.toProperCase()} flavor has successfully been bought!`)
+                                            .setColor(0x00FF00)
+                                            .setFooter('i!help', this.client.user.displayAvatarURL())
+                                            .setTimestamp();
+
+                                        message.channel.send(embed);
+                                    } else {
+                                        embed = new Discord.MessageEmbed()
+                                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                            .setTitle(profile.get('name'))
+                                            .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
+                                            .setColor(0xFF0000)
+                                            .setFooter('i!help', this.client.user.displayAvatarURL())
+                                            .setTimestamp();
+
+                                        message.channel.send(embed);
+                                    }
                                 } else {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
-                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
+                                        .setDescription(`You already own this flavor!`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
                                         .setTimestamp();
@@ -172,7 +203,7 @@ module.exports = class StoreCommand extends Command {
                             for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
                                 if (val.id.toLowerCase() == id.toLowerCase()) {
                                     selected = key;
-                                } 
+                                }
                             }
 
                             if (selected !== "") {
