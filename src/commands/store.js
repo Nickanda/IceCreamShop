@@ -37,7 +37,7 @@ module.exports = class StoreCommand extends Command {
                     advertisements += `\n${key} Ad: $${val.cost} (${100 * (val.boost - 1)}% boost for ${this.formatDate(val.duration)})\n    To buy: \`${message.settings.prefix}store buy ${val.id}\``;
                 }
 
-                let embed = new Discord.MessageEmbed()
+                embed = new Discord.MessageEmbed()
                     .setTitle("Store - Advertisements")
                     .setDescription("The advertisements that we offer at this time are:${advertisements}")
                     .setColor(0x00FF00)
@@ -52,7 +52,7 @@ module.exports = class StoreCommand extends Command {
                     machines += `\n${key} Machine: $${val.cost} (${100 * (val.boost - 1)}% boost)\n    To buy: \`${message.settings.prefix}store buy ${val.id}\``;
                 }
 
-                let embed = new Discord.MessageEmbed()
+                embed = new Discord.MessageEmbed()
                     .setTitle("Store - Machines")
                     .setDescription("The machines that we offer at this time are:${machines}")
                     .setColor(0x00FF00)
@@ -67,7 +67,7 @@ module.exports = class StoreCommand extends Command {
                     flavors += `\n${key.toProperCase()}: $${val.cost} (${100 * (val.boost - 1)}% boost)\n    To buy: \`${message.settings.prefix}store buy ${val.id}\``;
                 }
 
-                let embed = new Discord.MessageEmbed()
+                embed = new Discord.MessageEmbed()
                     .setTitle("Store - Flavors")
                     .setDescription("The flavors that we offer at this time are:${flavors}")
                     .setColor(0x00FF00)
@@ -80,7 +80,7 @@ module.exports = class StoreCommand extends Command {
                 
                 break;
             default:
-                let embed = new Discord.MessageEmbed()
+                embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setTitle(profile.get('name'))
                     .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
