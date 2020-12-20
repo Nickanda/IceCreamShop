@@ -139,6 +139,7 @@ module.exports = class StoreCommand extends Command {
                                 if (!profileFlavors.includes(selected)) {
                                     if (profile.money > this.client.shopHandler.flavors[selected].cost) {
                                         const newFlavors = profileFlavors.push(selected);
+                                        console.log(newFlavors, profileFlavors)
 
                                         await this.client.shops.decrement("money", {
                                             where: {
