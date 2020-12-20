@@ -21,7 +21,8 @@ module.exports = class RefillCommand extends Command {
             for (let machine in parsedMachines) {
                 newMachines[machine] = {
                     type: parsedMachines[machine]["type"],
-                    capacity: 100
+                    capacity: 100,
+                    flavor: parsedMachines[machine]["flavor"]
                 };
             }
 

@@ -100,10 +100,8 @@ module.exports = class StoreHandler {
     }
 
     async calculateBoosts(ads, machines) {
-        console.log(machines)
         ads = JSON.parse(ads);
         machines = JSON.parse(machines);
-        console.log(machines)
 
         let currentBoost = 1
 

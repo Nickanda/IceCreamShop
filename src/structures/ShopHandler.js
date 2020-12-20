@@ -122,12 +122,14 @@ module.exports = class ShopHandler extends StoreHandler {
                             capacityDifference -= parsedMachines[machine]["capacity"];
                             newMachines[machine] = {
                                 type: parsedMachines[machine]["type"],
-                                capacity: 0
+                                capacity: 0,
+                                flavor: parsedMachines[machine]["flavor"]
                             };
                         } else {
                             newMachines[machine] = {
                                 type: parsedMachines[machine]["type"],
-                                capacity: parsedMachines[machine]["capacity"] - capacityDifference
+                                capacity: parsedMachines[machine]["capacity"] - capacityDifference,
+                                flavor: parsedMachines[machine]["flavor"]
                             };
                             decreased = true;
                         }
