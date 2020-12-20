@@ -91,6 +91,8 @@ module.exports = class StoreCommand extends Command {
                                 } 
                             }
 
+                            console.log(selected);
+
                             if (selected !== "") {
                                 if (profile.money > this.client.shopHandler.ads[selected].price) {
                                     embed = new Discord.MessageEmbed()
