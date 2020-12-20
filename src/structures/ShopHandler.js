@@ -76,6 +76,23 @@ module.exports = class ShopHandler extends StoreHandler {
                     });
 
                     res(true);
+                } else if (Date.now() - Date.parse(cooldown.createdAt) > (cooldown.duration + 86400000)) {
+                    await profile.increment("money", {
+                        where: {
+                            userId: message.author.id
+                        },
+                        by: 50
+                    });
+
+                    if (cooldown) await cooldown.destroy();
+
+                    await this.client.cooldowns.create({
+                        userId: message.author.id,
+                        action: "daily",
+                        duration: 72000000
+                    });
+
+                    res(true);
                 } else {
                     rej("Daily reward has already been claimed. Please wait " + this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt))));
                 }
