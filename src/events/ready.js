@@ -23,5 +23,9 @@ module.exports = class ReadyEvent {
         this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
 
         this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.guilds.cache.size} servers.`, "ready");
+
+        setInterval(() => {
+            this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
+        }, 900000);
     }
 };
