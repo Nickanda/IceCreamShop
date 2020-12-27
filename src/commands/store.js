@@ -208,7 +208,7 @@ module.exports = class StoreCommand extends Command {
 
                             if (selected !== "") {
                                 if (profile.money > this.client.shopHandler.machines[selected].cost) {
-                                    const profileMachines = JSON.parse(profile.machines);
+                                    const profileMachines = JSON.parse(profile.machineCapacity);
 
                                     if (profileMachines.keys().length < 5) {
                                         profileMachines[profileMachines.keys().length + 1] = {
@@ -225,7 +225,7 @@ module.exports = class StoreCommand extends Command {
                                         })
 
                                         await this.client.shops.update({
-                                            machines: JSON.stringify(profileMachines)
+                                            machineCapacity: JSON.stringify(profileMachines)
                                         }, {
                                             where: {
                                                 userId: message.author.id
