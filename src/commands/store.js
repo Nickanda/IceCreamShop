@@ -39,7 +39,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Advertisements")
-                    .setDescription(`The advertisements that we offer at this time are:${advertisements}`)
+                    .setDescription(`The advertisements that we offer at this time are:\n${advertisements}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -54,7 +54,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Flavors")
-                    .setDescription(`The flavors that we offer at this time are:${flavors}`)
+                    .setDescription(`The flavors that we offer at this time are:\n${flavors}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -69,7 +69,7 @@ module.exports = class StoreCommand extends Command {
 
                 embed = new Discord.MessageEmbed()
                     .setTitle("Store - Machines")
-                    .setDescription(`The machines that we offer at this time are:${machines}`)
+                    .setDescription(`The machines that we offer at this time are:\n${machines}`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
@@ -208,6 +208,50 @@ module.exports = class StoreCommand extends Command {
 
                             if (selected !== "") {
                                 if (profile.money > this.client.shopHandler.machines[selected].cost) {
+                                    const profileMachines = JSON.parse(profile.machines);
+
+                                    if (profileMachines.keys().length < 5) {
+                                        profileMachines[profileMachines.keys().length + 1] = {
+                                            type: selected,
+                                            capacity: 100,
+                                            flavor: "vanilla"
+                                        }
+
+                                        await this.client.shops.decrement("money", {
+                                            where: {
+                                                userId: message.author.id
+                                            },
+                                            by: this.client.shopHandler.machines[selected].cost
+                                        })
+
+                                        await this.client.shops.update({
+                                            machines: JSON.stringify(profileMachines)
+                                        }, {
+                                            where: {
+                                                userId: message.author.id
+                                            }
+                                        });
+
+                                        embed = new Discord.MessageEmbed()
+                                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                            .setTitle(profile.get('name'))
+                                            .setDescription(`${selected.toProperCase()} Machine has successfully been bought!`)
+                                            .setColor(0x00FF00)
+                                            .setFooter('i!help', this.client.user.displayAvatarURL())
+                                            .setTimestamp();
+
+                                        message.channel.send(embed);
+                                    } else {
+                                        embed = new Discord.MessageEmbed()
+                                            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                                            .setTitle(profile.get('name'))
+                                            .setDescription(`At this time you can only own up to 4 machines in your shop. This may be expanded in the future.`)
+                                            .setColor(0xFF0000)
+                                            .setFooter('i!help', this.client.user.displayAvatarURL())
+                                            .setTimestamp();
+
+                                        message.channel.send(embed);
+                                    }
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
