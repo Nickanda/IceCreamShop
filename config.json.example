@@ -3,6 +3,9 @@
         "version": "0.0.1"
     },
     "discordToken": "",
+    "votingKeys": {
+        "topgg": ""
+    },
     "database": {
         "username": "",
         "password": ""

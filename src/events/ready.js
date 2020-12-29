@@ -26,6 +26,8 @@ module.exports = class ReadyEvent {
 
         setInterval(() => {
             this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
+
+            this.dbl.postStats(this.client.guilds.cache.size)
         }, 900000);
     }
 };
