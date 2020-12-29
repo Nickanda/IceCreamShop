@@ -24,6 +24,7 @@
     "dblapi.js": "^2.4.1",
     "discord.js": "^12.4.0",
     "erlpack": "github:discord/erlpack",
+    "got": "^11.8.1",
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",

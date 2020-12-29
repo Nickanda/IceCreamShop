@@ -1,3 +1,5 @@
+const got = require('got');
+
 module.exports = class ReadyEvent {
     constructor(client) {
         this.client = client;
@@ -24,10 +26,20 @@ module.exports = class ReadyEvent {
 
         this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.guilds.cache.size} servers.`, "ready");
 
-        setInterval(() => {
+        setInterval(async () => {
             this.client.user.setActivity(`${defaultSetting.get("prefix")}help | ${this.client.guilds.cache.size} Servers`);
 
-            this.dbl.postStats(this.client.guilds.cache.size)
+            this.dbl.postStats(this.client.guilds.cache.size);
+
+            await got('https://discord.bots.gg/api/v1/bots/1/stats', {
+                method: "POST",
+                json: {
+                    guildCount: this.client.guilds.cache.size
+                },
+                headers: {
+                    Authorization: this.client.config.votingKeys.botsgg
+                }
+            })
         }, 900000);
     }
 };

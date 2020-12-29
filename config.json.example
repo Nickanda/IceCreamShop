@@ -4,7 +4,8 @@
     },
     "discordToken": "",
     "votingKeys": {
-        "topgg": ""
+        "topgg": "",
+        "botsgg": ""
     },
     "database": {
         "username": "",
