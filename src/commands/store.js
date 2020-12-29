@@ -210,7 +210,7 @@ module.exports = class StoreCommand extends Command {
                                 if (profile.money > this.client.shopHandler.machines[selected].cost) {
                                     const profileMachines = JSON.parse(profile.machineCapacity);
 
-                                    if (profileMachines.keys().length < 5) {
+                                    if (Object.keys(profileMachines).length < 5) {
                                         profileMachines[JSON.stringify(Object.keys(profileMachines).length + 1)] = {
                                             type: selected,
                                             capacity: 100,
