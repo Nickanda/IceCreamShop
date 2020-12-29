@@ -13,15 +13,35 @@ module.exports = class SupportCommand extends Command {
     }
 
     async run(message, args) {
-        const embed = new Discord.MessageEmbed()
-            .setTitle("Ice Cream Shop")
-            .addField("Support Server", "https://discord.gg/sXkpG2J", true)
-            .addField("Invite Link", "[Invite Me!](https://discord.com/oauth2/authorize?client_id=765627044687249439&scope=bot&permissions=347200)", true)
-            .setColor(0x00FF00)
-            .setThumbnail(this.client.user.displayAvatarURL())
-            .setFooter('i!help', this.client.user.displayAvatarURL())
-            .setTimestamp();
-        
-        message.channel.send(embed);
+        const voted = await this.client.dbl.hasVoted(message.author.id);
+
+        if (voted) {
+            await profile.increment("money", {
+                where: {
+                    userId: message.author.id
+                },
+                by: 100
+            });
+
+            const embed = new Discord.MessageEmbed()
+                .setTitle("Ice Cream Shop")
+                .setDescription("Thanks for voting! You have been rewarded $100 for voting for our bot. Make sure to vote again in 12 hours!")
+                .setColor(0x00FF00)
+                .setThumbnail(this.client.user.displayAvatarURL())
+                .setFooter('i!help', this.client.user.displayAvatarURL())
+                .setTimestamp();
+            
+            message.channel.send(embed);
+        } else {
+            const embed = new Discord.MessageEmbed()
+                .setTitle("Ice Cream Shop")
+                .setDescription("You have not voted yet! You can vote here: https://top.gg/bot/765627044687249439/vote")
+                .setColor(0xFF0000)
+                .setThumbnail(this.client.user.displayAvatarURL())
+                .setFooter('i!help', this.client.user.displayAvatarURL())
+                .setTimestamp();
+            
+            message.channel.send(embed);
+        }
     }
 }

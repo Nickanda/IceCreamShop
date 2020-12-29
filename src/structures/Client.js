@@ -1,3 +1,4 @@
+const DBL = require('dblapi.js');
 const { Client, Collection } = require('discord.js');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -13,6 +14,8 @@ module.exports = class DiscordClient extends Client {
 
         this.commands = new Collection();
         this.aliases = new Collection();
+
+        this.dbl = new DBL(this.config.votingKeys.topgg, this);
 
         this.database = new Sequelize('iceCreamShop', this.config.database.username, this.config.database.password, {
             host: 'localhost',
