@@ -31,7 +31,7 @@ module.exports = class ReadyEvent {
 
             this.dbl.postStats(this.client.guilds.cache.size);
 
-            await got('https://discord.bots.gg/api/v1/bots/1/stats', {
+            await got('https://discord.bots.gg/api/v1/bots/765627044687249439/stats', {
                 method: "POST",
                 json: {
                     guildCount: this.client.guilds.cache.size
@@ -39,7 +39,17 @@ module.exports = class ReadyEvent {
                 headers: {
                     Authorization: this.client.config.votingKeys.botsgg
                 }
-            })
+            });
+
+            await got('https://discordbotlist.com/api/v1/bots/765627044687249439/stats', {
+                method: "POST",
+                json: {
+                    guilds: this.client.guilds.cache.size
+                },
+                headers: {
+                    Authorization: this.client.config.votingKeys.discordbotlist
+                }
+            });
         }, 900000);
     }
 };
