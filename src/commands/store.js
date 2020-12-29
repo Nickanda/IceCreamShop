@@ -211,7 +211,7 @@ module.exports = class StoreCommand extends Command {
                                     const profileMachines = JSON.parse(profile.machineCapacity);
 
                                     if (profileMachines.keys().length < 5) {
-                                        profileMachines[profileMachines.keys().length + 1] = {
+                                        profileMachines[JSON.stringify(Object.keys(profileMachines).length + 1)] = {
                                             type: selected,
                                             capacity: 100,
                                             flavor: "vanilla"
