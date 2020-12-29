@@ -8,7 +8,8 @@ module.exports = class SupportCommand extends Command {
             name: "vote",
             description: "Checks your daily votes.",
             category: "System",
-            usage: "vote"
+            usage: "vote",
+            enabled: false
         });
     }
 
