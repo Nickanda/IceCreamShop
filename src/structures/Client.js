@@ -99,7 +99,7 @@ module.exports = class DiscordClient extends Client {
         })
 
         this.botStaff = {
-            developers: ["190966781760765952", "386572401141481482"],
+            developers: ["190966781760765952"],
             administrators: [],
             support: []
         };
