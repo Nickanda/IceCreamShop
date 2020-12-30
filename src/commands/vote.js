@@ -25,7 +25,7 @@ module.exports = class SupportCommand extends Command {
 
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
-        const cooldown = await this.client.shopHandler.getCooldowns(message, "serve");
+        const cooldown = await this.client.shopHandler.getCooldowns(message, "vote");
 
         const voted = await this.client.dbl.hasVoted(message.author.id);
 
@@ -36,6 +36,14 @@ module.exports = class SupportCommand extends Command {
                         userId: message.author.id
                     },
                     by: 100
+                });
+
+                if (cooldown) await cooldown.destroy();
+
+                await this.client.cooldowns.create({
+                    userId: message.author.id,
+                    action: "vote",
+                    duration: 43200000
                 });
 
                 const embed = new Discord.MessageEmbed()
