@@ -8,31 +8,58 @@ module.exports = class SupportCommand extends Command {
             name: "vote",
             description: "Checks your daily votes.",
             category: "System",
-            usage: "vote",
-            enabled: false
+            usage: "vote"
         });
     }
 
+    formatDate(milliseconds) {
+        milliseconds = Math.floor(milliseconds / 1000);
+        const seconds = milliseconds % 60;
+        milliseconds /= 60;
+        const minutes = Math.floor(milliseconds % 60);
+        milliseconds /= 60;
+        const hours = Math.floor(milliseconds % 24);
+
+        return `${hours > 0 ? hours + " hours, " : ""}${minutes > 0 ? minutes + " minutes, " : ""}${seconds > 0 ? seconds + " seconds" : ""}`;
+    }
+
     async run(message, args) {
+        const profile = await this.client.shopHandler.getProfile(message);
+        const cooldown = await this.client.shopHandler.getCooldowns(message, "serve");
+
         const voted = await this.client.dbl.hasVoted(message.author.id);
 
         if (voted) {
-            await profile.increment("money", {
-                where: {
-                    userId: message.author.id
-                },
-                by: 100
-            });
+            if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration) {
+                await profile.increment("money", {
+                    where: {
+                        userId: message.author.id
+                    },
+                    by: 100
+                });
 
-            const embed = new Discord.MessageEmbed()
-                .setTitle("Ice Cream Shop")
-                .setDescription("Thanks for voting! You have been rewarded $100 for voting for our bot. Make sure to vote again in 12 hours!")
-                .setColor(0x00FF00)
-                .setThumbnail(this.client.user.displayAvatarURL())
-                .setFooter('i!help', this.client.user.displayAvatarURL())
-                .setTimestamp();
+                const embed = new Discord.MessageEmbed()
+                    .setTitle("Ice Cream Shop")
+                    .setDescription("Thanks for voting! You have been rewarded $100 for voting for our bot. Make sure to vote again in 12 hours!")
+                    .setColor(0x00FF00)
+                    .setThumbnail(this.client.user.displayAvatarURL())
+                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                    .setTimestamp();
+
+                message.channel.send(embed);
+            } else {
+                const embed = new Discord.MessageEmbed()
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                    .setTitle(profile.get('name'))
+                    .setDescription(`Error while claiming vote rewards:
             
-            message.channel.send(embed);
+Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
+                    .setColor(0xFF0000)
+                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                    .setTimestamp();
+
+                message.channel.send(embed);
+            }
         } else {
             const embed = new Discord.MessageEmbed()
                 .setTitle("Ice Cream Shop")
@@ -41,7 +68,7 @@ module.exports = class SupportCommand extends Command {
                 .setThumbnail(this.client.user.displayAvatarURL())
                 .setFooter('i!help', this.client.user.displayAvatarURL())
                 .setTimestamp();
-            
+
             message.channel.send(embed);
         }
     }
