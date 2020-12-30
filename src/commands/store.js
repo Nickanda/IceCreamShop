@@ -145,7 +145,7 @@ module.exports = class StoreCommand extends Command {
                                                 userId: message.author.id
                                             },
                                             by: this.client.shopHandler.flavors[selected].cost
-                                        })
+                                        });
 
                                         await this.client.shops.update({
                                             flavors: JSON.stringify(profileFlavors)
@@ -215,14 +215,14 @@ module.exports = class StoreCommand extends Command {
                                             type: selected,
                                             capacity: 100,
                                             flavor: "vanilla"
-                                        }
+                                        };
 
                                         await this.client.shops.decrement("money", {
                                             where: {
                                                 userId: message.author.id
                                             },
                                             by: this.client.shopHandler.machines[selected].cost
-                                        })
+                                        });
 
                                         await this.client.shops.update({
                                             machineCapacity: JSON.stringify(profileMachines)
