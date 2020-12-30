@@ -60,11 +60,22 @@ module.exports = class ShopHandler extends StoreHandler {
                 const cooldown = await this.getCooldowns(message, "daily");
 
                 if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration && Date.now() - Date.parse(cooldown.createdAt) < (cooldown.duration + 86400000))) { // between 22 hrs and 48 hrs
+                    let dailyReward = 50;
+
+                    await profile.increment("dailyStreak", {
+                        where: {
+                            userId: message.author.id
+                        },
+                        by: 1
+                    });
+
+                    if (profile.dailyStreak + 1 == 5) dailyReward = 200;
+                    
                     await profile.increment("money", {
                         where: {
                             userId: message.author.id
                         },
-                        by: 50
+                        by: dailyReward
                     });
 
                     if (cooldown) await cooldown.destroy();
