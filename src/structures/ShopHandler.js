@@ -69,7 +69,17 @@ module.exports = class ShopHandler extends StoreHandler {
                         by: 1
                     });
 
-                    if (profile.dailyStreak + 1 == 5) dailyReward = 200;
+                    if (profile.dailyStreak + 1 == 5) {
+                        dailyReward = 200;
+
+                        await this.client.shops.update({
+                            dailyStreak: 0
+                        }, {
+                            where: {
+                                userId: message.author.id
+                            }
+                        });
+                    }
                     
                     await profile.increment("money", {
                         where: {
@@ -93,6 +103,14 @@ module.exports = class ShopHandler extends StoreHandler {
                             userId: message.author.id
                         },
                         by: 50
+                    });
+
+                    await this.client.shops.update({
+                        dailyStreak: 0
+                    }, {
+                        where: {
+                            userId: message.author.id
+                        }
                     });
 
                     if (cooldown) await cooldown.destroy();
@@ -156,7 +174,7 @@ module.exports = class ShopHandler extends StoreHandler {
                     by: idleMoney
                 });
 
-                this.client.shops.update({
+                await this.client.shops.update({
                     machineCapacity: JSON.stringify(newMachines),
                     lastRefill: Date()
                 }, {

@@ -19,10 +19,15 @@ module.exports = class DailyCommand extends Command {
             const success = await this.client.shopHandler.claimDaily(message);
             
             if (success) {
+                const dailyReward = profile.dailyStreak + 1 == 5 && 200 || 50;
+
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setTitle(profile.get('name'))
-                    .setDescription("Your daily reward of $50 has been claimed!")
+                    .setDescription(`Your daily reward of $${dailyReward} has been claimed!
+
+Daily Streak: ${profile.dailyStreak + 1} days
+Reach Day 5 to earn $200 daily rewards instead of $50!`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
