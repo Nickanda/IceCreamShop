@@ -24,7 +24,7 @@ module.exports = class StoreCommand extends Command {
     }
 
     async run(message, args) {
-        const category = args[0] && ads[0].toLowerCase() || undefined;
+        const category = args[0] && args[0].toLowerCase() || undefined;
 
         const profile = await this.client.shopHandler.getProfile(message);
 
