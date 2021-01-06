@@ -168,7 +168,7 @@ module.exports = class StoreCommand extends Command {
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                             .setTitle(profile.get('name'))
-                                            .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
+                                            .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.flavors[selected].cost}`)
                                             .setColor(0xFF0000)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
                                             .setTimestamp();
@@ -256,7 +256,7 @@ module.exports = class StoreCommand extends Command {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                         .setTitle(profile.get('name'))
-                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
+                                        .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.machines[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
                                         .setTimestamp();
