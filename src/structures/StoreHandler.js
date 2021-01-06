@@ -106,14 +106,14 @@ module.exports = class StoreHandler {
         let currentBoost = 1
 
         for (let ad in ads) {
-            currentBoost += 1 - this.ads[ad["type"]]["boost"];
+            currentBoost += this.ads[ad["type"]]["boost"] - 1;
         };
 
         for (let machine in machines) {
             const flavor = machines[machine]["flavor"];
 
-            currentBoost += 1 - this.machines[machines[machine]["type"]]["boost"];
-            currentBoost += 1 - this.flavors[flavor]["boost"];
+            currentBoost += this.machines[machines[machine]["type"]]["boost"] - 1;
+            currentBoost += this.flavors[flavor]["boost"] - 1;
         }
 
         await this.client.wait(50);
