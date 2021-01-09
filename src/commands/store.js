@@ -245,7 +245,7 @@ module.exports = class StoreCommand extends Command {
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
                                             .setTitle(profile.get('name'))
-                                            .setDescription(`At this time you can only own up to 4 machines in your shop. This may be expanded in the future.`)
+                                            .setDescription(`At this time you can only own up to 5 machines in your shop. This may be expanded in the future.`)
                                             .setColor(0xFF0000)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
                                             .setTimestamp();
