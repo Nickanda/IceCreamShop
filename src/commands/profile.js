@@ -30,7 +30,7 @@ module.exports = class ProfileCommand extends Command {
         const profile = await this.client.shopHandler.getProfile(message);
 
         let advertisements = "";
-        for (const [key, val] of Object.entries(JSON.parse(profile.get('advertisements')))) {
+        for (const [key, val] of Object.entries(JSON.parse(profile.advertisements))) {
             if (Date.now() - Date.parse(val[0]) < val[1]) {
                 advertisements += `${key}: ${this.formatDate(Date.new(val[1] - Date.now() - Date.parse(val[0])))}`;
             }
@@ -43,13 +43,13 @@ module.exports = class ProfileCommand extends Command {
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setTitle(profile.get('name'))
-            .setDescription(`💰 $${profile.get('money')}
-Maximum customers in your shop: ${profile.get('customerMax')}
+            .setTitle(profile.name)
+            .setDescription(`💰 $${profile.money}
+Maximum customers in your shop: ${profile.customerMax}
 
 Machine Capacity: ${machineCap}
 
-Flavors: ${JSON.parse(profile.get('flavors')).join(', ')}
+Flavors: ${JSON.parse(profile.flavors).join(', ')}
 
 Advertisements: ${advertisements == "" && "none active" || advertisements}`)
             .setColor(0x00FF00)

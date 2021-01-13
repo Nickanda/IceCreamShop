@@ -25,7 +25,7 @@ module.exports = class NameCommand extends Command {
 
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription(`Your shop name has successfully been updated to ${name}!`)
                 .setColor(0x00FF00)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -35,7 +35,7 @@ module.exports = class NameCommand extends Command {
         } else {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription(`Please keep your new shop name under 30 characters!`)
                 .setColor(0xFF0000)
                 .setFooter('i!help', this.client.user.displayAvatarURL())

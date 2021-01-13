@@ -23,7 +23,7 @@ module.exports = class MachinesCommand extends Command {
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setTitle(profile.get('name'))
+            .setTitle(profile.name)
             .setDescription(`Your machines:${machineCap}`)
             .setColor(0x00FF00)
             .setFooter('i!help', this.client.user.displayAvatarURL())

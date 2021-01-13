@@ -23,15 +23,15 @@ module.exports = class BalanceCommand extends Command {
 
         let lbInsert = "";
         leaderboards.forEach(async (shop, ind) => {
-            const user = await this.client.users.fetch(shop.get("userId"));
-            lbInsert += `\n${ind + 1}. ${user.tag} - $${shop.get("money")}`;
+            const user = await this.client.users.fetch(shop.userId);
+            lbInsert += `\n${ind + 1}. ${user.tag} - $${shop.money}`;
         })
 
         await this.client.wait(250);
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setTitle(profile.get('name'))
+            .setTitle(profile.name)
             .setDescription(`Top 10 Money Leaderboard: \n${lbInsert}`)
             .setColor(0x00FF00)
             .setFooter('i!help', this.client.user.displayAvatarURL())

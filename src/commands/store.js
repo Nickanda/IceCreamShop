@@ -95,7 +95,7 @@ module.exports = class StoreCommand extends Command {
                                 if (profile.money > this.client.shopHandler.ads[selected].cost) {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                        .setTitle(profile.get('name'))
+                                        .setTitle(profile.name)
                                         .setDescription(`WIP`)
                                         .setColor(0x00FF00)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -105,7 +105,7 @@ module.exports = class StoreCommand extends Command {
                                 } else {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                        .setTitle(profile.get('name'))
+                                        .setTitle(profile.name)
                                         .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -116,7 +116,7 @@ module.exports = class StoreCommand extends Command {
                             } else {
                                 embed = new Discord.MessageEmbed()
                                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                    .setTitle(profile.get('name'))
+                                    .setTitle(profile.name)
                                     .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                                     .setColor(0xFF0000)
                                     .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -149,7 +149,7 @@ module.exports = class StoreCommand extends Command {
 
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                            .setTitle(profile.get('name'))
+                                            .setTitle(profile.name)
                                             .setDescription(`${selected.toProperCase()} flavor has successfully been bought!`)
                                             .setColor(0x00FF00)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -159,7 +159,7 @@ module.exports = class StoreCommand extends Command {
                                     } else {
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                            .setTitle(profile.get('name'))
+                                            .setTitle(profile.name)
                                             .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.flavors[selected].cost}`)
                                             .setColor(0xFF0000)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -170,7 +170,7 @@ module.exports = class StoreCommand extends Command {
                                 } else {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                        .setTitle(profile.get('name'))
+                                        .setTitle(profile.name)
                                         .setDescription(`You already own this flavor!`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -181,7 +181,7 @@ module.exports = class StoreCommand extends Command {
                             } else {
                                 embed = new Discord.MessageEmbed()
                                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                    .setTitle(profile.get('name'))
+                                    .setTitle(profile.name)
                                     .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                                     .setColor(0xFF0000)
                                     .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -218,7 +218,7 @@ module.exports = class StoreCommand extends Command {
 
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                            .setTitle(profile.get('name'))
+                                            .setTitle(profile.name)
                                             .setDescription(`${selected.toProperCase()} Machine has successfully been bought!`)
                                             .setColor(0x00FF00)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -228,7 +228,7 @@ module.exports = class StoreCommand extends Command {
                                     } else {
                                         embed = new Discord.MessageEmbed()
                                             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                            .setTitle(profile.get('name'))
+                                            .setTitle(profile.name)
                                             .setDescription(`At this time you can only own up to 5 machines in your shop. This may be expanded in the future.`)
                                             .setColor(0xFF0000)
                                             .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -239,7 +239,7 @@ module.exports = class StoreCommand extends Command {
                                 } else {
                                     embed = new Discord.MessageEmbed()
                                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                        .setTitle(profile.get('name'))
+                                        .setTitle(profile.name)
                                         .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.machines[selected].cost}`)
                                         .setColor(0xFF0000)
                                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -250,7 +250,7 @@ module.exports = class StoreCommand extends Command {
                             } else {
                                 embed = new Discord.MessageEmbed()
                                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                                    .setTitle(profile.get('name'))
+                                    .setTitle(profile.name)
                                     .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                                     .setColor(0xFF0000)
                                     .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -263,7 +263,7 @@ module.exports = class StoreCommand extends Command {
                 } else {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                        .setTitle(profile.get('name'))
+                        .setTitle(profile.name)
                         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -275,7 +275,7 @@ module.exports = class StoreCommand extends Command {
             default:
                 embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setTitle(profile.get('name'))
+                    .setTitle(profile.name)
                     .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())

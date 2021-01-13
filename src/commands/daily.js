@@ -23,7 +23,7 @@ module.exports = class DailyCommand extends Command {
 
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setTitle(profile.get('name'))
+                    .setTitle(profile.name)
                     .setDescription(`Your daily reward of $${dailyReward} has been claimed!
 
 Daily Streak: ${profile.dailyStreak + 1} days
@@ -37,7 +37,7 @@ Reach Day 5 to earn $200 daily rewards instead of $50!`)
         } catch (e) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription(`Error while claiming your daily reward:
                 
 ${e}`)

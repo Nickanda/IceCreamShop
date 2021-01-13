@@ -68,7 +68,7 @@ module.exports = class ServeCommand extends Command {
 
                     const embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                        .setTitle(profile.get('name'))
+                        .setTitle(profile.name)
                         .setDescription(`You earned $${addAmount} for serving your customers.`)
                         .setColor(0x00FF00)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -78,7 +78,7 @@ module.exports = class ServeCommand extends Command {
                 } else {
                     const embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                        .setTitle(profile.get('name'))
+                        .setTitle(profile.name)
                         .setDescription(`Error while serving your customers:
                 
 Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
@@ -91,7 +91,7 @@ Please refill your machines using the \`${message.settings.prefix}refill\` comma
             } else {
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setTitle(profile.get('name'))
+                    .setTitle(profile.name)
                     .setDescription(`Error while serving your customers:
                 
 Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
@@ -104,7 +104,7 @@ Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(coold
         } catch (e) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription(`Error while serving your customers:
                 
 ${e}`)

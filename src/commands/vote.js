@@ -58,7 +58,7 @@ module.exports = class SupportCommand extends Command {
             } else {
                 const embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setTitle(profile.get('name'))
+                    .setTitle(profile.name)
                     .setDescription(`Error while claiming vote rewards:
             
 Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)

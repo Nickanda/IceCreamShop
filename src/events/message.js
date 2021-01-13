@@ -15,12 +15,12 @@ module.exports = class {
 
         const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
         if (message.content.match(prefixMention)) {
-            return message.reply(`My prefix on this server is \`${settings.get('prefix')}\``);
+            return message.reply(`My prefix on this server is \`${settings.prefix}\``);
         }
 
-        if (message.content.toLowerCase().indexOf(settings.get('prefix')) !== 0) return;
+        if (message.content.toLowerCase().indexOf(settings.prefix) !== 0) return;
 
-        const args = message.content.slice(settings.get('prefix').length).trim().split(/ +/g);
+        const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
         const command = args.shift().toLowerCase();
 
         if (message.guild && !message.member) await message.guild.fetchMember(message.author);

@@ -37,7 +37,7 @@ module.exports = class RefillCommand extends Command {
 
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription("Your machines have all been refilled to 100%!")
                 .setColor(0x00FF00)
                 .setFooter('i!help', this.client.user.displayAvatarURL())
@@ -47,7 +47,7 @@ module.exports = class RefillCommand extends Command {
         } catch (e) {
             const embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                .setTitle(profile.get('name'))
+                .setTitle(profile.name)
                 .setDescription(`Error while refilling:
                 
 ${e}`)

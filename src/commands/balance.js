@@ -18,8 +18,8 @@ module.exports = class BalanceCommand extends Command {
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
-            .setTitle(profile.get('name'))
-            .setDescription(`💰 $${profile.get('money')}`)
+            .setTitle(profile.name)
+            .setDescription(`💰 $${profile.money}`)
             .setColor(0x00FF00)
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
