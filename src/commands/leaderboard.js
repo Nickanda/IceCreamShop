@@ -17,14 +17,12 @@ module.exports = class BalanceCommand extends Command {
         const profile = await this.client.shopHandler.getProfile(message);
 
         const leaderboards = await this.client.shops.find({}, {
-            order: {"money": 1},
+            order: {"money": -1},
             limit: 10
         }).toArray();
 
-        console.log(leaderboards)
-
         let lbInsert = "";
-        leaderboards.forEach(async (shop, ind) => {
+        leaderboards.sort((a, b) => b - a).forEach(async (shop, ind) => {
             const user = await this.client.users.fetch(shop.userId);
             lbInsert += `\n${ind + 1}. ${user.tag} - $${shop.money}`;
         })
