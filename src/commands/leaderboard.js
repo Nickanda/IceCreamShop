@@ -22,7 +22,7 @@ module.exports = class BalanceCommand extends Command {
         }).toArray();
 
         let lbInsert = "";
-        leaderboards.sort((a, b) => b - a).forEach(async (shop, ind) => {
+        leaderboards.sort((a, b) => b.money - a.money).forEach(async (shop, ind) => {
             const user = await this.client.users.fetch(shop.userId);
             lbInsert += `\n${ind + 1}. ${user.tag} - $${shop.money}`;
         })
