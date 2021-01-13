@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const got = require('got');
 
 module.exports = class ReadyEvent {
@@ -51,5 +52,11 @@ module.exports = class ReadyEvent {
                 }
             });
         }, 900000);
+
+        const embed = new Discord.MessageEmbed()
+        .setTitle("Bot Ready")
+        .setColor(0x00FF00)
+        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setTimestamp();
     }
 };
