@@ -2,7 +2,6 @@ const DBL = require('dblapi.js');
 const { Client, Collection } = require('discord.js');
 const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
-const Sequelize = require('sequelize');
 
 const Logger = require('./Logger');
 const ShopHandler = require('./ShopHandler');
