@@ -8,7 +8,7 @@ const Logger = require('./Logger');
 const ShopHandler = require('./ShopHandler');
 
 module.exports = class DiscordClient extends Client {
-    async constructor(options) {
+    constructor(options) {
         super(options);
 
         this.config = require(path.join(process.cwd(), './config.json'));
