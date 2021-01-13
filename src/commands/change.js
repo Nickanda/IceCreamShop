@@ -8,7 +8,7 @@ module.exports = class ChangeCommand extends Command {
             name: "change",
             description: "Changes parts of your shop.",
             category: "Shop",
-            usage: "change [flavor] [machine #] [newFlavor]",
+            usage: "change <flavor> <machine #> <newFlavor>",
             aliases: []
         });
     }
@@ -26,7 +26,7 @@ module.exports = class ChangeCommand extends Command {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
@@ -38,7 +38,7 @@ module.exports = class ChangeCommand extends Command {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
@@ -53,7 +53,7 @@ module.exports = class ChangeCommand extends Command {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                        .setDescription(`Please follow the proper command format and include a valid flavor:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
@@ -61,13 +61,26 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
+                const flavors = JSON.parse(profile.flavors);
                 let machines = JSON.parse(profile.machineCapacity);
 
                 if (!machines[JSON.stringify(machine)]) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                        .setDescription(`You do not own a machine #${machine}.`)
+                        .setColor(0xFF0000)
+                        .setFooter('i!help', this.client.user.displayAvatarURL())
+                        .setTimestamp();
+
+                    return message.channel.send(embed);
+                }
+
+                if (!flavors.includes(JSON.stringify(newFlavor.toLowerCase()))) {
+                    embed = new Discord.MessageEmbed()
+                        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                        .setTitle(profile.get('name'))
+                        .setDescription(`You don't have the ${newFlavor} flavor!`)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
@@ -89,7 +102,7 @@ module.exports = class ChangeCommand extends Command {
                 embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setTitle(profile.get('name'))
-                    .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+                    .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
