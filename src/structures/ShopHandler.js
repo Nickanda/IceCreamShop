@@ -18,15 +18,25 @@ module.exports = class ShopHandler extends StoreHandler {
 
     async getProfile(message) {
         try {
-            const profile = await this.client.shops.findOrCreate({
-                where: {
-                    userId: message.author.id
-                },
-                defaults: {
-                    userId: message.author.id
+            const profile = await this.client.shops.findOneAndUpdate({
+                userId: message.author.id
+            },
+            {
+                $setOnInsert: {
+                    userId: message.author.id,
+                    name: "Ice Cream Shop",
+                    money: 1000,
+                    customerMax: 10,
+                    machineCapacity: JSON.stringify({1: {type: "Basic", capacity: 100, flavor: "vanilla"}}),
+                    lastRefill: Date(),
+                    flavors: JSON.stringify(["vanilla"]),
+                    advertisements: JSON.stringify([]),
+                    dailyStreak: 0,
+                    premiumExpiration: null,
+                    createdAt: Date()
                 }
             });
-            return profile[0];
+            return profile;
         } catch (e) {
             console.log(e);
         }
@@ -34,15 +44,13 @@ module.exports = class ShopHandler extends StoreHandler {
 
     async getCooldowns(message, filter) {
         try {
-            const cooldowns = await this.client.cooldowns.findAll({
-                where: {
-                    userId: message.author.id
-                }
+            const cooldowns = this.client.cooldowns.find({
+                userId: message.author.id
             });
 
             let cooldown = "";
             cooldowns.forEach(cooldownItem => {
-                if (cooldownItem.get("action") == filter) {
+                if (cooldownItem.action == filter) {
                     cooldown = cooldownItem;
                 }
             });
@@ -62,63 +70,48 @@ module.exports = class ShopHandler extends StoreHandler {
                 if (!cooldown || (Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration && Date.now() - Date.parse(cooldown.createdAt) < (cooldown.duration + 86400000))) { // between 22 hrs and 48 hrs
                     let dailyReward = 50;
 
-                    await profile.increment("dailyStreak", {
-                        where: {
-                            userId: message.author.id
-                        },
-                        by: 1
+                    await this.client.shops.updateOne({
+                        userId: message.author.id
+                    }, {
+                        dailyStreak: profile.dailyStreak + 1
                     });
 
                     if (profile.dailyStreak + 1 == 5) {
                         dailyReward = 200;
 
-                        await this.client.shops.update({
-                            dailyStreak: 0
+                        await this.client.shops.updateOne({
+                            userId: message.author.id
                         }, {
-                            where: {
-                                userId: message.author.id
-                            }
+                            money: profile.money + dailyReward,
+                            dailyStreak: 0
                         });
                     }
-                    
-                    await profile.increment("money", {
-                        where: {
-                            userId: message.author.id
-                        },
-                        by: dailyReward
-                    });
 
                     if (cooldown) await cooldown.destroy();
 
-                    await this.client.cooldowns.create({
+                    await this.client.cooldowns.insertOne({
                         userId: message.author.id,
                         action: "daily",
-                        duration: 72000000
+                        duration: 72000000,
+                        createdAt: Date()
                     });
 
                     res(true);
                 } else if (Date.now() - Date.parse(cooldown.createdAt) > (cooldown.duration + 86400000)) {
-                    await profile.increment("money", {
-                        where: {
-                            userId: message.author.id
-                        },
-                        by: 50
-                    });
-
-                    await this.client.shops.update({
-                        dailyStreak: 0
+                    await this.client.shops.updateOne({
+                        userId: message.author.id
                     }, {
-                        where: {
-                            userId: message.author.id
-                        }
+                        money: profile.money + 50,
+                        dailyStreak: 0
                     });
 
                     if (cooldown) await cooldown.destroy();
 
-                    await this.client.cooldowns.create({
+                    await this.client.cooldowns.insertOne({
                         userId: message.author.id,
                         action: "daily",
-                        duration: 72000000
+                        duration: 72000000,
+                        createdAt: Date()
                     });
 
                     res(true);
@@ -167,20 +160,12 @@ module.exports = class ShopHandler extends StoreHandler {
                     }
                 }
 
-                await profile.increment("money", {
-                    where: {
-                        userId: message.author.id
-                    },
-                    by: idleMoney
-                });
-
-                await this.client.shops.update({
+                await this.client.shops.updateOne({
+                    userId: message.author.id
+                }, {
+                    money: profile.money + idleMoney,
                     machineCapacity: JSON.stringify(newMachines),
                     lastRefill: Date()
-                }, {
-                    where: {
-                        userId: message.author.id
-                    }
                 });
 
                 res(newMachines);

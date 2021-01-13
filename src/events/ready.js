@@ -14,12 +14,12 @@ module.exports = class ReadyEvent {
         //     this.client.appInfo = await this.client.fetchApplication();
         // }, 60000);
 
-        await this.client.settings.sync();
-        await this.client.shops.sync();
-        await this.client.cooldowns.sync();
+        // await this.client.settings.sync();
+        // await this.client.shops.sync();
+        // await this.client.cooldowns.sync();
 
-        const defaultSetting = await this.client.settings.findOne({ where: { guildId: "default" } });
-        if (!defaultSetting) {
+        const defaultSetting = await this.client.settings.findOne({ guildId: "default" });
+        if (!defaultSetting[0]) {
             throw new Error("No default setting available in the settings database.")
         }
 

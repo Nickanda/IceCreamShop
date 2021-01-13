@@ -90,12 +90,10 @@ module.exports = class ChangeCommand extends Command {
 
                 machines[JSON.stringify(machine)]["flavor"] = newFlavor;
 
-                await this.client.shops.update({
-                    machineCapacity: JSON.stringify(machines)
+                await this.client.shops.updateOne({
+                    userId: message.author.id
                 }, {
-                    where: {
-                        userId: message.author.id
-                    }
+                    machineCapacity: JSON.stringify(machines)
                 });
 
                 embed = new Discord.MessageEmbed()

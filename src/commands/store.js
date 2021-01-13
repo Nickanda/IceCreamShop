@@ -140,19 +140,11 @@ module.exports = class StoreCommand extends Command {
                                     if (profile.money > this.client.shopHandler.flavors[selected].cost) {
                                         profileFlavors.push(selected);
 
-                                        await this.client.shops.decrement("money", {
-                                            where: {
-                                                userId: message.author.id
-                                            },
-                                            by: this.client.shopHandler.flavors[selected].cost
-                                        });
-
-                                        await this.client.shops.update({
-                                            flavors: JSON.stringify(profileFlavors)
+                                        await this.client.shops.updateOne({
+                                            userId: message.author.id
                                         }, {
-                                            where: {
-                                                userId: message.author.id
-                                            }
+                                            money: profile.money - this.client.shopHandler.flavors[selected].cost,
+                                            machineCapacity: JSON.stringify(profileFlavors)
                                         });
 
                                         embed = new Discord.MessageEmbed()
@@ -217,19 +209,11 @@ module.exports = class StoreCommand extends Command {
                                             flavor: "vanilla"
                                         };
 
-                                        await this.client.shops.decrement("money", {
-                                            where: {
-                                                userId: message.author.id
-                                            },
-                                            by: this.client.shopHandler.machines[selected].cost
-                                        });
-
-                                        await this.client.shops.update({
-                                            machineCapacity: JSON.stringify(profileMachines)
+                                        await this.client.shops.updateOne({
+                                            userId: message.author.id
                                         }, {
-                                            where: {
-                                                userId: message.author.id
-                                            }
+                                            money: profile.money - this.client.shopHandler.machines[selected].cost,
+                                            machineCapacity: JSON.stringify(profileMachines)
                                         });
 
                                         embed = new Discord.MessageEmbed()

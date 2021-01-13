@@ -1,5 +1,6 @@
 const DBL = require('dblapi.js');
 const { Client, Collection } = require('discord.js');
+const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
 const Sequelize = require('sequelize');
 
@@ -17,86 +18,14 @@ module.exports = class DiscordClient extends Client {
 
         this.dbl = new DBL(this.config.votingKeys.topgg, this);
 
-        this.database = new Sequelize('iceCreamShop', this.config.database.username, this.config.database.password, {
-            host: 'localhost',
-            dialect: 'mysql',
-            logging: false
-        });
+        this.databaseClient = new MongoClient("mongodb://localhost:27017", {useNewUrlParser: true});
+        this.database = await this.databaseClient.connect();
 
-        this.settings = this.database.define('settings', {
-            guildId: {
-                type: Sequelize.STRING,
-                primaryKey: true,
-            },
-            prefix: {
-                type: Sequelize.STRING,
-                defaultValue: 'i!'
-            },
-            premiumServer: {
-                type: Sequelize.BOOLEAN,
-                defaultValue: false
-            }
-        });
+        this.settings = this.database.db("iceCreamShop").collection("settings");
 
-        this.shops = this.database.define('shops', {
-            userId: {
-                type: Sequelize.STRING,
-                primaryKey: true,
-            },
-            name: {
-                type: Sequelize.STRING,
-                defaultValue: 'Ice Cream Shop'
-            },
-            money: {
-                type: Sequelize.INTEGER,
-                defaultValue: 1000
-            },
-            customerMax: {
-                type: Sequelize.INTEGER,
-                defaultValue: 10
-            },
-            machineCapacity: {
-                type: Sequelize.STRING,
-                defaultValue: JSON.stringify({1: {type: "Basic", capacity: 100, flavor: "vanilla"}})
-            },
-            lastRefill: {
-                type: Sequelize.DATE,
-                defaultValue: Sequelize.NOW
-            },
-            flavors: {
-                type: Sequelize.STRING,
-                defaultValue: JSON.stringify(["vanilla"])
-            },
-            advertisements: {
-                type: Sequelize.STRING,
-                defaultValue: JSON.stringify({})
-                // [{
-                //     type: "Basic Ad",
-                //     duration: 1000000,
-                //     start: Date()
-                // }]
-            },
-            dailyStreak: {
-                type: Sequelize.INTEGER,
-                defaultValue: 0
-            },
-            premiumExpiration: {
-                type: Sequelize.DATE,
-                defaultValue: null
-            }
-        });
+        this.shops = this.database.db("iceCreamShop").collection("shops");
 
-        this.cooldowns = this.database.define('cooldowns', {
-            userId: {
-                type: Sequelize.STRING
-            },
-            action: {
-                type: Sequelize.STRING
-            },
-            duration: {
-                type: Sequelize.INTEGER
-            }
-        })
+        this.cooldowns = this.database.db("iceCreamShop").collection("cooldowns");
 
         this.botStaff = {
             developers: ["190966781760765952"],

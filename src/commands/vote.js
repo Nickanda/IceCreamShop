@@ -31,19 +31,19 @@ module.exports = class SupportCommand extends Command {
 
         if (voted) {
             if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration) {
-                await profile.increment("money", {
-                    where: {
-                        userId: message.author.id
-                    },
-                    by: 100
+                await this.client.shops.updateOne({
+                    userId: message.author.id
+                }, {
+                    money: profile.money + 100,
                 });
 
                 if (cooldown) await cooldown.destroy();
 
-                await this.client.cooldowns.create({
+                await this.client.cooldowns.insertOne({
                     userId: message.author.id,
                     action: "vote",
-                    duration: 43200000
+                    duration: 43200000,
+                    createdAt: Date()
                 });
 
                 const embed = new Discord.MessageEmbed()

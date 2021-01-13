@@ -41,31 +41,29 @@ module.exports = class ServeCommand extends Command {
                 if (enoughCapacity) {
                     capacity[enoughCapacity]["capacity"] -= 5;
 
-                    await profile.update({
-                        machineCapacity: JSON.stringify(capacity)
+                    await this.client.shops.updateOne({
+                        userId: message.author.id
                     }, {
-                        where: {
-                            userId: message.author.id
-                        }
+                        machineCapacity: JSON.stringify(capacity),
                     });
 
                     const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
                     const median = Math.floor(20 * boost);
                     const addAmount = Math.floor(Math.random() * ((median + 5) - (median - 15)) + (median - 15));
 
-                    await profile.increment("money", {
-                        where: {
-                            userId: message.author.id
-                        },
-                        by: addAmount
+                    await this.client.shops.updateOne({
+                        userId: message.author.id
+                    }, {
+                        money: profile.money + addAmount,
                     });
 
                     if (cooldown) await cooldown.destroy();
 
-                    await this.client.cooldowns.create({
+                    await this.client.cooldowns.insertOne({
                         userId: message.author.id,
                         action: "serve",
-                        duration: 10000
+                        duration: 10000,
+                        createdAt: Date()
                     });
 
                     const embed = new Discord.MessageEmbed()

@@ -17,12 +17,10 @@ module.exports = class NameCommand extends Command {
         const name = args.join(" ");
 
         if (name.length < 30) {
-            await this.client.shops.update({
-                name: name
+            await this.client.shops.updateOne({
+                userId: message.author.id
             }, {
-                where: {
-                    userId: message.author.id
-                }
+                name: name
             });
 
             const embed = new Discord.MessageEmbed()

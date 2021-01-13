@@ -16,10 +16,10 @@ module.exports = class BalanceCommand extends Command {
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
 
-        const leaderboards = await this.client.shops.findAll({
-            order: [["money", "DESC"]],
+        const leaderboards = await this.client.shops.find({}, {
+            order: {"money": 1},
             limit: 10
-        });
+        }).toArray();
 
         let lbInsert = "";
         leaderboards.forEach(async (shop, ind) => {
