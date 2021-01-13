@@ -18,12 +18,6 @@ module.exports = class ReadyEvent {
         // await this.client.shops.sync();
         // await this.client.cooldowns.sync();
 
-        this.client.database = await this.client.databaseClient.connect();
-
-        this.client.settings = this.client.database.db("iceCreamShop").collection("settings");
-        this.client.shops = this.client.database.db("iceCreamShop").collection("shops");
-        this.client.cooldowns = this.client.database.db("iceCreamShop").collection("cooldowns");
-
         const defaultSetting = await this.client.settings.findOne({ guildId: "default" });
         if (!defaultSetting[0]) {
             throw new Error("No default setting available in the settings database.")

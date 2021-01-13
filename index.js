@@ -11,8 +11,8 @@ const Sentry = require("@sentry/node");
 const Tracing = require("@sentry/tracing");
 
 Sentry.init({
-  dsn: "https://20454f919fd14b11ac6f24fbd436d5ed@o459376.ingest.sentry.io/5458429",
-  tracesSampleRate: 1.0,
+    dsn: "https://20454f919fd14b11ac6f24fbd436d5ed@o459376.ingest.sentry.io/5458429",
+    tracesSampleRate: 1.0,
 });
 
 const init = async () => {
@@ -34,6 +34,12 @@ const init = async () => {
         delete require.cache[require.resolve(`./src/events/${file}`)];
     });
 
+    client.database = await client.databaseClient.connect();
+
+    client.settings = client.database.db("iceCreamShop").collection("settings");
+    client.shops = client.database.db("iceCreamShop").collection("shops");
+    client.cooldowns = client.database.db("iceCreamShop").collection("cooldowns");
+
     client.login(client.config.discordToken)
 }
 
@@ -45,11 +51,11 @@ client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
     .on("warn", info => client.logger.warn(info));
 
 String.prototype.toProperCase = function () {
-    return this.replace(/([^\W_]+[^\s-]*) */g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+    return replace(/([^\W_]+[^\s-]*) */g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 Array.prototype.random = function () {
-    return this[Math.floor(Math.random() * this.length)];
+    return this[Math.floor(Math.random() * length)];
 };
 
 process.on("uncaughtException", (err) => {
