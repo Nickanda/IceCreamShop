@@ -61,7 +61,10 @@ module.exports = class ServeCommand extends Command {
                         }
                     });
 
-                    if (cooldown) await cooldown.destroy();
+                    if (cooldown) await this.client.cooldowns.remove({
+                        userId: message.author.id,
+                        action: "serve"
+                    });
 
                     await this.client.cooldowns.insertOne({
                         userId: message.author.id,

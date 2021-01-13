@@ -93,7 +93,10 @@ module.exports = class ShopHandler extends StoreHandler {
                         });
                     }
 
-                    if (cooldown) await cooldown.destroy();
+                    if (cooldown) await this.client.cooldowns.remove({
+                        userId: message.author.id,
+                        action: "daily"
+                    });
 
                     await this.client.cooldowns.insertOne({
                         userId: message.author.id,
@@ -115,7 +118,10 @@ module.exports = class ShopHandler extends StoreHandler {
                         }
                     });
 
-                    if (cooldown) await cooldown.destroy();
+                    if (cooldown) await this.client.cooldowns.remove({
+                        userId: message.author.id,
+                        action: "daily"
+                    });
 
                     await this.client.cooldowns.insertOne({
                         userId: message.author.id,

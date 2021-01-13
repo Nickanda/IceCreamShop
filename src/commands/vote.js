@@ -39,7 +39,10 @@ module.exports = class SupportCommand extends Command {
                     }
                 });
 
-                if (cooldown) await cooldown.destroy();
+                if (cooldown) await this.client.cooldowns.remove({
+                    userId: message.author.id,
+                    action: "vote"
+                });
 
                 await this.client.cooldowns.insertOne({
                     userId: message.author.id,
