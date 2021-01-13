@@ -15,6 +15,7 @@ module.exports = class BalanceCommand extends Command {
 
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
+        console.log(profile)
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
