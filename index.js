@@ -72,7 +72,7 @@ process.on("unhandledRejection", err => {
     console.error("Uncaught Promise Error: ", err);
 });
 
-process.on("SIGINT", () => {
+process.on("SIGINT", async () => {
     const embed = new Discord.MessageEmbed()
         .setTitle("Bot Rebooting")
         .setColor(0xFFFF00)
