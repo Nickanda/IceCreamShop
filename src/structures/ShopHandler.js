@@ -49,7 +49,7 @@ module.exports = class ShopHandler extends StoreHandler {
                 action: filter
             });
 
-            return cooldowns[0]];
+            return cooldowns[0];
         } catch (e) {
             console.log(e);
         }
