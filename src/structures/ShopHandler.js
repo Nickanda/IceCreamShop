@@ -50,6 +50,7 @@ module.exports = class ShopHandler extends StoreHandler {
 
             let cooldown = "";
             cooldowns.forEach(cooldownItem => {
+                console.log(cooldownItem)
                 if (cooldownItem.action == filter) {
                     cooldown = cooldownItem;
                 }
