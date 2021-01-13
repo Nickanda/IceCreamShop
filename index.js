@@ -67,3 +67,14 @@ process.on("uncaughtException", (err) => {
 process.on("unhandledRejection", err => {
     console.error("Uncaught Promise Error: ", err);
 });
+
+process.on("SIGINT", () => {
+    const embed = new Discord.MessageEmbed()
+        .setTitle("Bot Rebooting")
+        .setColor(0xFFFF00)
+        .setFooter('i!help', client.user.displayAvatarURL())
+        .setTimestamp();
+
+    const statusChannel = await client.channels.fetch("798740320363085865");
+    statusChannel.send(embed);
+});
