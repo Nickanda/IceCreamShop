@@ -20,12 +20,6 @@ module.exports = class DiscordClient extends Client {
 
         this.databaseClient = new MongoClient("mongodb://localhost:27017", {useNewUrlParser: true});
 
-        this.settings = this.database.db("iceCreamShop").collection("settings");
-
-        this.shops = this.database.db("iceCreamShop").collection("shops");
-
-        this.cooldowns = this.database.db("iceCreamShop").collection("cooldowns");
-
         this.botStaff = {
             developers: ["190966781760765952"],
             administrators: [],
