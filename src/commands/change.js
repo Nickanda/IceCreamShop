@@ -14,15 +14,15 @@ module.exports = class ChangeCommand extends Command {
     }
 
     async run(message, args) {
-        const category = args[0] && args[0].toLowerCase() || undefined;
+        // const category = args[0] && args[0].toLowerCase() || undefined;
 
         const profile = await this.client.shopHandler.getProfile(message);
 
         let embed;
 
-        switch(category) {
-            case "flavor": case "flavors":
-                if (!args[1] || isNaN(parseInt(args[1]))) {
+        // switch(category) {
+        //     case "flavor": case "flavors":
+                if (!args[0] || isNaN(parseInt(args[0]))) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.name)
@@ -34,7 +34,7 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
-                if (!args[2]) {
+                if (!args[1]) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.name)
@@ -46,8 +46,8 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
-                const machine = parseInt(args[1]);
-                const newFlavor = args[2].toLowerCase();
+                const machine = parseInt(args[0]);
+                const newFlavor = args[1].toLowerCase();
 
                 if (!this.client.shopHandler.flavors[newFlavor.toLowerCase()]) {
                     embed = new Discord.MessageEmbed()
@@ -107,18 +107,18 @@ module.exports = class ChangeCommand extends Command {
                     .setTimestamp();
 
                 message.channel.send(embed);
-                break;
-            default:
-                embed = new Discord.MessageEmbed()
-                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
-                    .setTitle(profile.name)
-                    .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
-                    .setColor(0xFF0000)
-                    .setFooter('i!help', this.client.user.displayAvatarURL())
-                    .setTimestamp();
+                // break;
+            // default:
+            //     embed = new Discord.MessageEmbed()
+            //         .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            //         .setTitle(profile.name)
+            //         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
+            //         .setColor(0xFF0000)
+            //         .setFooter('i!help', this.client.user.displayAvatarURL())
+            //         .setTimestamp();
 
-                message.channel.send(embed);
-                break
-        }
+            //     message.channel.send(embed);
+            //     break
+        // }
     }
 }
