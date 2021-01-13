@@ -76,7 +76,8 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
-                if (!flavors.includes(JSON.stringify(newFlavor.toLowerCase()))) {
+                console.log(flavors, newFlavor)
+                if (!flavors.includes(newFlavor.toLowerCase())) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
