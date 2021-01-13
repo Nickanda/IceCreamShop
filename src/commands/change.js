@@ -22,7 +22,7 @@ module.exports = class ChangeCommand extends Command {
 
         switch(category) {
             case "flavor": case "flavors":
-                if (!args[1] || !isNaN(parseInt(args[1]))) {
+                if (!args[1] || isNaN(parseInt(args[1]))) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
@@ -38,7 +38,7 @@ module.exports = class ChangeCommand extends Command {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
-                        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
+                        .setDescription(`Please follow the proper command format and include a new flavor:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
                         .setColor(0xFF0000)
                         .setFooter('i!help', this.client.user.displayAvatarURL())
                         .setTimestamp();
