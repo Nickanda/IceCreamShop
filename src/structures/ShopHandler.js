@@ -21,21 +21,21 @@ module.exports = class ShopHandler extends StoreHandler {
             const profile = await this.client.shops.findOneAndUpdate({
                 userId: message.author.id
             },
-            {
-                $setOnInsert: {
-                    userId: message.author.id,
-                    name: "Ice Cream Shop",
-                    money: 1000,
-                    customerMax: 10,
-                    machineCapacity: JSON.stringify({1: {type: "Basic", capacity: 100, flavor: "vanilla"}}),
-                    lastRefill: Date(),
-                    flavors: JSON.stringify(["vanilla"]),
-                    advertisements: JSON.stringify([]),
-                    dailyStreak: 0,
-                    premiumExpiration: null,
-                    createdAt: Date()
-                }
-            });
+                {
+                    $setOnInsert: {
+                        userId: message.author.id,
+                        name: "Ice Cream Shop",
+                        money: 1000,
+                        customerMax: 10,
+                        machineCapacity: JSON.stringify({ 1: { type: "Basic", capacity: 100, flavor: "vanilla" } }),
+                        lastRefill: Date(),
+                        flavors: JSON.stringify(["vanilla"]),
+                        advertisements: JSON.stringify([]),
+                        dailyStreak: 0,
+                        premiumExpiration: null,
+                        createdAt: Date()
+                    }
+                });
             return profile;
         } catch (e) {
             console.log(e);
@@ -73,7 +73,9 @@ module.exports = class ShopHandler extends StoreHandler {
                     await this.client.shops.updateOne({
                         userId: message.author.id
                     }, {
-                        dailyStreak: profile.dailyStreak + 1
+                        $inc: {
+                            dailyStreak: 1
+                        }
                     });
 
                     if (profile.dailyStreak + 1 == 5) {
@@ -82,8 +84,12 @@ module.exports = class ShopHandler extends StoreHandler {
                         await this.client.shops.updateOne({
                             userId: message.author.id
                         }, {
-                            money: profile.money + dailyReward,
-                            dailyStreak: 0
+                            $inc: {
+                                money: dailyReward
+                            },
+                            $set: {
+                                dailyStreak: 0
+                            }
                         });
                     }
 
@@ -101,8 +107,12 @@ module.exports = class ShopHandler extends StoreHandler {
                     await this.client.shops.updateOne({
                         userId: message.author.id
                     }, {
-                        money: profile.money + 50,
-                        dailyStreak: 0
+                        $inc: {
+                            money: 50,
+                        },
+                        $set: {
+                            dailyStreak: 0
+                        }
                     });
 
                     if (cooldown) await cooldown.destroy();
@@ -163,9 +173,13 @@ module.exports = class ShopHandler extends StoreHandler {
                 await this.client.shops.updateOne({
                     userId: message.author.id
                 }, {
-                    money: profile.money + idleMoney,
-                    machineCapacity: JSON.stringify(newMachines),
-                    lastRefill: Date()
+                    $inc: {
+                        money: profile.money + idleMoney
+                    },
+                    $set: {
+                        machineCapacity: JSON.stringify(newMachines),
+                        lastRefill: Date()
+                    }
                 });
 
                 res(newMachines);

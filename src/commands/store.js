@@ -143,8 +143,12 @@ module.exports = class StoreCommand extends Command {
                                         await this.client.shops.updateOne({
                                             userId: message.author.id
                                         }, {
-                                            money: profile.money - this.client.shopHandler.flavors[selected].cost,
-                                            machineCapacity: JSON.stringify(profileFlavors)
+                                            $inc: {
+                                                money: -1 * this.client.shopHandler.flavors[selected].cost
+                                            },
+                                            $set: {
+                                                machineCapacity: JSON.stringify(profileFlavors)
+                                            }
                                         });
 
                                         embed = new Discord.MessageEmbed()
@@ -212,8 +216,12 @@ module.exports = class StoreCommand extends Command {
                                         await this.client.shops.updateOne({
                                             userId: message.author.id
                                         }, {
-                                            money: profile.money - this.client.shopHandler.machines[selected].cost,
-                                            machineCapacity: JSON.stringify(profileMachines)
+                                            $inc: {
+                                                money: -1 * this.client.shopHandler.machines[selected].cost
+                                            },
+                                            $set: {
+                                                machineCapacity: JSON.stringify(profileMachines)
+                                            }
                                         });
 
                                         embed = new Discord.MessageEmbed()

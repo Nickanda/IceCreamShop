@@ -44,7 +44,9 @@ module.exports = class ServeCommand extends Command {
                     await this.client.shops.updateOne({
                         userId: message.author.id
                     }, {
-                        machineCapacity: JSON.stringify(capacity),
+                        $set: {
+                            machineCapacity: JSON.stringify(capacity),
+                        }
                     });
 
                     const boost = await this.client.shopHandler.calculateBoosts(profile.advertisements, profile.machineCapacity);
@@ -54,7 +56,9 @@ module.exports = class ServeCommand extends Command {
                     await this.client.shops.updateOne({
                         userId: message.author.id
                     }, {
-                        money: profile.money + addAmount,
+                        $inc: {
+                            money: ddAmount
+                        }
                     });
 
                     if (cooldown) await cooldown.destroy();

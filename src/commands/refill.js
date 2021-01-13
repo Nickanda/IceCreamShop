@@ -31,8 +31,10 @@ module.exports = class RefillCommand extends Command {
             await this.client.shops.updateOne({
                 userId: message.author.id
             }, {
-                machineCapacity: JSON.stringify(newMachines),
-                lastRefill: Date()
+                $set: {
+                    machineCapacity: JSON.stringify(newMachines),
+                    lastRefill: Date()
+                }
             });
 
             const embed = new Discord.MessageEmbed()

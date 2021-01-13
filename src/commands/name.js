@@ -20,7 +20,9 @@ module.exports = class NameCommand extends Command {
             await this.client.shops.updateOne({
                 userId: message.author.id
             }, {
-                name: name
+                $set: {
+                    name: name
+                }
             });
 
             const embed = new Discord.MessageEmbed()

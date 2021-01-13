@@ -34,7 +34,9 @@ module.exports = class SupportCommand extends Command {
                 await this.client.shops.updateOne({
                     userId: message.author.id
                 }, {
-                    money: profile.money + 100,
+                    $inc: {
+                        money: 100
+                    }
                 });
 
                 if (cooldown) await cooldown.destroy();

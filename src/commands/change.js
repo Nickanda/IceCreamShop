@@ -93,7 +93,9 @@ module.exports = class ChangeCommand extends Command {
                 await this.client.shops.updateOne({
                     userId: message.author.id
                 }, {
-                    machineCapacity: JSON.stringify(machines)
+                    $set: {
+                        machineCapacity: JSON.stringify(machines)
+                    }
                 });
 
                 embed = new Discord.MessageEmbed()
