@@ -47,7 +47,7 @@ module.exports = class ChangeCommand extends Command {
                 }
 
                 const machine = parseInt(args[1]);
-                const newFlavor = args[2];
+                const newFlavor = args[2].toLowerCase();
 
                 if (!this.client.shopHandler.flavors[newFlavor.toLowerCase()]) {
                     embed = new Discord.MessageEmbed()
@@ -76,8 +76,7 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
-                console.log(flavors, newFlavor)
-                if (!flavors.includes(newFlavor.toLowerCase())) {
+                if (!flavors.includes(newFlavor)) {
                     embed = new Discord.MessageEmbed()
                         .setAuthor(message.author.tag, message.author.displayAvatarURL())
                         .setTitle(profile.get('name'))
@@ -89,7 +88,7 @@ module.exports = class ChangeCommand extends Command {
                     return message.channel.send(embed);
                 }
 
-                machines[JSON.stringify(machine)]["flavor"] = newFlavor.toLowerCase();
+                machines[JSON.stringify(machine)]["flavor"] = newFlavor;
 
                 await this.client.shops.update({
                     machineCapacity: JSON.stringify(machines)
@@ -97,7 +96,17 @@ module.exports = class ChangeCommand extends Command {
                     where: {
                         userId: message.author.id
                     }
-                })
+                });
+
+                embed = new Discord.MessageEmbed()
+                    .setAuthor(message.author.tag, message.author.displayAvatarURL())
+                    .setTitle(profile.get('name'))
+                    .setDescription(`Machine #${machine} has successfully been changed to the ${newFlavor} flavor!`)
+                    .setColor(0x00FF00)
+                    .setFooter('i!help', this.client.user.displayAvatarURL())
+                    .setTimestamp();
+
+                message.channel.send(embed);
                 break;
             default:
                 embed = new Discord.MessageEmbed()
