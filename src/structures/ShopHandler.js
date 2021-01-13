@@ -49,8 +49,6 @@ module.exports = class ShopHandler extends StoreHandler {
                 action: filter
             }).toArray();
 
-            console.log(cooldowns, cooldowns[0])
-
             return cooldowns[0];
         } catch (e) {
             console.log(e);
