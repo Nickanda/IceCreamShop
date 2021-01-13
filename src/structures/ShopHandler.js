@@ -35,8 +35,11 @@ module.exports = class ShopHandler extends StoreHandler {
                         premiumExpiration: null,
                         createdAt: Date()
                     }
+                }, {
+                    returnOriginal: false,
+                    upsert: true
                 });
-            return profile.value;
+            return profile;
         } catch (e) {
             console.log(e);
         }

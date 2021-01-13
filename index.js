@@ -2,6 +2,7 @@ const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const klaw = require("klaw");
 const path = require("path");
+const Discord = require('discord.js');
 
 const Client = require('./src/structures/Client');
 
