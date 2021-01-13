@@ -57,7 +57,7 @@ module.exports = class ServeCommand extends Command {
                         userId: message.author.id
                     }, {
                         $inc: {
-                            money: ddAmount
+                            money: addAmount
                         }
                     });
 
