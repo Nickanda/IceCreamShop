@@ -47,7 +47,7 @@ module.exports = class ShopHandler extends StoreHandler {
             const cooldowns = await this.client.cooldowns.find({
                 userId: message.author.id,
                 action: filter
-            });
+            }).toArray();
 
             console.log(cooldowns, cooldowns[0])
 
