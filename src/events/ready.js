@@ -54,9 +54,12 @@ module.exports = class ReadyEvent {
         }, 900000);
 
         const embed = new Discord.MessageEmbed()
-        .setTitle("Bot Ready")
-        .setColor(0x00FF00)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
-        .setTimestamp();
+            .setTitle("Bot Ready")
+            .setColor(0x00FF00)
+            .setFooter('i!help', this.client.user.displayAvatarURL())
+            .setTimestamp();
+
+        const statusChannel = await this.client.channels.fetch("7988740320363085865");
+        statusChannel.send(embed);
     }
 };
