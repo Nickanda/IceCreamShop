@@ -26,7 +26,7 @@ module.exports = class ServeCommand extends Command {
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
         const cooldown = await this.client.shopHandler.getCooldowns(message, "serve");
-
+console.log(cooldown)
         try {
             if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration) {
                 let capacity = await this.client.shopHandler.refreshMachineCapacity(message);
@@ -61,7 +61,7 @@ module.exports = class ServeCommand extends Command {
                         }
                     });
 
-                    if (cooldown) await this.client.cooldowns.remove({
+                    if (cooldown) await this.client.cooldowns.deleteMany({
                         userId: message.author.id,
                         action: "serve"
                     });

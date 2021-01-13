@@ -44,13 +44,12 @@ module.exports = class ShopHandler extends StoreHandler {
 
     async getCooldowns(message, filter) {
         try {
-            const cooldowns = this.client.cooldowns.find({
+            const cooldowns = await this.client.cooldowns.find({
                 userId: message.author.id
             });
 
             let cooldown = "";
             cooldowns.forEach(cooldownItem => {
-                console.log(cooldownItem)
                 if (cooldownItem.action == filter) {
                     cooldown = cooldownItem;
                 }
@@ -94,7 +93,7 @@ module.exports = class ShopHandler extends StoreHandler {
                         });
                     }
 
-                    if (cooldown) await this.client.cooldowns.remove({
+                    if (cooldown) await this.client.cooldowns.deleteMany({
                         userId: message.author.id,
                         action: "daily"
                     });
@@ -119,7 +118,7 @@ module.exports = class ShopHandler extends StoreHandler {
                         }
                     });
 
-                    if (cooldown) await this.client.cooldowns.remove({
+                    if (cooldown) await this.client.cooldowns.deleteMany({
                         userId: message.author.id,
                         action: "daily"
                     });
