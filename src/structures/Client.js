@@ -29,6 +29,16 @@ module.exports = class DiscordClient extends Client {
         this.logger = new Logger();
         this.shopHandler = new ShopHandler(this);
         this.wait = require("util").promisify(setTimeout);
+
+        this.init();
+    }
+
+    async init() {
+        this.client.database = await this.client.databaseClient.connect();
+
+        this.client.settings = this.client.database.db("iceCreamShop").collection("settings");
+        this.client.shops = this.client.database.db("iceCreamShop").collection("shops");
+        this.client.cooldowns = this.client.database.db("iceCreamShop").collection("cooldowns");
     }
 
     loadCommand(commandPath, commandName) {
