@@ -41,6 +41,10 @@ const init = async () => {
     client.cooldowns = client.database.db("iceCreamShop").collection("cooldowns");
 
     client.login(client.config.discordToken)
+
+    client.dbl.webhook.on("vote", async data => {
+        console.log(data)
+    });
 }
 
 init();

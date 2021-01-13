@@ -30,7 +30,7 @@ module.exports = class ReadyEvent {
         setInterval(async () => {
             this.client.user.setActivity(`${defaultSetting.prefix}help | ${this.client.guilds.cache.size} Servers`);
 
-            this.client.dbl.postStats(this.client.guilds.cache.size);
+            // this.client.dbl.postStats(this.client.guilds.cache.size);
 
             await got('https://discord.bots.gg/api/v1/bots/765627044687249439/stats', {
                 method: "POST",

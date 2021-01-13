@@ -15,7 +15,11 @@ module.exports = class DiscordClient extends Client {
         this.commands = new Collection();
         this.aliases = new Collection();
 
-        this.dbl = new DBL(this.config.votingKeys.topgg, this);
+        this.dbl = new DBL(this.config.votingKeys.topgg, {
+            statsInterval: 9000000,
+            webhookPort: 5000,
+            webhookAuth: this.config.votingKeys.topggwebhook
+        }, this);
 
         this.databaseClient = new MongoClient("mongodb://localhost:27017", {useNewUrlParser: true});
 
