@@ -174,7 +174,7 @@ module.exports = class ShopHandler extends StoreHandler {
                     userId: message.author.id
                 }, {
                     $inc: {
-                        money: profile.money + idleMoney
+                        money: idleMoney
                     },
                     $set: {
                         machineCapacity: JSON.stringify(newMachines),
