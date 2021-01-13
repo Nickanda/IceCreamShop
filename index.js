@@ -50,8 +50,9 @@ client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
     .on("error", e => client.logger.error(e))
     .on("warn", info => client.logger.warn(info));
 
-String.prototype.toProperCase = function () {
-    return replace(/([^\W_]+[^\s-]*) */g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+String.prototype.toProperCase = function (opt_lowerCaseTheRest) {
+    return (opt_lowerCaseTheRest ? this.toLowerCase() : this)
+        .replace(/(^|[\s\xA0])[^\s\xA0]/g, function (s) { return s.toUpperCase(); });
 };
 
 Array.prototype.random = function () {
