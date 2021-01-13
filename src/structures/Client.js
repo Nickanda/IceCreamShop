@@ -19,7 +19,6 @@ module.exports = class DiscordClient extends Client {
         this.dbl = new DBL(this.config.votingKeys.topgg, this);
 
         this.databaseClient = new MongoClient("mongodb://localhost:27017", {useNewUrlParser: true});
-        this.database = await this.databaseClient.connect();
 
         this.settings = this.database.db("iceCreamShop").collection("settings");
 
