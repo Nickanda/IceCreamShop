@@ -36,7 +36,7 @@ module.exports = class ShopHandler extends StoreHandler {
                         createdAt: Date()
                     }
                 });
-            return profile;
+            return profile.value;
         } catch (e) {
             console.log(e);
         }
@@ -50,12 +50,12 @@ module.exports = class ShopHandler extends StoreHandler {
 
             let cooldown = "";
             cooldowns.forEach(cooldownItem => {
-                if (cooldownItem.action == filter) {
+                if (cooldownItem.value.action == filter) {
                     cooldown = cooldownItem;
                 }
             });
 
-            return cooldown === "" ? undefined : cooldown;
+            return cooldown === "" ? undefined : cooldown.value;
         } catch (e) {
             console.log(e);
         }

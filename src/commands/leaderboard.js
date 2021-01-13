@@ -21,6 +21,8 @@ module.exports = class BalanceCommand extends Command {
             limit: 10
         }).toArray();
 
+        console.log(leaderboards)
+
         let lbInsert = "";
         leaderboards.forEach(async (shop, ind) => {
             const user = await this.client.users.fetch(shop.userId);
