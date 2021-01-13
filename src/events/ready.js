@@ -19,7 +19,7 @@ module.exports = class ReadyEvent {
         // await this.client.cooldowns.sync();
 
         const defaultSetting = await this.client.settings.findOne({ guildId: "default" });
-        if (!defaultSetting[0]) {
+        if (!defaultSetting) {
             throw new Error("No default setting available in the settings database.")
         }
 
