@@ -65,12 +65,12 @@ module.exports = class UpgradeCommand extends Command {
             return message.channel.send(embed);
         }
 
-        const costDifference = (this.client.shops.machines[this.machines[parseInt(machine) + 1]]["cost"] - this.client.shops.machines[machines[machine]["type"]]["cost"]) * 1.05;
+        const costDifference = (this.client.shopHandler.machines[this.machines[parseInt(machine) - 1]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
 
         embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.name)
-            .setDescription(`The upgrade cost from ${this.client.shops.machines[machines[machine]["type"]]} to ${this.machines[parseInt(machine) + 1]} will cost ${costDifference}.
+            .setDescription(`The upgrade cost from ${this.client.shopHandler.machines[machines[machine]["type"]]} to ${this.machines[parseInt(machine) - 1]} will cost ${costDifference}.
                 
 Please type \`yes\` or \`no\`.`)
             .setColor(0xFFFF00)
@@ -93,7 +93,7 @@ Please type \`yes\` or \`no\`.`)
                     return message.channel.send(embed);
                 }
 
-                machines[machine]["type"] = this.machines[parseInt(machine) + 1];
+                machines[machine]["type"] = this.machines[parseInt(machine) - 1];
                 machines[machine]["capacity"] = 100;
 
                 await this.client.shops.updateOne({
@@ -108,7 +108,7 @@ Please type \`yes\` or \`no\`.`)
                 embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setTitle(profile.name)
-                    .setDescription(`Machine #${machine} has successfully been upgraded to the ${this.client.shops.machines[machines[machine]["type"]]}!`)
+                    .setDescription(`Machine #${machine} has successfully been upgraded to the ${this.client.shopHandler.machines[machines[machine]["type"]]}!`)
                     .setColor(0x00FF00)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
