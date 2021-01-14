@@ -25,6 +25,8 @@ module.exports = class UpgradeCommand extends Command {
 
         const profile = await this.client.shopHandler.getProfile(message);
 
+        let embed;
+
         if (!args[0] || isNaN(parseInt(args[0]))) {
             embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
