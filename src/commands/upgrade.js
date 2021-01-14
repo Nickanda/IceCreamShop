@@ -40,6 +40,7 @@ module.exports = class UpgradeCommand extends Command {
         }
 
         let machines = JSON.parse(profile.machineCapacity);
+        console.log(machines, machine);
 
         if (!machines[JSON.stringify(machine)]) {
             embed = new Discord.MessageEmbed()
@@ -70,7 +71,7 @@ module.exports = class UpgradeCommand extends Command {
         embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.name)
-            .setDescription(`The upgrade cost from ${this.client.shops.machines[machines[JSON.stringify(machine)]["type"]]} to ${this.client.shops.machines[this.machines[parseInt(machine) + 1]]} will cost ${costDifference}.
+            .setDescription(`The upgrade cost from ${this.client.shops.machines[machines[JSON.stringify(machine)]["type"]]} to ${this.machines[parseInt(machine) + 1]} will cost ${costDifference}.
                 
 Please type \`yes\` or \`no\`.`)
             .setColor(0xFFFF00)
@@ -92,6 +93,8 @@ Please type \`yes\` or \`no\`.`)
 
                     return message.channel.send(embed);
                 }
+
+                machines[JSON.stringify(machine)]["type"] = this.machines[parseInt(machine) + 1];
 
                 await this.client.shops.updateOne({
                     userId: message.author.id
