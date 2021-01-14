@@ -77,7 +77,7 @@ Please type \`yes\` or \`no\`.`)
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-        const response = await this.client.awaitReply(msg, embed);
+        const response = await this.client.awaitReply(message, embed);
 
         switch (response.toLowerCase()) {
             case "yes": case "y":
