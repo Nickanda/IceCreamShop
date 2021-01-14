@@ -100,7 +100,8 @@ Please type \`yes\` or \`no\`.`)
                     userId: message.author.id
                 }, {
                     $inc: {
-                        money: -1 * costDifference
+                        money: -1 * costDifference,
+                        machineCapacity: JSON.stringify(machines)
                     }
                 });
 
