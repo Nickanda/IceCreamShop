@@ -40,10 +40,15 @@ const init = async () => {
     client.settings = client.database.db("iceCreamShop").collection("settings");
     client.shops = client.database.db("iceCreamShop").collection("shops");
     client.cooldowns = client.database.db("iceCreamShop").collection("cooldowns");
+    client.votes = client.database.db("iceCreamShop").collection("votes");
 
     client.login(client.config.discordToken)
 
     client.dbl.webhook.on("vote", async data => {
+        client.votes.insertOne({
+            userId: data.user,
+            createdAt: Date()
+        })
         console.log(data)
     });
 }
