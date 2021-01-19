@@ -17,7 +17,7 @@ module.exports = class UpgradeCommand extends Command {
             "Regular",
             "Improved",
             "Advanced"
-        ]
+        ];
     }
 
     async run(message, args) {
@@ -65,12 +65,12 @@ module.exports = class UpgradeCommand extends Command {
             return message.channel.send(embed);
         }
 
-        const costDifference = (this.client.shopHandler.machines[this.machines[parseInt(machine) - 1]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
+        const costDifference = (this.client.shopHandler.machines[this.machines[parseInt(machine)]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
 
         embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
             .setTitle(profile.name)
-            .setDescription(`The upgrade cost from ${this.client.shopHandler.machines[machines[machine]["type"]]} to ${this.machines[parseInt(machine) - 1]} will cost ${costDifference}.
+            .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[parseInt(machine)]} will cost $${costDifference}.
                 
 Please type \`yes\` or \`no\`.`)
             .setColor(0xFFFF00)
@@ -93,7 +93,7 @@ Please type \`yes\` or \`no\`.`)
                     return message.channel.send(embed);
                 }
 
-                machines[machine]["type"] = this.machines[parseInt(machine) - 1];
+                machines[machine]["type"] = this.machines[parseInt(machine)];
                 machines[machine]["capacity"] = 100;
 
                 await this.client.shops.updateOne({
@@ -115,7 +115,7 @@ Please type \`yes\` or \`no\`.`)
 
                 message.channel.send(embed);
                 break;
-            case "no": case "n":
+            case "no": case "n": case "cancel":
                 embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
                     .setTitle(profile.name)
