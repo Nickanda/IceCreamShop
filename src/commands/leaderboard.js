@@ -27,7 +27,7 @@ module.exports = class BalanceCommand extends Command {
             lbInsert += `\n${ind + 1}. ${user.tag} - $${shop.money}`;
         })
 
-        await this.client.wait(250);
+        await this.client.wait(500);
 
         const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
