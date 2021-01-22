@@ -58,6 +58,25 @@ module.exports = class ShopHandler extends StoreHandler {
         }
     }
 
+    async getVotes(message) {
+        try {
+            await this.client.votes.deleteMany({
+                userId: message.author.id,
+                createdAt: {
+                    $lte: Date.parse(Date.now() - 43200000)
+                }
+            })
+            
+            const vote = await this.client.votes.findOne({
+                userId: message.author.id
+            });
+
+            return vote;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async claimDaily(message) {
         return new Promise(async (res, rej) => {
             try {
