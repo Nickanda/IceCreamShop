@@ -17,9 +17,9 @@ module.exports = class HelpCommand extends Command {
 
             const myCommands = message.guild ? this.client.commands : this.client.commands.filter(cmd => {
                 cmd.conf.guildOnly !== true
-                && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author.id) : false)
-                && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author.id) : false)
-                && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author.id) : false)
+                && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author.id) : true)
+                && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author.id) : true)
+                && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author.id) : true)
             });
 
             const commandNames = myCommands.keyArray();
