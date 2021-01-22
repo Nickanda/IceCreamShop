@@ -15,7 +15,13 @@ module.exports = class HelpCommand extends Command {
         if (!args[0]) {
             const settings = message.settings;
 
-            const myCommands = message.guild ? this.client.commands : this.client.commands.filter(cmd => cmd.conf.guildOnly !== true);
+            const myCommands = message.guild ? this.client.commands : this.client.commands.filter(cmd => {
+                cmd.conf.guildOnly !== true
+                && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author.id) : false)
+                && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author.id) : false)
+                && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author.id) : false)
+            });
+
             const commandNames = myCommands.keyArray();
             const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
             let currentCategory = "";
