@@ -7,7 +7,8 @@ module.exports = class PingCommand extends Command {
             description: "Changes the server settings.",
             category: "System",
             usage: "settings",
-            aliases: ["set", "setting"]
+            aliases: ["set", "setting"],
+            enabled: false
         });
     }
 
