@@ -25,12 +25,10 @@ module.exports = class SupportCommand extends Command {
 
     async run(message, args) {
         const profile = await this.client.shopHandler.getProfile(message);
-        const cooldown = await this.client.shopHandler.getCooldowns(message, "vote");
+        const vote = await this.client.shopHandler.getVotes(message);
 
-        const voted = await this.client.dbl.hasVoted(message.author.id);
-
-        if (voted) {
-            if (!cooldown || Date.now() - Date.parse(cooldown.createdAt) > cooldown.duration) {
+        if (vote) {
+            if (vote.claimed == false) {
                 await this.client.shops.updateOne({
                     userId: message.author.id
                 }, {
@@ -39,16 +37,10 @@ module.exports = class SupportCommand extends Command {
                     }
                 });
 
-                if (cooldown) await this.client.cooldowns.deleteMany({
-                    userId: message.author.id,
-                    action: "vote"
-                });
-
-                await this.client.cooldowns.insertOne({
-                    userId: message.author.id,
-                    action: "vote",
-                    duration: 43200000,
-                    createdAt: Date()
+                await this.client.votes.updateOne({
+                    userId: message.author.id
+                }, {
+                    claimed: true
                 });
 
                 const embed = new Discord.MessageEmbed()
@@ -66,7 +58,7 @@ module.exports = class SupportCommand extends Command {
                     .setTitle(profile.name)
                     .setDescription(`Error while claiming vote rewards:
             
-Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
+Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt)))}.`)
                     .setColor(0xFF0000)
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();

@@ -56,6 +56,7 @@ const init = async () => {
     client.dbl.webhook.on("vote", async data => {
         client.votes.insertOne({
             userId: data.user,
+            claimed: false,
             createdAt: Date()
         })
         console.log(data)
