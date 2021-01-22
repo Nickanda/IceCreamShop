@@ -69,7 +69,7 @@ module.exports = class GiveCommand extends Command {
 
         const targetUser = await this.client.users.fetch(userId, false);
 
-        if (!targetProfile) {
+        if (!targetUser) {
             embed = new Discord.MessageEmbed()
                 .setAuthor(message.author.tag, message.author.displayAvatarURL())
                 .setTitle(profile.name)
