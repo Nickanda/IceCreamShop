@@ -147,7 +147,7 @@ module.exports = class StoreCommand extends Command {
                                                 money: -1 * this.client.shopHandler.flavors[selected].cost
                                             },
                                             $set: {
-                                                machineCapacity: JSON.stringify(profileFlavors)
+                                                flavors: JSON.stringify(profileFlavors)
                                             }
                                         });
 
