@@ -1,4 +1,4 @@
-const AutoPoster = require('topgg-autoposter');
+const { AutoPoster } = require('topgg-autoposter');
 const { Client, Collection } = require('discord.js');
 const MongoClient = require('mongodb').MongoClient;
 const path = require('path');
