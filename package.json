@@ -27,7 +27,9 @@
     "got": "^11.8.1",
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
-    "mongodb": "^3.6.3",
+    "mongodb": "^3.6.9",
+    "mongoose": "^5.13.2",
+    "mongoose-findorcreate": "^3.0.0",
     "utf-8-validate": "^5.0.2",
     "zlib-sync": "^0.1.7"
   }

@@ -21,7 +21,7 @@ module.exports = class DiscordClient extends Client {
             webhookAuth: this.config.votingKeys.topggwebhook
         }, this);
 
-        this.databaseClient = new MongoClient("mongodb://localhost:27017", {useNewUrlParser: true});
+        this.databaseClient = new MongoClient(`mongodb://${this.config.database.username}:${this.config.database.password}localhost:27017`, {useNewUrlParser: true});
 
         this.botStaff = {
             developers: ["190966781760765952"],
