@@ -53,14 +53,11 @@ const init = async () => {
 
     client.login(client.config.discordToken)
 
-    client.dbl.webhook.on("vote", async data => {
-        client.votes.insertOne({
-            userId: data.user,
-            claimed: false,
-            createdAt: Date()
-        })
-        console.log(data)
-    });
+    const app = express();
+
+    app.post("/dblwebhook", client.topgg.listener(vote => {
+      
+    }))
 }
 
 init();
