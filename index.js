@@ -60,8 +60,10 @@ const init = async () => {
       userId: vote.user,
       claimed: false,
       createdAt: Date()
-    })
-  }))
+    });
+  }));
+
+  app.listen(5000);
 }
 
 init();
