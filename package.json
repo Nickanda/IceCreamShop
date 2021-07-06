@@ -19,17 +19,21 @@
   "dependencies": {
     "@sentry/node": "^5.25.0",
     "@sentry/tracing": "^5.25.0",
+    "@top-gg/sdk": "^3.1.2",
     "bufferutil": "^4.0.1",
     "chalk": "^4.1.0",
-    "dblapi.js": "^2.4.1",
     "discord.js": "^12.4.0",
     "erlpack": "github:discord/erlpack",
+    "express": "^4.17.1",
     "got": "^11.8.1",
+    "i": "^0.3.6",
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.9",
     "mongoose": "^5.13.2",
     "mongoose-findorcreate": "^3.0.0",
+    "npm": "^7.19.1",
+    "topgg-autoposter": "^2.0.0",
     "utf-8-validate": "^5.0.2",
     "zlib-sync": "^0.1.7"
   }

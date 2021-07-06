@@ -5,6 +5,7 @@
     "discordToken": "",
     "votingKeys": {
         "topgg": "",
+        "topggwebhook": "", 
         "botsgg": "",
         "discordbotlist": ""
     },
