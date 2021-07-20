@@ -26,7 +26,6 @@
     "erlpack": "github:discord/erlpack",
     "express": "^4.17.1",
     "got": "^11.8.1",
-    "i": "^0.3.6",
     "klaw": "^3.0.0",
     "moment": "^2.29.1",
     "mongodb": "^3.6.9",
