@@ -96,7 +96,7 @@ process.on("SIGINT", async () => {
   const embed = new Discord.MessageEmbed()
     .setTitle("Bot Rebooting")
     .setColor(0xFFFF00)
-    .setFooter('i!help', client.user.displayAvatarURL())
+    .setFooter('i!help')
     .setTimestamp();
 
   const statusChannel = await client.channels.fetch("798740320363085865");
