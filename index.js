@@ -45,9 +45,8 @@ const init = async () => {
     delete require.cache[require.resolve(`./src/events/${file}`)];
   });
 
-  console.log('everything up to connect is done')
   client.database = await client.databaseClient.connect();
-  console.log('connection established')
+
   client.settings = client.database.db("iceCreamShop").collection("settings");
   client.shops = client.database.db("iceCreamShop").collection("shops");
   client.cooldowns = client.database.db("iceCreamShop").collection("cooldowns");
