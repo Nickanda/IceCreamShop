@@ -10,6 +10,7 @@
         "discordbotlist": ""
     },
     "database": {
+        "host": "",
         "username": "",
         "password": ""
     }

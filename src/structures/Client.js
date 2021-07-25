@@ -20,7 +20,7 @@ module.exports = class DiscordClient extends Client {
 
     this.autoposter = new AutoPoster(this.config.votingKeys.topgg, this);
 
-    this.databaseClient = new MongoClient(`mongodb://${this.config.database.username}:${this.config.database.password}@localhost:27017?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`, { useNewUrlParser: true, useUnifiedTopology: true });
+    this.databaseClient = new MongoClient(`mongodb://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
 
     this.botStaff = {
       developers: ["190966781760765952"],
