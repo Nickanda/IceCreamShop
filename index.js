@@ -55,17 +55,17 @@ const init = async () => {
 
   client.login(client.config.discordToken)
 
-  const app = express();
+  // const app = express();
 
-  app.post("/dblwebhook", client.topgg.listener(vote => {
-    client.votes.insertOne({
-      userId: vote.user,
-      claimed: false,
-      createdAt: Date()
-    });
-  }));
+  // app.post("/dblwebhook", client.topgg.listener(vote => {
+  //   client.votes.insertOne({
+  //     userId: vote.user,
+  //     claimed: false,
+  //     createdAt: Date()
+  //   });
+  // }));
 
-  app.listen(5000);
+  // app.listen(5000);
 }
 
 init();
