@@ -44,10 +44,6 @@ const init = async () => {
     delete require.cache[require.resolve(`./src/events/${file}`)];
   });
 
-  console.log(client);
-
-  client.database.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
-
   client.cooldowns.deleteMany()
   client.votes.deleteMany()
   client.shops.deleteMany()

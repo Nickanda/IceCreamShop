@@ -22,8 +22,11 @@ module.exports = class DiscordClient extends Client {
     this.autoposter = new AutoPoster(this.config.votingKeys.topgg, this);
 
     this.database = mongoose;
+
     this.database.plugin(mongooseFindOrCreate);
     this.database.Promise = Promise;
+
+    mongoose.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
 
     this.cooldowns = mongoose.model('cooldowns', new mongoose.Schema({
       userId: String,
@@ -68,8 +71,8 @@ module.exports = class DiscordClient extends Client {
       machineCapacity: {
         type: Array,
         default: [{
-          type: "Basic", 
-          capacity: 100, 
+          type: "Basic",
+          capacity: 100,
           flavor: "vanilla"
         }]
       },
