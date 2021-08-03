@@ -107,9 +107,9 @@ module.exports = class StoreHandler {
     });
 
     machines.forEach(machine => {
-      const flavor = machines[machine]["flavor"];
+      const flavor = machine["flavor"];
 
-      currentBoost += this.machines[machines[machine]["type"]]["boost"] - 1;
+      currentBoost += this.machines[machine["type"]]["boost"] - 1;
       currentBoost += this.flavors[flavor]["boost"] - 1;
     })
 
