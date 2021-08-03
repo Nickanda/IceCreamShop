@@ -39,7 +39,9 @@ module.exports = class ShopHandler extends StoreHandler {
         returnOriginal: false,
         upsert: true
       });
-      return profile.value
+
+      console.log(profile)
+      return profile
     } catch (e) {
       console.log(e);
     }

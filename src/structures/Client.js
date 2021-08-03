@@ -26,7 +26,7 @@ module.exports = class DiscordClient extends Client {
     this.database.plugin(mongooseFindOrCreate);
     this.database.Promise = Promise;
 
-    mongoose.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
     this.cooldowns = mongoose.model('cooldowns', new mongoose.Schema({
       userId: String,
