@@ -47,7 +47,6 @@ const init = async () => {
   await client.cooldowns.remove({})
   await client.votes.remove({})
   await client.shops.remove({})
-  await client.settings.remove({})
 
   client.login(client.config.discordToken)
 

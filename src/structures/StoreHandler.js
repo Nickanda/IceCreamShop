@@ -102,16 +102,16 @@ module.exports = class StoreHandler {
   async calculateBoosts(ads, machines) {
     let currentBoost = 1
 
-    for (let ad in ads) {
+    ads.forEach(ad => {
       currentBoost += this.ads[ad["type"]]["boost"] - 1;
-    };
+    });
 
-    for (let machine in machines) {
+    machines.forEach(machine => {
       const flavor = machines[machine]["flavor"];
 
       currentBoost += this.machines[machines[machine]["type"]]["boost"] - 1;
       currentBoost += this.flavors[flavor]["boost"] - 1;
-    }
+    })
 
     await this.client.wait(50);
 
