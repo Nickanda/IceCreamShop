@@ -44,10 +44,10 @@ const init = async () => {
     delete require.cache[require.resolve(`./src/events/${file}`)];
   });
 
-  client.cooldowns.remove({})
-  client.votes.remove({})
-  client.shops.remove({})
-  client.settings.remove({})
+  await client.cooldowns.remove({})
+  await client.votes.remove({})
+  await client.shops.remove({})
+  await client.settings.remove({})
 
   client.login(client.config.discordToken)
 
