@@ -30,7 +30,7 @@ module.exports = class ShopHandler extends StoreHandler {
             machineCapacity: { 1: { type: "Basic", capacity: 100, flavor: "vanilla" } },
             lastRefill: Date.now(),
             flavors: ["vanilla"],
-            advertisements: {},
+            advertisements: [],
             dailyStreak: 0,
             premiumExpiration: null,
             createdAt: Date.now()
