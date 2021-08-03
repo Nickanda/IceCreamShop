@@ -164,36 +164,35 @@ module.exports = class ShopHandler extends StoreHandler {
       try {
         const profile = await this.getProfile(message);
 
-        const parsedMachines = profile.machineCapacity;
         const boost = await this.calculateBoosts(profile.advertisements, profile.machineCapacity)
         const timeDifference = Date.now() - Date.parse(profile.lastRefill);
         let capacityDifference = Math.floor(timeDifference / 288000);
         let idleMoney = Math.floor(capacityDifference * .5 * boost);
 
-        let newMachines = {};
+        let newMachines = [];
         let decreased = false;
-        for (let machine in parsedMachines) {
+        profile.machineCapacity.forEach((machine, index) => {
           if (!decreased) {
-            if (parsedMachines[machine]["capacity"] - capacityDifference < 0) {
-              capacityDifference -= parsedMachines[machine]["capacity"];
-              newMachines[machine] = {
-                type: parsedMachines[machine]["type"],
+            if (machine["capacity"] - capacityDifference < 0) {
+              capacityDifference -= machine["capacity"];
+              newMachines[index] = {
+                type: machine["type"],
                 capacity: 0,
-                flavor: parsedMachines[machine]["flavor"]
+                flavor: machine["flavor"]
               };
             } else {
-              newMachines[machine] = {
-                type: parsedMachines[machine]["type"],
-                capacity: parsedMachines[machine]["capacity"] - capacityDifference,
-                flavor: parsedMachines[machine]["flavor"]
+              newMachines[index] = {
+                type: machine["type"],
+                capacity: machine["capacity"] - capacityDifference,
+                flavor: machine["flavor"]
               };
               decreased = true;
             }
           } else {
-            newMachines[machine] = parsedMachines[machine];
+            newMachines[index] = machine;
           }
-        }
-
+        })
+          
         await this.client.shops.updateOne({
           userId: message.author.id
         }, {
