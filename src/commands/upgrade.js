@@ -101,7 +101,7 @@ Please type \`yes\` or \`no\`.`)
         }, {
           $inc: {
             money: -1 * costDifference,
-            machineCapacity: JSON.stringify(machines)
+            machineCapacity: machines
           }
         });
 

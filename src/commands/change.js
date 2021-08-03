@@ -61,8 +61,8 @@ module.exports = class ChangeCommand extends Command {
       return message.channel.send(embed);
     }
 
-    const flavors = JSON.parse(profile.flavors);
-    let machines = JSON.parse(profile.machineCapacity);
+    const flavors = profile.flavors;
+    let machines = profile.machineCapacity;
 
     if (!machines[JSON.stringify(machine)]) {
       embed = new Discord.MessageEmbed()
@@ -94,7 +94,7 @@ module.exports = class ChangeCommand extends Command {
       userId: message.author.id
     }, {
       $set: {
-        machineCapacity: JSON.stringify(machines)
+        machineCapacity: machines
       }
     });
 

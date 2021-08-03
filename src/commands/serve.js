@@ -45,7 +45,7 @@ module.exports = class ServeCommand extends Command {
             userId: message.author.id
           }, {
             $set: {
-              machineCapacity: JSON.stringify(capacity),
+              machineCapacity: capacity,
             }
           });
 

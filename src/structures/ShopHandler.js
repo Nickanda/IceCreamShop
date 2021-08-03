@@ -27,13 +27,13 @@ module.exports = class ShopHandler extends StoreHandler {
             name: "Ice Cream Shop",
             money: 1000,
             customerMax: 10,
-            machineCapacity: JSON.stringify({ 1: { type: "Basic", capacity: 100, flavor: "vanilla" } }),
-            lastRefill: Date(),
-            flavors: JSON.stringify(["vanilla"]),
-            advertisements: JSON.stringify({}),
+            machineCapacity: { 1: { type: "Basic", capacity: 100, flavor: "vanilla" } },
+            lastRefill: Date.now(),
+            flavors: ["vanilla"],
+            advertisements: {},
             dailyStreak: 0,
             premiumExpiration: null,
-            createdAt: Date()
+            createdAt: Date.now()
           }
         }, {
         returnOriginal: false,
@@ -162,7 +162,7 @@ module.exports = class ShopHandler extends StoreHandler {
       try {
         const profile = await this.getProfile(message);
 
-        const parsedMachines = JSON.parse(profile.machineCapacity);
+        const parsedMachines = profile.machineCapacity;
         const boost = await this.calculateBoosts(profile.advertisements, profile.machineCapacity)
         const timeDifference = Date.now() - Date.parse(profile.lastRefill);
         let capacityDifference = Math.floor(timeDifference / 288000);
@@ -199,7 +199,7 @@ module.exports = class ShopHandler extends StoreHandler {
             money: idleMoney
           },
           $set: {
-            machineCapacity: JSON.stringify(newMachines),
+            machineCapacity: newMachines,
             lastRefill: Date()
           }
         });

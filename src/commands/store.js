@@ -134,7 +134,7 @@ module.exports = class StoreCommand extends Command {
               }
 
               if (selected !== "") {
-                const profileFlavors = JSON.parse(profile.flavors);
+                const profileFlavors = profile.flavors;
 
                 if (!profileFlavors.includes(selected)) {
                   if (profile.money > this.client.shopHandler.flavors[selected].cost) {
@@ -147,7 +147,7 @@ module.exports = class StoreCommand extends Command {
                         money: -1 * this.client.shopHandler.flavors[selected].cost
                       },
                       $set: {
-                        flavors: JSON.stringify(profileFlavors)
+                        flavors: profileFlavors
                       }
                     });
 
@@ -204,7 +204,7 @@ module.exports = class StoreCommand extends Command {
 
               if (selected !== "") {
                 if (profile.money > this.client.shopHandler.machines[selected].cost) {
-                  const profileMachines = JSON.parse(profile.machineCapacity);
+                  const profileMachines = profile.machineCapacity;
 
                   if (Object.keys(profileMachines).length < 5) {
                     profileMachines[JSON.stringify(Object.keys(profileMachines).length + 1)] = {
@@ -220,7 +220,7 @@ module.exports = class StoreCommand extends Command {
                         money: -1 * this.client.shopHandler.machines[selected].cost
                       },
                       $set: {
-                        machineCapacity: JSON.stringify(profileMachines)
+                        machineCapacity: profileMachines
                       }
                     });
 

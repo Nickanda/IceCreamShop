@@ -30,7 +30,7 @@ module.exports = class ProfileCommand extends Command {
     const profile = await this.client.shopHandler.getProfile(message);
 
     let advertisements = "";
-    for (const [key, val] of Object.entries(JSON.parse(profile.advertisements))) {
+    for (const [key, val] of Object.entries(profile.advertisements)) {
       if (Date.now() - Date.parse(val[0]) < val[1]) {
         advertisements += `${key}: ${this.formatDate(Date.new(val[1] - Date.now() - Date.parse(val[0])))}`;
       }
@@ -49,7 +49,7 @@ Maximum customers in your shop: ${profile.customerMax}
 
 Machine Capacity: ${machineCap}
 
-Flavors: ${JSON.parse(profile.flavors).join(', ')}
+Flavors: ${profile.flavors.join(', ')}
 
 Advertisements: ${advertisements == "" && "none active" || advertisements}`)
       .setColor(0x00FF00)

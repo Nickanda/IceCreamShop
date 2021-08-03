@@ -1,6 +1,7 @@
 const { AutoPoster } = require('topgg-autoposter');
 const { Client, Collection } = require('discord.js');
-const MongoClient = require('mongodb').MongoClient;
+const mongoose = require('mongoose');
+const mongooseFindOrCreate = require('mongoose-findorcreate');
 const path = require('path');
 const topgg = require("@top-gg/sdk");
 
@@ -20,7 +21,89 @@ module.exports = class DiscordClient extends Client {
 
     this.autoposter = new AutoPoster(this.config.votingKeys.topgg, this);
 
-    this.databaseClient = new MongoClient(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
+    this.database = mongoose;
+    this.database.plugin(mongooseFindOrCreate);
+    this.database.Promise = Promise;
+
+    this.cooldowns = mongoose.model('cooldowns', new mongoose.Schema({
+      userId: String,
+      action: String,
+      duration: Number,
+      createdAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }));
+
+    this.settings = mongoose.model('settings', new mongoose.Schema({
+      guildId: String,
+      prefix: {
+        type: String,
+        default: 'i!'
+      },
+      premiumServer: {
+        type: Boolean,
+        default: false
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }));
+
+    this.shops = mongoose.model('shops', new mongoose.Schema({
+      userId: String,
+      name: {
+        type: String,
+        default: 'Ice Cream Shop'
+      },
+      money: {
+        type: Number,
+        default: 1000
+      },
+      customerMax: {
+        type: Number,
+        default: 10
+      },
+      machineCapacity: {
+        type: Array,
+        default: [{
+          type: "Basic", 
+          capacity: 100, 
+          flavor: "vanilla"
+        }]
+      },
+      lastRefill: {
+        type: Date,
+        default: Date.now()
+      },
+      flavors: {
+        type: Array,
+        default: ["vanilla"]
+      },
+      advertisements: {
+        type: Array,
+        default: []
+      },
+      dailyStreak: {
+        type: Number,
+        default: 0
+      },
+      premiumExpiration: Date,
+      createdAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }));
+
+    this.votes = mongoose.model('votes', new mongoose.Schema({
+      userId: String,
+      claimed: Boolean,
+      createdAt: {
+        type: Date,
+        default: Date.now()
+      }
+    }));
 
     this.botStaff = {
       developers: ["190966781760765952"],

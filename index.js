@@ -45,26 +45,26 @@ const init = async () => {
     delete require.cache[require.resolve(`./src/events/${file}`)];
   });
 
-  client.database = await client.databaseClient.connect();
+  client.database.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
 
-  client.settings = client.database.db("iceCreamShop").collection("settings");
-  client.shops = client.database.db("iceCreamShop").collection("shops");
-  client.cooldowns = client.database.db("iceCreamShop").collection("cooldowns");
-  client.votes = client.database.db("iceCreamShop").collection("votes");
+  client.cooldowns.deleteMany()
+  client.votes.deleteMany()
+  client.shops.deleteMany()
+  client.settings.deleteMany()
 
   client.login(client.config.discordToken)
 
-  // const app = express();
+  const app = express();
 
-  // app.post("/dblwebhook", client.topgg.listener(vote => {
-  //   client.votes.insertOne({
-  //     userId: vote.user,
-  //     claimed: false,
-  //     createdAt: Date()
-  //   });
-  // }));
+  app.post("/dblwebhook", client.topgg.listener(vote => {
+    client.votes.insertOne({
+      userId: vote.user,
+      claimed: false,
+      createdAt: Date()
+    });
+  }));
 
-  // app.listen(5000);
+  app.listen(5000);
 }
 
 init();
