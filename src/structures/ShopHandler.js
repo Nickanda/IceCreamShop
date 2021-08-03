@@ -27,7 +27,7 @@ module.exports = class ShopHandler extends StoreHandler {
             name: "Ice Cream Shop",
             money: 1000,
             customerMax: 10,
-            machineCapacity: { 1: { type: "Basic", capacity: 100, flavor: "vanilla" } },
+            machineCapacity: [ { type: "Basic", capacity: 100, flavor: "vanilla" } ],
             lastRefill: Date.now(),
             flavors: ["vanilla"],
             advertisements: [],
