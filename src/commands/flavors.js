@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const Command = require('../structures/Command');
 
-module.exports = class MachinesCommand extends Command {
+module.exports = class FlavorsCommand extends Command {
   constructor(client) {
     super(client, {
       name: "flavors",
@@ -18,7 +18,7 @@ module.exports = class MachinesCommand extends Command {
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`Your flavors: ${JSON.parse(profile.flavors).join(', ')}`)
+      .setDescription(`Your flavors: ${profile.flavors.join(', ')}`)
       .setColor(0x00FF00)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();

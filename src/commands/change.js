@@ -46,7 +46,7 @@ module.exports = class ChangeCommand extends Command {
       return message.channel.send(embed);
     }
 
-    const machine = parseInt(args[0]);
+    const machine = parseInt(args[0]) - 1;
     const newFlavor = args[1].toLowerCase();
 
     if (!this.client.shopHandler.flavors[newFlavor.toLowerCase()]) {
@@ -64,11 +64,11 @@ module.exports = class ChangeCommand extends Command {
     const flavors = profile.flavors;
     let machines = profile.machineCapacity;
 
-    if (!machines[JSON.stringify(machine)]) {
+    if (!machines[machine]) {
       embed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setTitle(profile.name)
-        .setDescription(`You do not own a machine #${machine}.`)
+        .setDescription(`You do not own a machine #${machine + 1}.`)
         .setColor(0xFF0000)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
@@ -88,7 +88,7 @@ module.exports = class ChangeCommand extends Command {
       return message.channel.send(embed);
     }
 
-    machines[JSON.stringify(machine)]["flavor"] = newFlavor;
+    machines[machine]["flavor"] = newFlavor;
 
     await this.client.shops.updateOne({
       userId: message.author.id
@@ -101,7 +101,7 @@ module.exports = class ChangeCommand extends Command {
     embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`Machine #${machine} has successfully been changed to the ${newFlavor} flavor!`)
+      .setDescription(`Machine #${machine + 1} has successfully been changed to the ${newFlavor} flavor!`)
       .setColor(0x00FF00)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();

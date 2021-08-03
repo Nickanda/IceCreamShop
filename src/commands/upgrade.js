@@ -21,8 +21,6 @@ module.exports = class UpgradeCommand extends Command {
   }
 
   async run(message, args) {
-    const machine = args[0] && args[0].toLowerCase() || undefined;
-
     const profile = await this.client.shopHandler.getProfile(message);
 
     let embed;
@@ -39,13 +37,14 @@ module.exports = class UpgradeCommand extends Command {
       return message.channel.send(embed);
     }
 
-    let machines = JSON.parse(profile.machineCapacity);
+    const machine = parseInt(args[0]) - 1;
+    let machines = profile.machineCapacity;
 
     if (!machines[machine]) {
       embed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
         .setTitle(profile.name)
-        .setDescription(`You do not own a machine #${machine}.`)
+        .setDescription(`You do not own a machine #${machine + 1}.`)
         .setColor(0xFF0000)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
@@ -65,12 +64,12 @@ module.exports = class UpgradeCommand extends Command {
       return message.channel.send(embed);
     }
 
-    const costDifference = (this.client.shopHandler.machines[this.machines[parseInt(machine)]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
+    const costDifference = (this.client.shopHandler.machines[this.machines[machine]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
 
     embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[parseInt(machine)]} will cost $${costDifference}.
+      .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[machine]} will cost $${costDifference}.
                 
 Please type \`yes\` or \`no\`.`)
       .setColor(0xFFFF00)
@@ -108,7 +107,7 @@ Please type \`yes\` or \`no\`.`)
         embed = new Discord.MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL())
           .setTitle(profile.name)
-          .setDescription(`Machine #${machine} has successfully been upgraded to the ${this.client.shopHandler.machines[machines[machine]["type"]]}!`)
+          .setDescription(`Machine #${machine + 1} has successfully been upgraded to the ${this.client.shopHandler.machines[machines[machine]["type"]]}!`)
           .setColor(0x00FF00)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 const Command = require('../structures/Command');
 
-module.exports = class BalanceCommand extends Command {
+module.exports = class LeaderboardCommand extends Command {
   constructor(client) {
     super(client, {
       name: "leaderboard",

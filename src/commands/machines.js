@@ -17,9 +17,9 @@ module.exports = class MachinesCommand extends Command {
     const capacity = await this.client.shopHandler.refreshMachineCapacity(message);
 
     let machineCap = "";
-    for (const [key, val] of Object.entries(capacity)) {
-      machineCap += `\n${val.type} Machine ${key} (${val.flavor}): ${val.capacity}%`;
-    }
+    capacity.forEach((machine, index) => {
+      machineCap += `\n${machine.type} Machine ${index + 1} (${machine.flavor}): ${machine.capacity}%`;
+    });
 
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())

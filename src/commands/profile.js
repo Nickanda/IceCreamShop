@@ -34,12 +34,12 @@ module.exports = class ProfileCommand extends Command {
       if (Date.now() - Date.parse(val[0]) < val[1]) {
         advertisements += `${key}: ${this.formatDate(Date.new(val[1] - Date.now() - Date.parse(val[0])))}`;
       }
-    })
+    });
 
     let machineCap = "";
     capacity.forEach((machine, index) => {
       machineCap += `\n${machine.type} Machine ${index + 1} (${machine.flavor}): ${machine.capacity}%`;
-    })
+    });
       
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
