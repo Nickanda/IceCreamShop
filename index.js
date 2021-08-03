@@ -8,7 +8,6 @@ const express = require('express');
 const Client = require('./src/structures/Client');
 
 const client = new Client({
-  fetchAllMembers: true,
   messageCacheMaxSize: 20,
   messageCacheLifetime: 120,
   messageSweepInterval: 120,
@@ -44,6 +43,8 @@ const init = async () => {
     client.on(eventName, (...args) => event.run(...args));
     delete require.cache[require.resolve(`./src/events/${file}`)];
   });
+
+  console.log(client);
 
   client.database.connect(`mongodb+srv://${this.config.database.username}:${this.config.database.password}@${this.config.database.host}/iceCreamShop?retryWrites=true&w=majoritye`, { useNewUrlParser: true, useUnifiedTopology: true });
 
