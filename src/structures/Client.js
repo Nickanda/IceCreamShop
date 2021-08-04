@@ -128,9 +128,6 @@ module.exports = class DiscordClient extends Client {
         props.init(this);
       }
       this.commands.set(props.help.name, props);
-      props.conf.aliases.forEach(alias => {
-        this.aliases.set(alias, props.help.name);
-      });
       return false;
     } catch (e) {
       console.log(e)
