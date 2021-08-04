@@ -36,6 +36,8 @@ const init = async () => {
     const response = client.loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
     if (response) client.logger.error(response);
 
+    console.log(cmdFile.name)
+
     const command = client.commands.get(cmdFile.name);
 
     commandInfo.push({
