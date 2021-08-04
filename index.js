@@ -37,7 +37,7 @@ const init = async () => {
     if (response) client.logger.error(response);
 
     const command = client.commands.get(cmdFile.name);
-    console.log(command)
+    console.log(client.commands)
 
     commandInfo.push({
       name: command.help.name,
