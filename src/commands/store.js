@@ -26,7 +26,7 @@ module.exports = class StoreCommand extends Command {
           description: "View all available machines in the store"
         },
         {
-          type: "SUB_COMMAND_GROUP",
+          type: "SUB_COMMAND",
           name: "buy",
           description: "Buys an item from the store",
           options: [
