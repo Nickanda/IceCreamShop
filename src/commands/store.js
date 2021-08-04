@@ -32,7 +32,7 @@ module.exports = class StoreCommand extends Command {
           options: [
             {
               type: "STRING",
-              name: "ID",
+              name: "id",
               description: "ID of the item you want to buy",
               required: true
             }
