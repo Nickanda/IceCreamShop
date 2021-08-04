@@ -51,6 +51,28 @@ module.exports = class ReadyEvent {
       .setTimestamp();
 
     const statusChannel = await this.client.channels.fetch("798740320363085865");
-    statusChannel.send(embed);
+    statusChannel.send({ embeds: [embed] });
+
+    if (!client.application?.owner) await client.application?.fetch();
+
+    let commandInfo = [];
+
+    const commands = client.commands.values();
+
+    commands.forEach(command => {
+      commandInfo.push({
+        name: command.help.name,
+        description: command.help.description,
+        options: command.help.options
+      });
+
+      console.log(command.help.name, "has been loaded into the slash commands!")
+    })
+
+    setTimeout(() => { }, 1000);
+
+    client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
+      console.log(result.map(res => res.name + " |  " + res.id).join("\n"));
+    });
   }
 };
