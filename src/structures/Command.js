@@ -5,7 +5,7 @@ module.exports = class Command {
     category = "Miscellaneous",
     usage = "No usage provided.",
     enabled = true,
-    options: [],
+    options = new Array(),
     permLevel = ""
   } = {}) {
     this.client = client;
