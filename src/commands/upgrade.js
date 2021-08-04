@@ -9,7 +9,14 @@ module.exports = class UpgradeCommand extends Command {
       description: "Upgrade machines from one tier to the next.",
       category: "Shop",
       usage: "upgrade <machine #>",
-      aliases: []
+      options: [
+        {
+          type: "INTEGER",
+          name: "machine_number",
+          description: "The number of the machine that you want to upgrade",
+          required: true
+        }
+      ]
     });
 
     this.machines = [
@@ -34,7 +41,7 @@ module.exports = class UpgradeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const machine = parseInt(args[0]) - 1;
@@ -49,7 +56,7 @@ module.exports = class UpgradeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     if (machines[machine]["type"] == "Advanced") {
@@ -61,7 +68,7 @@ module.exports = class UpgradeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const costDifference = (this.client.shopHandler.machines[this.machines[machine]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
@@ -89,7 +96,7 @@ Please type \`yes\` or \`no\`.`)
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-          return message.channel.send(embed);
+          return message.channel.send({ embeds: [embed] });
         }
 
         machines[machine]["type"] = this.machines[parseInt(machine)];
@@ -112,7 +119,7 @@ Please type \`yes\` or \`no\`.`)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
       case "no": case "n": case "cancel":
         embed = new Discord.MessageEmbed()
@@ -123,7 +130,7 @@ Please type \`yes\` or \`no\`.`)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
       default:
         embed = new Discord.MessageEmbed()
@@ -134,7 +141,7 @@ Please type \`yes\` or \`no\`.`)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
     }
   }

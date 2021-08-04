@@ -81,7 +81,7 @@ module.exports = class ServeCommand extends Command {
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-          message.channel.send(embed);
+          message.channel.send({ embeds: [embed] });
         } else {
           const embed = new Discord.MessageEmbed()
             .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -93,7 +93,7 @@ Please refill your machines using the \`${message.settings.prefix}refill\` comma
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-          message.channel.send(embed);
+          message.channel.send({ embeds: [embed] });
         }
       } else {
         const embed = new Discord.MessageEmbed()
@@ -106,7 +106,7 @@ Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(coold
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
       }
     } catch (e) {
       const embed = new Discord.MessageEmbed()
@@ -119,7 +119,7 @@ ${e}`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     }
   }
 }

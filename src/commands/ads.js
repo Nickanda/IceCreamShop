@@ -5,15 +5,14 @@ const Command = require('../structures/Command');
 module.exports = class AdsCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "ads",
+      name: "advertisements",
       description: "Shows the ads that you are currently running",
       category: "Shop",
-      usage: "ads",
-      aliases: ["advertisements", "advertisement", "ad"]
+      usage: "ads"
     });
   }
 
-  ormatDate(milliseconds) {
+  formatDate(milliseconds) {
     milliseconds = Math.floor(milliseconds / 1000);
     const seconds = milliseconds % 60;
     milliseconds /= 60;
@@ -37,11 +36,11 @@ module.exports = class AdsCommand extends Command {
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`Current Advertisements: ${advertisements == "" && "none active" || advertisements}`)
+      .setDescription(`Current Advertisements: ${advertisements == "" ? "none active" : advertisements}`)
       .setColor(0x00FF00)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 }

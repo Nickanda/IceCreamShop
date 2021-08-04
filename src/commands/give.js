@@ -6,10 +6,23 @@ module.exports = class GiveCommand extends Command {
   constructor(client) {
     super(client, {
       name: "give",
-      description: "Donates a certain amount of money to another user.",
+      description: "Donates a certain amount of money to another user (there is a 10% tax!).",
       category: "Shop",
       usage: "give <@user> <amount>",
-      aliases: ["advertisements", "advertisement", "ad"]
+      options: [
+        {
+          type: "USER",
+          name: "user",
+          description: "The user who you want to donate money to",
+          required: true
+        },
+        {
+          type: "INTEGER",
+          name: "amount",
+          description: "The amount of money you want to give to another user",
+          required: true
+        }
+      ]
     });
   }
 
@@ -25,7 +38,7 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     if (!args[1] || isNaN(parseInt(args[1]))) {
@@ -37,11 +50,11 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
-    const userId = args[0] && args[0].match(/\d+/g) || undefined;
-    const amount = args[1] && (isNaN(parseInt(args[1])) && undefined || parseInt(args[1])) || undefined;
+    const userId = args[0] ? args[0].match(/\d+/g) : undefined;
+    const amount = args[1] ? (isNaN(parseInt(args[1])) ? undefined : parseInt(args[1])) : undefined;
 
     if (!userId || !amount) {
       embed = new Discord.MessageEmbed()
@@ -52,7 +65,7 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     if (profile.money < amount) {
@@ -64,7 +77,7 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const targetUser = await this.client.users.fetch(userId, false);
@@ -78,7 +91,7 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const targetProfile = await this.client.shops.findOne({
@@ -94,7 +107,7 @@ module.exports = class GiveCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const confirmationCode = Math.floor(Math.random() * (10000 - 1000) + 1000);
@@ -138,7 +151,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     } else {
       embed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -148,7 +161,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
   }
 }

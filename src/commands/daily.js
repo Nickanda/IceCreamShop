@@ -19,7 +19,7 @@ module.exports = class DailyCommand extends Command {
       const success = await this.client.shopHandler.claimDaily(message);
 
       if (success) {
-        const dailyReward = profile.dailyStreak + 1 == 5 && 200 || 50;
+        const dailyReward = profile.dailyStreak + 1 == 5 ? 200 : 50;
 
         const embed = new Discord.MessageEmbed()
           .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -32,7 +32,7 @@ Reach Day 5 to earn $200 daily rewards instead of $50!`)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
       }
     } catch (e) {
       const embed = new Discord.MessageEmbed()
@@ -45,7 +45,7 @@ ${e}`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     }
   }
 }

@@ -5,16 +5,16 @@ const path = require("path");
 const Discord = require('discord.js');
 const express = require('express');
 
+const hasSetCommands = false;
+
 const Client = require('./src/structures/Client');
 
 const client = new Client({
-  messageCacheMaxSize: 20,
-  messageCacheLifetime: 120,
-  messageSweepInterval: 120,
-  messageEditHistoryMaxSize: 1,
-  ws: {
-    intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"]
-  }
+  // messageCacheMaxSize: 20,
+  // messageCacheLifetime: 120,
+  // messageSweepInterval: 120,
+  // messageEditHistoryMaxSize: 1,
+  intents: ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"]
 });
 
 const Sentry = require("@sentry/node");
@@ -26,12 +26,34 @@ Sentry.init({
 });
 
 const init = async () => {
+  if (!client.application?.owner) await client.application?.fetch();
+
+  let commandInfo = [];
+
   klaw("./src/commands").on("data", (item) => {
     const cmdFile = path.parse(item.path);
     if (!cmdFile.ext || cmdFile.ext !== ".js") return;
     const response = client.loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
     if (response) client.logger.error(response);
+
+    const command = client.commands.get(cmdFile.name);
+
+    commandInfo.push({
+      name: command.help.name,
+      description: command.help.description,
+      options: command.help.options
+    });
+
+    console.log(cmdFile.name, "has been loaded into the slash commands!")
   });
+
+  setTimeout(() => {}, 1000);
+
+  if (hasSetCommands == false) {
+    client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
+      console.log(result.map(res => cmdFile.name + " |  " + res.id).join("\n"));
+    });
+  }
 
   const evtFiles = await readdir("./src/events/");
   client.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");

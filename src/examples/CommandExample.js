@@ -6,11 +6,16 @@ module.exports = class ExampleCommand extends Command {
       name: "example",
       description: "Example.",
       usage: "example",
-      aliases: ["ex"],
       category: "Miscellaneous",
       enabled: true,
-      guildOnly: false,
-      aliases: []
+      options: [
+        {
+          type: "STRING",
+          name: "example",
+          description: "example",
+          required: true
+        }
+      ]
     });
   }
 

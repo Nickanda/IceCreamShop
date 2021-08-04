@@ -8,8 +8,7 @@ module.exports = class BalanceCommand extends Command {
       name: "balance",
       description: "Shows your current balance",
       category: "Economy",
-      usage: "balance",
-      aliases: ["bal"]
+      usage: "balance"
     });
   }
 
@@ -24,6 +23,6 @@ module.exports = class BalanceCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 }

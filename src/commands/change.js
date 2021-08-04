@@ -9,7 +9,20 @@ module.exports = class ChangeCommand extends Command {
       description: "Changes parts of your shop.",
       category: "Shop",
       usage: "change <machine #> <newFlavor>",
-      aliases: []
+      options: [
+        {
+          type: "INTEGER",
+          name: "machine_number",
+          description: "The number of the machine that you want to change",
+          required: true
+        },
+        {
+          type: "STRING",
+          name: "new_flavor",
+          description: "The new flavor that you want your machine to use",
+          required: true
+        }
+      ]
     });
   }
 
@@ -31,7 +44,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     if (!args[1]) {
@@ -43,7 +56,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const machine = parseInt(args[0]) - 1;
@@ -58,7 +71,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     const flavors = profile.flavors;
@@ -73,7 +86,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     if (!flavors.includes(newFlavor)) {
@@ -85,7 +98,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send(embed);
+      return message.channel.send({ embeds: [embed] });
     }
 
     machines[machine]["flavor"] = newFlavor;
@@ -106,7 +119,7 @@ module.exports = class ChangeCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
     // break;
     // default:
     //     embed = new Discord.MessageEmbed()
@@ -117,7 +130,7 @@ module.exports = class ChangeCommand extends Command {
     //         .setFooter('i!help', this.client.user.displayAvatarURL())
     //         .setTimestamp();
 
-    //     message.channel.send(embed);
+    //     message.channel.send({embeds: [embed]});
     //     break
     // }
   }
