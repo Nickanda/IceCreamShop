@@ -57,7 +57,7 @@ module.exports = class ReadyEvent {
 
     let commandInfo = [];
 
-    const commands = this.client.commands.values();
+    const commands = this.client.commands.map(val => val);
 
     commands.forEach(command => {
       commandInfo.push({
