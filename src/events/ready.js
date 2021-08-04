@@ -53,11 +53,11 @@ module.exports = class ReadyEvent {
     const statusChannel = await this.client.channels.fetch("798740320363085865");
     statusChannel.send({ embeds: [embed] });
 
-    if (!client.application?.owner) await client.application?.fetch();
+    if (!this.client.application?.owner) await this.client.application?.fetch();
 
     let commandInfo = [];
 
-    const commands = client.commands.values();
+    const commands = this.client.commands.values();
 
     commands.forEach(command => {
       commandInfo.push({
@@ -71,7 +71,7 @@ module.exports = class ReadyEvent {
 
     setTimeout(() => { }, 1000);
 
-    client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
+    this.client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
       console.log(result.map(res => res.name + " |  " + res.id).join("\n"));
     });
   }
