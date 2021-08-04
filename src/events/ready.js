@@ -71,6 +71,8 @@ module.exports = class ReadyEvent {
 
     setTimeout(() => { }, 1000);
 
+    console.log(commandInfo)
+
     this.client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
       console.log(result.map(res => res.name + " |  " + res.id).join("\n"));
     });
