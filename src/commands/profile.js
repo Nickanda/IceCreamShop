@@ -9,8 +9,7 @@ module.exports = class ProfileCommand extends Command {
       name: "profile",
       description: "Shows your ice cream shop profile",
       category: "Economy",
-      usage: "profile",
-      aliases: []
+      usage: "profile"
     });
   }
 
@@ -40,7 +39,7 @@ module.exports = class ProfileCommand extends Command {
     capacity.forEach((machine, index) => {
       machineCap += `\n${machine.type} Machine ${index + 1} (${machine.flavor}): ${machine.capacity}%`;
     });
-      
+
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author.tag, message.author.displayAvatarURL())
       .setTitle(profile.name)
@@ -51,11 +50,11 @@ Machine Capacity: ${machineCap}
 
 Flavors: ${profile.flavors.join(', ')}
 
-Advertisements: ${advertisements == "" && "none active" || advertisements}`)
+Advertisements: ${advertisements == "" ? "none active" : advertisements}`)
       .setColor(0x00FF00)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 }

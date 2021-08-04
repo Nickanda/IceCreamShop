@@ -8,8 +8,7 @@ module.exports = class LeaderboardCommand extends Command {
       name: "leaderboard",
       description: "Shows the leaderboards based on the amount of money.",
       category: "Economy",
-      usage: "leaderboard",
-      aliases: ["leaderboards", "lb"]
+      usage: "leaderboard"
     });
   }
 
@@ -37,6 +36,6 @@ module.exports = class LeaderboardCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 }

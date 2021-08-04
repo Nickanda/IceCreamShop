@@ -8,7 +8,37 @@ module.exports = class StoreCommand extends Command {
       name: "store",
       description: "Shows the store for you to buy new items",
       category: "Shop",
-      usage: "store <ads/flavors/machines/buy> [ID]"
+      usage: "store <ads/flavors/machines/buy> [ID]",
+      options: [
+        {
+          type: "SUB_COMMAND",
+          name: "ads",
+          description: "View all available ads in the store"
+        },
+        {
+          type: "SUB_COMMAND",
+          name: "flavors",
+          description: "View all available ice cream flavors in the store"
+        },
+        {
+          type: "SUB_COMMAND",
+          name: "machines",
+          description: "View all available machines in the store"
+        },
+        {
+          type: "SUB_COMMAND_GROUP",
+          name: "buy",
+          description: "Buys an item from the store",
+          options: [
+            {
+              type: "STRING",
+              name: "ID",
+              description: "ID of the item you want to buy",
+              required: true
+            }
+          ]
+        },
+      ]
     });
   }
 
@@ -24,7 +54,7 @@ module.exports = class StoreCommand extends Command {
   }
 
   async run(message, args) {
-    const category = args[0] && args[0].toLowerCase() || undefined;
+    const category = args[0] ? args[0].toLowerCase() : undefined;
 
     const profile = await this.client.shopHandler.getProfile(message);
 
@@ -44,7 +74,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
       case "flavor": case "flavors":
         let flavors = "";
@@ -59,7 +89,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
       case "machine": case "machines":
         let machines = "";
@@ -74,7 +104,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
       case "buy":
         const id = args[1];
@@ -101,7 +131,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send(embed);
+                  message.channel.send({ embeds: [embed] });
                 } else {
                   embed = new Discord.MessageEmbed()
                     .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -111,7 +141,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send(embed);
+                  message.channel.send({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -122,7 +152,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
               }
               break;
             case "f":
@@ -159,7 +189,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send(embed);
+                    message.channel.send({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
                       .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -169,7 +199,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send(embed);
+                    message.channel.send({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
@@ -180,7 +210,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send(embed);
+                  message.channel.send({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -191,7 +221,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
               }
               break;
             case "m":
@@ -232,7 +262,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send(embed);
+                    message.channel.send({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
                       .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -242,7 +272,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send(embed);
+                    message.channel.send({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
@@ -253,7 +283,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send(embed);
+                  message.channel.send({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -264,7 +294,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
               }
               break;
           }
@@ -277,7 +307,7 @@ module.exports = class StoreCommand extends Command {
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-          message.channel.send(embed);
+          message.channel.send({ embeds: [embed] });
         }
         break;
       default:
@@ -289,7 +319,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
         break;
     }
   }

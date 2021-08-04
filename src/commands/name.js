@@ -8,7 +8,15 @@ module.exports = class NameCommand extends Command {
       name: "name",
       description: "Renames your shop",
       category: "Economy",
-      usage: "name <new_name>"
+      usage: "name <new_name>",
+      options: [
+        {
+          type: "STRING",
+          name: "new_name",
+          description: "The new name of your shop, up to 30 characters",
+          required: true
+        }
+      ]
     });
   }
 
@@ -33,7 +41,7 @@ module.exports = class NameCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     } else {
       const embed = new Discord.MessageEmbed()
         .setAuthor(message.author.tag, message.author.displayAvatarURL())
@@ -43,7 +51,7 @@ module.exports = class NameCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send(embed);
+      message.channel.send({ embeds: [embed] });
     }
   }
 }

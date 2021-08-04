@@ -22,6 +22,6 @@ module.exports = class DonateCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send(embed);
+    message.channel.send({ embeds: [embed] });
   }
 }

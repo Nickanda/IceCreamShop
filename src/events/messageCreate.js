@@ -1,3 +1,5 @@
+const Discord = require('discord.js');
+
 module.exports = class {
   constructor(client) {
     this.client = client;
@@ -7,7 +9,7 @@ module.exports = class {
     if (message.author.bot) return;
     if (message.system) return;
 
-    if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
+    if (message.guild && !message.channel.permissionsFor(message.guild.me).missing(Discord.Permissions.FLAGS.SEND_MESSAGES)) return;
 
     const settings = await this.client.getSettings(message.guild);
 
@@ -25,11 +27,8 @@ module.exports = class {
 
     if (message.guild && !message.member) await message.guild.fetchMember(message.author);
 
-    const cmd = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
+    const cmd = this.client.commands.get(command) ?? this.client.commands.get(this.client.aliases.get(command));
     if (!cmd) return;
-
-    if (cmd && !message.guild && cmd.conf.guildOnly)
-      return message.channel.send("This command is unavailable via private message. Please run this command in a guild.");
 
     if (cmd.conf.permLevel !== "") {
       if (!this.client.botStaff[cmd.conf.permLevel].includes(message.author.id)) return message.channel.send('You do not have permission to use this command.');
