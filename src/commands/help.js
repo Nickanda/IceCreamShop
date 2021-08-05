@@ -48,9 +48,9 @@ module.exports = class HelpCommand extends Command {
           currentCategory = cat;
           output = '```asciidoc\n';
         };
-        output += `${msg.settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
+        output += `${message.settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
       });
-      msg.reply({ embeds: [embed] });
+      message.reply({ embeds: [embed] });
     } else {
       let command = args[0];
       if (client.commands.has(command)) {
@@ -58,7 +58,7 @@ module.exports = class HelpCommand extends Command {
         if (cmd.permLevel && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author?.id ?? message.user?.id) : true)
         && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author?.id ?? message.user?.id) : true)
         && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author?.id ?? message.user?.id) : true)) {
-          msg.reply(Discord.Formatters.codeBlock("ascii", `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(', ')}\n= ${command.help.name} =`));
+          message.reply(Discord.Formatters.codeBlock("ascii", `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(', ')}\n= ${command.help.name} =`));
         } else {
 
         }        
