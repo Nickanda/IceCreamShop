@@ -25,15 +25,13 @@ module.exports = class {
       cmd.help.options.forEach(option => {
         if (option.type == "SUB_COMMAND") {
           const interactionOptions = interaction.options.getSubcommand(true);
-          
-          if (interactionOptions == option.name) {
-            args.push(interactionOptions)
-          }
 
-          if (option.options) {
-            option.options.forEach(option => {
+          if (interactionOptions == option.name) {
+            args.push(interactionOptions);
+            if (option.options) {
+              option.options.forEach(option => {
                 const interactionOptions = interaction.options.get(option.name, option.required ?? false);
-      
+
                 if (interactionOptions && option.required) {
                   switch (interactionOptions.type) {
                     case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
@@ -52,7 +50,8 @@ module.exports = class {
                       break;
                   }
                 }
-            });
+              });
+            }
           }
         } else {
           const interactionOptions = interaction.options.get(option.name, option.required ?? false);
