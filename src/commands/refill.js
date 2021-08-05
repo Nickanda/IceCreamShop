@@ -29,7 +29,7 @@ module.exports = class RefillCommand extends Command {
       await this.client.wait(50);
 
       await this.client.shops.updateOne({
-        userId: message.author.id
+        userId: message.author?.id ?? message.user?.id
       }, {
         $set: {
           machineCapacity: newMachines,

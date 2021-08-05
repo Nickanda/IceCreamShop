@@ -30,7 +30,7 @@ module.exports = class SupportCommand extends Command {
     if (vote) {
       if (vote.claimed == false) {
         await this.client.shops.updateOne({
-          userId: message.author.id
+          userId: message.author?.id ?? message.user?.id
         }, {
           $inc: {
             money: 100
@@ -38,7 +38,7 @@ module.exports = class SupportCommand extends Command {
         });
 
         await this.client.votes.updateOne({
-          userId: message.author.id
+          userId: message.author?.id ?? message.user?.id
         }, {
           claimed: true
         });

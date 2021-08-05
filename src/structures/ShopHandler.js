@@ -19,11 +19,11 @@ module.exports = class ShopHandler extends StoreHandler {
   async getProfile(message) {
     try {
       const profile = await this.client.shops.findOneAndUpdate({
-        userId: message.author.id
+        userId: message.author?.id ?? message.user?.id
       },
         {
           $setOnInsert: {
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             name: "Ice Cream Shop",
             money: 1000,
             customerMax: 10,
@@ -50,7 +50,7 @@ module.exports = class ShopHandler extends StoreHandler {
   async getCooldowns(message, filter) {
     try {
       const cooldowns = await this.client.cooldowns.find({
-        userId: message.author.id,
+        userId: message.author?.id ?? message.user?.id,
         action: filter
       }).toArray();
 
@@ -63,14 +63,14 @@ module.exports = class ShopHandler extends StoreHandler {
   async getVotes(message) {
     try {
       await this.client.votes.deleteMany({
-        userId: message.author.id,
+        userId: message.author?.id ?? message.user?.id,
         createdAt: {
           $lte: Date.parse(Date.now() - 43200000)
         }
       })
 
       const vote = await this.client.votes.findOne({
-        userId: message.author.id
+        userId: message.author?.id ?? message.user?.id
       });
 
       return vote;
@@ -89,7 +89,7 @@ module.exports = class ShopHandler extends StoreHandler {
           let dailyReward = 50;
 
           await this.client.shops.updateOne({
-            userId: message.author.id
+            userId: message.author?.id ?? message.user?.id
           }, {
             $inc: {
               dailyStreak: 1
@@ -100,7 +100,7 @@ module.exports = class ShopHandler extends StoreHandler {
             dailyReward = 200;
 
             await this.client.shops.updateOne({
-              userId: message.author.id
+              userId: message.author?.id ?? message.user?.id
             }, {
               $inc: {
                 money: dailyReward
@@ -112,12 +112,12 @@ module.exports = class ShopHandler extends StoreHandler {
           }
 
           if (cooldown) await this.client.cooldowns.deleteMany({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "daily"
           });
 
           await this.client.cooldowns.insertOne({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "daily",
             duration: 72000000,
             createdAt: Date()
@@ -126,7 +126,7 @@ module.exports = class ShopHandler extends StoreHandler {
           res(true);
         } else if (Date.now() - Date.parse(cooldown.createdAt) > (cooldown.duration + 86400000)) {
           await this.client.shops.updateOne({
-            userId: message.author.id
+            userId: message.author?.id ?? message.user?.id
           }, {
             $inc: {
               money: 50,
@@ -137,12 +137,12 @@ module.exports = class ShopHandler extends StoreHandler {
           });
 
           if (cooldown) await this.client.cooldowns.deleteMany({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "daily"
           });
 
           await this.client.cooldowns.insertOne({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "daily",
             duration: 72000000,
             createdAt: Date()
@@ -194,7 +194,7 @@ module.exports = class ShopHandler extends StoreHandler {
         })
           
         await this.client.shops.updateOne({
-          userId: message.author.id
+          userId: message.author?.id ?? message.user?.id
         }, {
           $inc: {
             money: idleMoney

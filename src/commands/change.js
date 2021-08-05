@@ -104,7 +104,7 @@ module.exports = class ChangeCommand extends Command {
     machines[machine]["flavor"] = newFlavor;
 
     await this.client.shops.updateOne({
-      userId: message.author.id
+      userId: message.author?.id ?? message.user?.id
     }, {
       $set: {
         machineCapacity: machines

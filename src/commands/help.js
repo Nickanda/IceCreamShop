@@ -24,9 +24,9 @@ module.exports = class HelpCommand extends Command {
       const settings = message.settings;
 
       const myCommands = message.guild ? this.client.commands : this.client.commands.filter(cmd => {
-        (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author.id) : true)
-          && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author.id) : true)
-          && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author.id) : true)
+        (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author?.id ?? message.user?.id) : true)
+          && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author?.id ?? message.user?.id) : true)
+          && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author?.id ?? message.user?.id) : true)
       });
 
       const commandNames = myCommands.map(command => command.name);
@@ -55,9 +55,9 @@ module.exports = class HelpCommand extends Command {
       let command = args[0];
       if (client.commands.has(command)) {
         command = client.commands.get(command);
-        if (cmd.permLevel && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author.id) : true)
-        && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author.id) : true)
-        && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author.id) : true)) {
+        if (cmd.permLevel && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author?.id ?? message.user?.id) : true)
+        && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author?.id ?? message.user?.id) : true)
+        && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author?.id ?? message.user?.id) : true)) {
           msg.channel.send(Discord.Formatters.codeBlock("ascii", `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(', ')}\n= ${command.help.name} =`));
         } else {
 

@@ -55,6 +55,10 @@ const init = async () => {
     });
   }));
 
+  app.post("/*", async (req, res) => {
+    console.log(req)
+  })
+
   app.listen(5000);
 }
 

@@ -26,7 +26,7 @@ module.exports = class NameCommand extends Command {
 
     if (name.length < 30) {
       await this.client.shops.updateOne({
-        userId: message.author.id
+        userId: message.author?.id ?? message.user?.id
       }, {
         $set: {
           name: name

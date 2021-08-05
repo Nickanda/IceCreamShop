@@ -103,7 +103,7 @@ Please type \`yes\` or \`no\`.`)
         machines[machine]["capacity"] = 100;
 
         await this.client.shops.updateOne({
-          userId: message.author.id
+          userId: message.author?.id ?? message.user?.id
         }, {
           $inc: {
             money: -1 * costDifference,

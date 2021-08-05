@@ -42,7 +42,7 @@ module.exports = class ServeCommand extends Command {
           capacity[enoughCapacity]["capacity"] -= 5;
 
           await this.client.shops.updateOne({
-            userId: message.author.id
+            userId: message.author?.id ?? message.user?.id
           }, {
             $set: {
               machineCapacity: capacity,
@@ -54,7 +54,7 @@ module.exports = class ServeCommand extends Command {
           const addAmount = Math.floor(Math.random() * ((median + 5) - (median - 15)) + (median - 15));
 
           await this.client.shops.updateOne({
-            userId: message.author.id
+            userId: message.author?.id ?? message.user?.id
           }, {
             $inc: {
               money: addAmount
@@ -62,12 +62,12 @@ module.exports = class ServeCommand extends Command {
           });
 
           if (cooldown) await this.client.cooldowns.deleteMany({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "serve"
           });
 
           await this.client.cooldowns.insertOne({
-            userId: message.author.id,
+            userId: message.author?.id ?? message.user?.id,
             action: "serve",
             duration: 10000,
             createdAt: Date()

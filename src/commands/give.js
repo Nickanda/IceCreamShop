@@ -128,7 +128,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
 
     if (response == confirmationCode) {
       await this.client.shops.updateOne({
-        userId: message.author.id
+        userId: message.author?.id ?? message.user?.id
       }, {
         $inc: {
           money: -1 * amount

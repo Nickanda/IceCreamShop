@@ -171,7 +171,7 @@ module.exports = class StoreCommand extends Command {
                     profileFlavors.push(selected);
 
                     await this.client.shops.updateOne({
-                      userId: message.author.id
+                      userId: message.author?.id ?? message.user?.id
                     }, {
                       $inc: {
                         money: -1 * this.client.shopHandler.flavors[selected].cost
@@ -244,7 +244,7 @@ module.exports = class StoreCommand extends Command {
                     });
 
                     await this.client.shops.updateOne({
-                      userId: message.author.id
+                      userId: message.author?.id ?? message.user?.id
                     }, {
                       $inc: {
                         money: -1 * this.client.shopHandler.machines[selected].cost
