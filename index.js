@@ -48,7 +48,7 @@ const init = async () => {
 
   app.post("/dblwebhook", client.topgg.listener(vote => {
     console.log(vote)
-    client.votes.insertOne({
+    client.votes.create({
       userId: vote.user,
       claimed: false,
       createdAt: Date()

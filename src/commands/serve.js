@@ -66,7 +66,7 @@ module.exports = class ServeCommand extends Command {
             action: "serve"
           });
 
-          await this.client.cooldowns.insertOne({
+          await this.client.cooldowns.create({
             userId: message.author?.id ?? message.user?.id,
             action: "serve",
             duration: 10000,

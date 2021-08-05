@@ -116,7 +116,7 @@ module.exports = class ShopHandler extends StoreHandler {
             action: "daily"
           });
 
-          await this.client.cooldowns.insertOne({
+          await this.client.cooldowns.create({
             userId: message.author?.id ?? message.user?.id,
             action: "daily",
             duration: 72000000,
@@ -141,7 +141,7 @@ module.exports = class ShopHandler extends StoreHandler {
             action: "daily"
           });
 
-          await this.client.cooldowns.insertOne({
+          await this.client.cooldowns.create({
             userId: message.author?.id ?? message.user?.id,
             action: "daily",
             duration: 72000000,
