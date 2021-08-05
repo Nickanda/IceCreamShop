@@ -7,7 +7,6 @@ module.exports = class {
 
   async run(interaction) {
     if (interaction.isCommand()) {
-      console.log(interaction);
       if (interaction.guild && !interaction.channel.permissionsFor(interaction.guild.me).missing(Discord.Permissions.FLAGS.SEND_MESSAGES)) return;
 
       const settings = await this.client.getSettings(interaction.guild);

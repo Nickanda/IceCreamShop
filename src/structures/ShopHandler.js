@@ -40,7 +40,6 @@ module.exports = class ShopHandler extends StoreHandler {
         upsert: true
       });
 
-      console.log(profile)
       return profile
     } catch (e) {
       console.log(e);
