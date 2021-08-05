@@ -13,6 +13,6 @@ module.exports = class PingCommand extends Command {
   async run(message, args) {
     const msg = await message.reply("🏓 Ping!");
     msg.delete();
-    message.reply(`🏓 Pong! (Roundtrip took: ${msg.createdTimestamp - message.createdTimestamp}ms. 💙: ${Math.round(this.client.ws.ping)}ms.)`);
+    message.channel.send(`🏓 Pong! (Roundtrip took: ${msg.createdTimestamp - message.createdTimestamp}ms. 💙: ${Math.round(this.client.ws.ping)}ms.)`);
   }
 }
