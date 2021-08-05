@@ -16,15 +16,14 @@ module.exports = class RefillCommand extends Command {
     const profile = await this.client.shopHandler.getProfile(message);
 
     try {
-      const parsedMachines = profile.machineCapacity;
-      let newMachines = {};
-      for (let machine in parsedMachines) {
+      let newMachines = [];
+      profile.machineCapacity.forEach((machine, index) => {
         newMachines[machine] = {
-          type: parsedMachines[machine]["type"],
+          type: machine["type"],
           capacity: 100,
-          flavor: parsedMachines[machine]["flavor"]
+          flavor: machine["flavor"]
         };
-      }
+      })
 
       await this.client.wait(50);
 
