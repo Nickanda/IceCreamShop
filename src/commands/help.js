@@ -30,7 +30,10 @@ module.exports = class HelpCommand extends Command {
       });
 
       const commandNames = myCommands.map(command => command.name);
-      const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+      const longest = commandNames.reduce((long, str) => {
+        console.log(long, str)
+        return Math.max(long, str.length), 0
+      });
 
       let currentCategory = '';
       let output = '```asciidoc\n';
