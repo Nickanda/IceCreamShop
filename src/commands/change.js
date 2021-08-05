@@ -37,7 +37,7 @@ module.exports = class ChangeCommand extends Command {
     //     case "flavor": case "flavors":
     if (!args[0] || isNaN(parseInt(args[0]))) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
@@ -49,7 +49,7 @@ module.exports = class ChangeCommand extends Command {
 
     if (!args[1]) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a new flavor:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
@@ -64,7 +64,7 @@ module.exports = class ChangeCommand extends Command {
 
     if (!this.client.shopHandler.flavors[newFlavor.toLowerCase()]) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a valid flavor:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
@@ -79,7 +79,7 @@ module.exports = class ChangeCommand extends Command {
 
     if (!machines[machine]) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`You do not own a machine #${machine + 1}.`)
         .setColor(0xFF0000)
@@ -91,7 +91,7 @@ module.exports = class ChangeCommand extends Command {
 
     if (!flavors.includes(newFlavor)) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`You don't have the ${newFlavor} flavor!`)
         .setColor(0xFF0000)
@@ -112,7 +112,7 @@ module.exports = class ChangeCommand extends Command {
     });
 
     embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`Machine #${machine + 1} has successfully been changed to the ${newFlavor} flavor!`)
       .setColor(0x00FF00)
@@ -123,7 +123,7 @@ module.exports = class ChangeCommand extends Command {
     // break;
     // default:
     //     embed = new Discord.MessageEmbed()
-    //         .setAuthor(message.author.tag, message.author.displayAvatarURL())
+    //         .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
     //         .setTitle(profile.name)
     //         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
     //         .setColor(0xFF0000)

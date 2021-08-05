@@ -34,7 +34,7 @@ module.exports = class AdsCommand extends Command {
     });
 
     const embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`Current Advertisements: ${advertisements == "" ? "none active" : advertisements}`)
       .setColor(0x00FF00)

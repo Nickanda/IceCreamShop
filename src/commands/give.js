@@ -31,7 +31,7 @@ module.exports = class GiveCommand extends Command {
 
     if (!args[0]) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a user:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
@@ -43,7 +43,7 @@ module.exports = class GiveCommand extends Command {
 
     if (!args[1] || isNaN(parseInt(args[1]))) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include an amount to donate:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
@@ -58,7 +58,7 @@ module.exports = class GiveCommand extends Command {
 
     if (!userId || !amount) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
@@ -70,7 +70,7 @@ module.exports = class GiveCommand extends Command {
 
     if (profile.money < amount) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`You do not have the sufficient money to donate $${amount}! You currently have $${profile.money}.`)
         .setColor(0xFF0000)
@@ -84,7 +84,7 @@ module.exports = class GiveCommand extends Command {
 
     if (!targetUser) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`It does not seem like the target user is a valid user.`)
         .setColor(0xFF0000)
@@ -100,7 +100,7 @@ module.exports = class GiveCommand extends Command {
 
     if (!targetProfile) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`It does not seem like the target user has a profile with Ice Cream Shop right now!`)
         .setColor(0xFF0000)
@@ -115,7 +115,7 @@ module.exports = class GiveCommand extends Command {
     const receiveAmount = Math.floor(amount * 0.9);
 
     embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`You are about to give ${targetUser.username} $${amount}. A 10% tax will be applied, so the user will receive ${receiveAmount}.
                 
@@ -144,7 +144,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
       });
 
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`$${receiveAmount} has successfully been donated to ${targetUser.username}`)
         .setColor(0x00FF00)
@@ -154,7 +154,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
       return message.channel.send({ embeds: [embed] });
     } else {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Prompt cancelled`)
         .setColor(0xFF0000)

@@ -16,7 +16,7 @@ module.exports = class BalanceCommand extends Command {
     const profile = await this.client.shopHandler.getProfile(message);
 
     const embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`💰 $${profile.money}`)
       .setColor(0x00FF00)

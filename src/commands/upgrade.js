@@ -34,7 +34,7 @@ module.exports = class UpgradeCommand extends Command {
 
     if (!args[0] || isNaN(parseInt(args[0]))) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}upgrade <machine #>\``)
         .setColor(0xFF0000)
@@ -49,7 +49,7 @@ module.exports = class UpgradeCommand extends Command {
 
     if (!machines[machine]) {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`You do not own a machine #${machine + 1}.`)
         .setColor(0xFF0000)
@@ -61,7 +61,7 @@ module.exports = class UpgradeCommand extends Command {
 
     if (machines[machine]["type"] == "Advanced") {
       embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`You cannot upgrade past Advanced Machine at this time.`)
         .setColor(0xFF0000)
@@ -74,7 +74,7 @@ module.exports = class UpgradeCommand extends Command {
     const costDifference = (this.client.shopHandler.machines[this.machines[machine]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
 
     embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[machine]} will cost $${costDifference}.
                 
@@ -89,7 +89,7 @@ Please type \`yes\` or \`no\`.`)
       case "yes": case "y":
         if (profile.money < costDifference) {
           embed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
             .setTitle(profile.name)
             .setDescription(`You do not have enough money to upgrade this machine. Required amount: $${costDifference}`)
             .setColor(0xFF0000)
@@ -112,7 +112,7 @@ Please type \`yes\` or \`no\`.`)
         });
 
         embed = new Discord.MessageEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
           .setTitle(profile.name)
           .setDescription(`Machine #${machine + 1} has successfully been upgraded to the ${this.client.shopHandler.machines[machines[machine]["type"]]}!`)
           .setColor(0x00FF00)
@@ -123,7 +123,7 @@ Please type \`yes\` or \`no\`.`)
         break;
       case "no": case "n": case "cancel":
         embed = new Discord.MessageEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
           .setTitle(profile.name)
           .setDescription(`Prompt cancelled.`)
           .setColor(0xFF0000)
@@ -134,7 +134,7 @@ Please type \`yes\` or \`no\`.`)
         break;
       default:
         embed = new Discord.MessageEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
           .setTitle(profile.name)
           .setDescription(`Invalid response. Please run the command and try again.`)
           .setColor(0xFF0000)

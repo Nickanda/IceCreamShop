@@ -54,7 +54,7 @@ module.exports = class SupportCommand extends Command {
         message.channel.send({ embeds: [embed] });
       } else {
         const embed = new Discord.MessageEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
           .setTitle(profile.name)
           .setDescription(`Error while claiming vote rewards:
             

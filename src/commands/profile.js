@@ -41,7 +41,7 @@ module.exports = class ProfileCommand extends Command {
     });
 
     const embed = new Discord.MessageEmbed()
-      .setAuthor(message.author.tag, message.author.displayAvatarURL())
+      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
       .setDescription(`💰 $${profile.money}
 Maximum customers in your shop: ${profile.customerMax}

@@ -74,7 +74,7 @@ module.exports = class ServeCommand extends Command {
           });
 
           const embed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
             .setTitle(profile.name)
             .setDescription(`You earned $${addAmount} for serving your customers.`)
             .setColor(0x00FF00)
@@ -84,7 +84,7 @@ module.exports = class ServeCommand extends Command {
           message.channel.send({ embeds: [embed] });
         } else {
           const embed = new Discord.MessageEmbed()
-            .setAuthor(message.author.tag, message.author.displayAvatarURL())
+            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
             .setTitle(profile.name)
             .setDescription(`Error while serving your customers:
                 
@@ -97,7 +97,7 @@ Please refill your machines using the \`${message.settings.prefix}refill\` comma
         }
       } else {
         const embed = new Discord.MessageEmbed()
-          .setAuthor(message.author.tag, message.author.displayAvatarURL())
+          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
           .setTitle(profile.name)
           .setDescription(`Error while serving your customers:
                 
@@ -110,7 +110,7 @@ Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(coold
       }
     } catch (e) {
       const embed = new Discord.MessageEmbed()
-        .setAuthor(message.author.tag, message.author.displayAvatarURL())
+        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
         .setTitle(profile.name)
         .setDescription(`Error while serving your customers:
                 
