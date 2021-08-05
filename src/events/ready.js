@@ -63,14 +63,24 @@ module.exports = class ReadyEvent {
       commandInfo.push({
         name: command.help.name,
         description: command.help.description,
-        options: command.help.options
+        options: command.help.options,
+        defaultPermission: command.conf.permissions.length == 0
       });
     });
 
     setTimeout(() => { }, 1000);
 
-    this.client.application?.commands.set(commandInfo, "768580865449787404").then(result => {
+    this.client.application?.commands.set(commandInfo).then(result => {
       console.log("All commands have been registered to slash commands successfully!")
+    });
+
+    commands.forEach(command => {
+      if (command.conf.permissions.length > 0) {
+        this.client.application?.commands.cache.find(comm => comm.commandName == command.help.name).permissions.set({
+          command: this.client.application?.commands.cache.find(comm => comm.commandName == command.help.name).id
+          permissions: command.conf.permissions
+        });
+      }
     });
   }
 };

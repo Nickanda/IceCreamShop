@@ -47,17 +47,12 @@ const init = async () => {
   const app = express();
 
   app.post("/dblwebhook", client.topgg.listener(vote => {
-    console.log(vote)
     client.votes.create({
       userId: vote.user,
       claimed: false,
       createdAt: Date()
     });
   }));
-
-  app.post("/*", async (req, res) => {
-    console.log(req)
-  })
 
   app.listen(5000);
 }

@@ -8,9 +8,11 @@ module.exports = class EvalCommand extends Command {
       category: "System",
       usage: "eval <expression>",
       permLevel: "developers",
-      permissions: {
-
-      }
+      permissions: [{
+        id: "190966781760765952",
+        type: "USER",
+        permission: true
+      }]
     });
   }
 
