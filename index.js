@@ -47,6 +47,7 @@ const init = async () => {
   const app = express();
 
   app.post("/dblwebhook", client.topgg.listener(vote => {
+    console.log(vote)
     client.votes.insertOne({
       userId: vote.user,
       claimed: false,

@@ -7,7 +7,10 @@ module.exports = class EvalCommand extends Command {
       description: "Evaluates arbitrary Javascript.",
       category: "System",
       usage: "eval <expression>",
-      permLevel: "developers"
+      permLevel: "developers",
+      permissions: {
+
+      }
     });
   }
 
