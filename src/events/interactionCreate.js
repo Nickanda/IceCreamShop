@@ -29,6 +29,31 @@ module.exports = class {
           if (interactionOptions == option.name) {
             args.push(interactionOptions)
           }
+
+          if (option.options) {
+            option.options.forEach(option => {
+                const interactionOptions = interaction.options.get(option.name, option.required ?? false);
+      
+                if (interactionOptions && option.required) {
+                  switch (interactionOptions.type) {
+                    case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
+                      args.push(interactionOptions.value);
+                      break;
+                    case "USER":
+                      args.push(interactionOptions.user);
+                      break;
+                    case "CHANNEL":
+                      args.push(interactionOptions.channel);
+                      break;
+                    case "ROLE":
+                      args.push(interactionOptions.role);
+                      break;
+                    default:
+                      break;
+                  }
+                }
+            });
+          }
         } else {
           const interactionOptions = interaction.options.get(option.name, option.required ?? false);
 
