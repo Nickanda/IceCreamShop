@@ -23,30 +23,34 @@ module.exports = class {
 
       let args = []
       cmd.help.options.forEach(option => {
-        const interactionOptions = interaction.options.get(option.name, option.required ?? false);
-        console.log(interactionOptions)
+        if (option.type == "SUB_COMMAND") {
+          const interactionOptions = interaction.options.getSubcommand(true);
+          console.log(interactionOptions)
+        } else {
+          const interactionOptions = interaction.options.get(option.name, option.required ?? false);
 
-        if (option.type == "SUB_COMMAND" || (interactionOptions && option.required)) {
-          switch (interactionOptions.type) {
-            case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
-              args.push(interactionOptions.value);
-              break;
-            case "USER":
-              args.push(interactionOptions.user);
-              break;
-            case "CHANNEL":
-              args.push(interactionOptions.channel);
-              break;
-            case "ROLE":
-              args.push(interactionOptions.role);
-              break;
-            case "SUB_COMMAND":
-              args.push(option.name);
-              break;
-            case "SUB_COMMAND_GROUP":
-              break;
-            default:
-              break;
+          if (interactionOptions && option.required) {
+            switch (interactionOptions.type) {
+              case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
+                args.push(interactionOptions.value);
+                break;
+              case "USER":
+                args.push(interactionOptions.user);
+                break;
+              case "CHANNEL":
+                args.push(interactionOptions.channel);
+                break;
+              case "ROLE":
+                args.push(interactionOptions.role);
+                break;
+              case "SUB_COMMAND":
+                args.push(option.name);
+                break;
+              case "SUB_COMMAND_GROUP":
+                break;
+              default:
+                break;
+            }
           }
         }
       });
