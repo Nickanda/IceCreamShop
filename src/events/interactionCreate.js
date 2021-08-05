@@ -25,7 +25,7 @@ module.exports = class {
       cmd.help.options.forEach(option => {
         const interactionOptions = interaction.options.get(option.name, option.required ?? false);
 
-        if (interactionOptions && option.required) {
+        if (option.type == "SUB_COMMAND" || (interactionOptions && option.required)) {
           switch (interactionOptions.type) {
             case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
               args.push(interactionOptions.value);
@@ -43,6 +43,8 @@ module.exports = class {
               args.push(option.name);
               break;
             case "SUB_COMMAND_GROUP":
+              break;
+            default:
               break;
           }
         }
