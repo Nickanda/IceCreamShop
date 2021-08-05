@@ -18,7 +18,7 @@ module.exports = class FlavorsCommand extends Command {
     const embed = new Discord.MessageEmbed()
       .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`Your flavors: ${profile.flavors.join(', ')}`)
+      .setDescription(`You currently have these flavors: ${profile.flavors.join(', ')}`)
       .setColor(0x00FF00)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
