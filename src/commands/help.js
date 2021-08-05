@@ -29,11 +29,8 @@ module.exports = class HelpCommand extends Command {
           && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author?.id ?? message.user?.id) : true)
       });
 
-      const commandNames = myCommands.map(command => command.name);
-      const longest = commandNames.reduce((long, str) => {
-        console.log(long, str)
-        return Math.max(long, str.length), 0
-      });
+      const commandNames = myCommands.map(command => command.help.name);
+      const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 
       let currentCategory = '';
       let output = '```asciidoc\n';
