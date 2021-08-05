@@ -24,6 +24,7 @@ module.exports = class {
       let args = []
       cmd.help.options.forEach(option => {
         const interactionOptions = interaction.options.get(option.name, option.required ?? false);
+        console.log(interactionOptions)
 
         if (option.type == "SUB_COMMAND" || (interactionOptions && option.required)) {
           switch (interactionOptions.type) {
