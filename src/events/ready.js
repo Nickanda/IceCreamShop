@@ -77,7 +77,7 @@ module.exports = class ReadyEvent {
     commands.forEach(command => {
       if (command.conf.permissions.length > 0) {
         this.client.application?.commands.cache.find(comm => comm.commandName == command.help.name).permissions.set({
-          command: this.client.application?.commands.cache.find(comm => comm.commandName == command.help.name).id
+          command: this.client.application?.commands.cache.find(comm => comm.commandName == command.help.name).id,
           permissions: command.conf.permissions
         });
       }
