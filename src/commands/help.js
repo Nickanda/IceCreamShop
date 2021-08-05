@@ -34,7 +34,7 @@ module.exports = class HelpCommand extends Command {
 
       let currentCategory = '';
       let output = '```asciidoc\n';
-      const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
+      const sorted = myCommands.sort((p, c) => p.help.category > c.help.category ? 1 : p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1);
 
       let embed = new Discord.MessageEmbed()
         .setTitle('Command List')
@@ -50,7 +50,7 @@ module.exports = class HelpCommand extends Command {
         };
         output += `${msg.settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
       });
-      msg.channel.send({ embeds: [embed] });
+      msg.reply({ embeds: [embed] });
     } else {
       let command = args[0];
       if (client.commands.has(command)) {
@@ -58,7 +58,7 @@ module.exports = class HelpCommand extends Command {
         if (cmd.permLevel && (cmd.permLevel == "developers" ? this.client.botStaff.developers.includes(message.author?.id ?? message.user?.id) : true)
         && (cmd.permLevel == "administrators" ? this.client.botStaff.administrators.includes(message.author?.id ?? message.user?.id) : true)
         && (cmd.permLevel == "support" ? this.client.botStaff.support.includes(message.author?.id ?? message.user?.id) : true)) {
-          msg.channel.send(Discord.Formatters.codeBlock("ascii", `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(', ')}\n= ${command.help.name} =`));
+          msg.reply(Discord.Formatters.codeBlock("ascii", `= ${command.help.name} = \n${command.help.description}\nusage:: ${command.help.usage}\naliases:: ${command.conf.aliases.join(', ')}\n= ${command.help.name} =`));
         } else {
 
         }        

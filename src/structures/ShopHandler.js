@@ -49,12 +49,12 @@ module.exports = class ShopHandler extends StoreHandler {
 
   async getCooldowns(message, filter) {
     try {
-      const cooldowns = await this.client.cooldowns.find({
+      const cooldowns = await this.client.cooldowns.findOne({
         userId: message.author?.id ?? message.user?.id,
         action: filter
-      }).toArray();
+      });
 
-      return cooldowns[0];
+      return cooldowns;
     } catch (e) {
       console.log(e);
     }

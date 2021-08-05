@@ -175,7 +175,7 @@ module.exports = class DiscordClient extends Client {
 
   async awaitReply(msg, question, limit = 60000) {
     const filter = m => m.author.id === msg.author.id;
-    await msg.channel.send(question);
+    await msg.reply(question);
     try {
       const collected = await msg.channel.awaitMessages({ filter, max: 1, time: limit, errors: ["time"] });
       return collected.first().content;

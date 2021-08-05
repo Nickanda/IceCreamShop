@@ -25,6 +25,6 @@ module.exports = class BotStatsCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send({ embeds: [embed] });
+    message.reply({ embeds: [embed] });
   }
 }

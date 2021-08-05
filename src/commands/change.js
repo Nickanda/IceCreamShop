@@ -44,7 +44,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send({ embeds: [embed] });
+      return message.reply({ embeds: [embed] });
     }
 
     if (!args[1]) {
@@ -56,7 +56,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send({ embeds: [embed] });
+      return message.reply({ embeds: [embed] });
     }
 
     const machine = parseInt(args[0]) - 1;
@@ -71,7 +71,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send({ embeds: [embed] });
+      return message.reply({ embeds: [embed] });
     }
 
     const flavors = profile.flavors;
@@ -86,7 +86,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send({ embeds: [embed] });
+      return message.reply({ embeds: [embed] });
     }
 
     if (!flavors.includes(newFlavor)) {
@@ -98,7 +98,7 @@ module.exports = class ChangeCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      return message.channel.send({ embeds: [embed] });
+      return message.reply({ embeds: [embed] });
     }
 
     machines[machine]["flavor"] = newFlavor;
@@ -119,7 +119,7 @@ module.exports = class ChangeCommand extends Command {
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    message.channel.send({ embeds: [embed] });
+    message.reply({ embeds: [embed] });
     // break;
     // default:
     //     embed = new Discord.MessageEmbed()
@@ -130,7 +130,7 @@ module.exports = class ChangeCommand extends Command {
     //         .setFooter('i!help', this.client.user.displayAvatarURL())
     //         .setTimestamp();
 
-    //     message.channel.send({embeds: [embed]});
+    //     message.reply({embeds: [embed]});
     //     break
     // }
   }

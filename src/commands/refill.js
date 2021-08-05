@@ -45,7 +45,7 @@ module.exports = class RefillCommand extends Command {
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send({ embeds: [embed] });
+      message.reply({ embeds: [embed] });
     } catch (e) {
       const embed = new Discord.MessageEmbed()
         .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
@@ -57,7 +57,7 @@ ${e}`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send({ embeds: [embed] });
+      message.reply({ embeds: [embed] });
     }
   }
 }

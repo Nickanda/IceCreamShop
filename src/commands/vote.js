@@ -51,7 +51,7 @@ module.exports = class SupportCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
       } else {
         const embed = new Discord.MessageEmbed()
           .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
@@ -63,7 +63,7 @@ Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
       }
     } else {
       const embed = new Discord.MessageEmbed()
@@ -74,7 +74,7 @@ Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send({ embeds: [embed] });
+      message.reply({ embeds: [embed] });
     }
   }
 }

@@ -74,7 +74,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
         break;
       case "flavor": case "flavors":
         let flavors = "";
@@ -89,7 +89,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
         break;
       case "machine": case "machines":
         let machines = "";
@@ -104,7 +104,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
         break;
       case "buy":
         const id = args[1];
@@ -131,7 +131,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send({ embeds: [embed] });
+                  message.reply({ embeds: [embed] });
                 } else {
                   embed = new Discord.MessageEmbed()
                     .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
@@ -141,7 +141,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send({ embeds: [embed] });
+                  message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -152,7 +152,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send({ embeds: [embed] });
+                message.reply({ embeds: [embed] });
               }
               break;
             case "f":
@@ -189,7 +189,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send({ embeds: [embed] });
+                    message.reply({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
                       .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
@@ -199,7 +199,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send({ embeds: [embed] });
+                    message.reply({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
@@ -210,7 +210,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send({ embeds: [embed] });
+                  message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -221,7 +221,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send({ embeds: [embed] });
+                message.reply({ embeds: [embed] });
               }
               break;
             case "m":
@@ -262,7 +262,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send({ embeds: [embed] });
+                    message.reply({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
                       .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
@@ -272,7 +272,7 @@ module.exports = class StoreCommand extends Command {
                       .setFooter('i!help', this.client.user.displayAvatarURL())
                       .setTimestamp();
 
-                    message.channel.send({ embeds: [embed] });
+                    message.reply({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
@@ -283,7 +283,7 @@ module.exports = class StoreCommand extends Command {
                     .setFooter('i!help', this.client.user.displayAvatarURL())
                     .setTimestamp();
 
-                  message.channel.send({ embeds: [embed] });
+                  message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
@@ -294,7 +294,7 @@ module.exports = class StoreCommand extends Command {
                   .setFooter('i!help', this.client.user.displayAvatarURL())
                   .setTimestamp();
 
-                message.channel.send({ embeds: [embed] });
+                message.reply({ embeds: [embed] });
               }
               break;
           }
@@ -307,7 +307,7 @@ module.exports = class StoreCommand extends Command {
             .setFooter('i!help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
-          message.channel.send({ embeds: [embed] });
+          message.reply({ embeds: [embed] });
         }
         break;
       default:
@@ -319,7 +319,7 @@ module.exports = class StoreCommand extends Command {
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
         break;
     }
   }

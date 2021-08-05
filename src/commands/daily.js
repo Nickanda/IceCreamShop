@@ -32,7 +32,7 @@ Reach Day 5 to earn $200 daily rewards instead of $50!`)
           .setFooter('i!help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
-        message.channel.send({ embeds: [embed] });
+        message.reply({ embeds: [embed] });
       }
     } catch (e) {
       const embed = new Discord.MessageEmbed()
@@ -45,7 +45,7 @@ ${e}`)
         .setFooter('i!help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
-      message.channel.send({ embeds: [embed] });
+      message.reply({ embeds: [embed] });
     }
   }
 }
