@@ -78,7 +78,7 @@ module.exports = class ReadyEvent {
       console.log("All commands have been registered to slash commands successfully!");
     });
 
-    setTimeout(() => { }, 1000);
+    setTimeout(() => { }, 3000);
 
     commands.forEach(command => {
       if (command.conf.permissions.length > 0) {
