@@ -68,7 +68,7 @@ module.exports = class ReadyEvent {
       });
     });
 
-    setTimeout(() => { }, 1000);
+    setTimeout(() => { }, 250);
 
     this.client.application?.commands.set(commandInfo).then(result => {
       result.forEach(async command => {
@@ -77,6 +77,8 @@ module.exports = class ReadyEvent {
 
       console.log("All commands have been registered to slash commands successfully!");
     });
+
+    setTimeout(() => { }, 1000);
 
     commands.forEach(command => {
       if (command.conf.permissions.length > 0) {
