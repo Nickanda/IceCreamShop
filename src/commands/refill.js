@@ -18,7 +18,7 @@ module.exports = class RefillCommand extends Command {
     try {
       let newMachines = [];
       profile.machineCapacity.forEach((machine, index) => {
-        newMachines[machine] = {
+        newMachines[index] = {
           type: machine["type"],
           capacity: 100,
           flavor: machine["flavor"]
