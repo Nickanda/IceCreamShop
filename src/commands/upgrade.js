@@ -71,12 +71,12 @@ module.exports = class UpgradeCommand extends Command {
       return message.reply({ embeds: [embed] });
     }
 
-    const costDifference = (this.client.shopHandler.machines[this.machines[machine]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
+    const costDifference = (this.client.shopHandler.machines[this.machines[machine + 1]]["cost"] - this.client.shopHandler.machines[machines[machine]["type"]]["cost"]) * 1.05;
 
     embed = new Discord.MessageEmbed()
       .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
       .setTitle(profile.name)
-      .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[machine]} will cost $${costDifference}.
+      .setDescription(`The upgrade cost from ${machines[machine]["type"]} to ${this.machines[machine + 1]} will cost $${costDifference}.
                 
 Please type \`yes\` or \`no\`.`)
       .setColor(0xFFFF00)
@@ -99,7 +99,7 @@ Please type \`yes\` or \`no\`.`)
           return message.reply({ embeds: [embed] });
         }
 
-        machines[machine]["type"] = this.machines[parseInt(machine)];
+        machines[machine]["type"] = this.machines[machine + 1];
         machines[machine]["capacity"] = 100;
 
         await this.client.shops.updateOne({
