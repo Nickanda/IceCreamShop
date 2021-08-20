@@ -124,7 +124,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
       .setFooter('i!help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
-    const response = await this.client.awaitReply(message, embed);
+    const response = await this.client.awaitReply(message, { embeds: [embed] });
 
     if (response == confirmationCode) {
       await this.client.shops.updateOne({
