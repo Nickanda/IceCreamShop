@@ -106,9 +106,9 @@ Please type \`yes\` or \`no\`.`)
           userId: message.author?.id ?? message.user?.id
         }, {
           $inc: {
-            money: -1 * costDifference,
-            machineCapacity: machines
-          }
+            money: -1 * costDifference
+          },
+          machineCapacity: machines
         });
 
         embed = new Discord.MessageEmbed()
