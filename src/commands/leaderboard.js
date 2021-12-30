@@ -33,7 +33,7 @@ module.exports = class LeaderboardCommand extends Command {
       .setTitle(profile.name)
       .setDescription(`Top 10 Money Leaderboard: \n${lbInsert}`)
       .setColor(0x00FF00)
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

@@ -41,7 +41,7 @@ module.exports = class RefillCommand extends Command {
         .setTitle(profile.name)
         .setDescription("Your machines have all been refilled to 100%!")
         .setColor(0x00FF00)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       message.reply({ embeds: [embed] });
@@ -53,7 +53,7 @@ module.exports = class RefillCommand extends Command {
                 
 ${e}`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       message.reply({ embeds: [embed] });

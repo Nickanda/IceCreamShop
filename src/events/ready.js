@@ -47,7 +47,7 @@ module.exports = class ReadyEvent {
     const embed = new Discord.MessageEmbed()
       .setTitle("Bot Ready")
       .setColor(0x00FF00)
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     const statusChannel = await this.client.channels.fetch("798740320363085865");

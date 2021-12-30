@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-module.exports = class {
+module.exports = class InteractionCreateEvent {
   constructor(client) {
     this.client = client;
   }
@@ -12,8 +12,6 @@ module.exports = class {
       const settings = await this.client.getSettings(interaction.guild);
 
       interaction.settings = settings;
-
-      // const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
 
       if (interaction.guild && !interaction.member) await interaction.guild.members.fetch(message.member);
 
@@ -88,6 +86,5 @@ module.exports = class {
         message.reply(e);
       }
     }
-
   }
 };

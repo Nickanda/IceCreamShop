@@ -19,7 +19,7 @@ module.exports = class DonateCommand extends Command {
       .addField("Donate", "[Click here!](https://www.buymeacoffee.com/NicholasY4815)", true)
       .setColor(0x00FF00)
       .setThumbnail(this.client.user.displayAvatarURL())
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

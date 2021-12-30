@@ -40,10 +40,6 @@ module.exports = class DiscordClient extends Client {
 
     this.settings = mongoose.model('settings', new mongoose.Schema({
       guildId: String,
-      prefix: {
-        type: String,
-        default: 'i!'
-      },
       premiumServer: {
         type: Boolean,
         default: false

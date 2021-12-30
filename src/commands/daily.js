@@ -29,7 +29,7 @@ module.exports = class DailyCommand extends Command {
 Daily Streak: ${profile.dailyStreak + 1} days
 Reach Day 5 to earn $200 daily rewards instead of $50!`)
           .setColor(0x00FF00)
-          .setFooter('i!help', this.client.user.displayAvatarURL())
+          .setFooter('/help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -42,7 +42,7 @@ Reach Day 5 to earn $200 daily rewards instead of $50!`)
                 
 ${e}`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       message.reply({ embeds: [embed] });

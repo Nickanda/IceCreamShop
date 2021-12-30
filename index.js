@@ -86,7 +86,7 @@ process.on("unhandledRejection", err => {
 //   const embed = new Discord.MessageEmbed()
 //     .setTitle("Bot Rebooting")
 //     .setColor(0xFFFF00)
-//     .setFooter('i!help')
+//     .setFooter('/help')
 //     .setTimestamp();
 
 //   const statusChannel = await client.channels.fetch("798740320363085865");

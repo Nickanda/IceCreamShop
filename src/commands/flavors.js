@@ -20,7 +20,7 @@ module.exports = class FlavorsCommand extends Command {
       .setTitle(profile.name)
       .setDescription(`You currently have these flavors: ${profile.flavors.join(', ')}`)
       .setColor(0x00FF00)
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

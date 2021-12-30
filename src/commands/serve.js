@@ -78,7 +78,7 @@ module.exports = class ServeCommand extends Command {
             .setTitle(profile.name)
             .setDescription(`You earned $${addAmount} for serving your customers.`)
             .setColor(0x00FF00)
-            .setFooter('i!help', this.client.user.displayAvatarURL())
+            .setFooter('/help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
           message.reply({ embeds: [embed] });
@@ -90,7 +90,7 @@ module.exports = class ServeCommand extends Command {
                 
 Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
             .setColor(0xFF0000)
-            .setFooter('i!help', this.client.user.displayAvatarURL())
+            .setFooter('/help', this.client.user.displayAvatarURL())
             .setTimestamp();
 
           message.reply({ embeds: [embed] });
@@ -103,7 +103,7 @@ Please refill your machines using the \`${message.settings.prefix}refill\` comma
                 
 Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
           .setColor(0xFF0000)
-          .setFooter('i!help', this.client.user.displayAvatarURL())
+          .setFooter('/help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -116,7 +116,7 @@ Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(coold
                 
 ${e}`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       message.reply({ embeds: [embed] });

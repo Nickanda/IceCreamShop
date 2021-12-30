@@ -48,7 +48,7 @@ module.exports = class SupportCommand extends Command {
           .setDescription("Thanks for voting! You have been rewarded $100 for voting for our bot. Make sure to vote again in 12 hours!")
           .setColor(0x00FF00)
           .setThumbnail(this.client.user.displayAvatarURL())
-          .setFooter('i!help', this.client.user.displayAvatarURL())
+          .setFooter('/help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -60,7 +60,7 @@ module.exports = class SupportCommand extends Command {
             
 Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt)))}.`)
           .setColor(0xFF0000)
-          .setFooter('i!help', this.client.user.displayAvatarURL())
+          .setFooter('/help', this.client.user.displayAvatarURL())
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -71,7 +71,7 @@ Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt
         .setDescription("You have not voted yet! You can vote here: https://top.gg/bot/765627044687249439/vote")
         .setColor(0xFF0000)
         .setThumbnail(this.client.user.displayAvatarURL())
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       message.reply({ embeds: [embed] });

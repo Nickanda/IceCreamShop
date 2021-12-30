@@ -20,7 +20,7 @@ module.exports = class BalanceCommand extends Command {
       .setTitle(profile.name)
       .setDescription(`💰 $${profile.money}`)
       .setColor(0x00FF00)
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

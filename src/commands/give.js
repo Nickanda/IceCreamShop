@@ -35,7 +35,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include a user:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -47,7 +47,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format and include an amount to donate:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -62,7 +62,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`Please follow the proper command format:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -74,7 +74,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`You do not have the sufficient money to donate $${amount}! You currently have $${profile.money}.`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -88,7 +88,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`It does not seem like the target user is a valid user.`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -104,7 +104,7 @@ module.exports = class GiveCommand extends Command {
         .setTitle(profile.name)
         .setDescription(`It does not seem like the target user has a profile with Ice Cream Shop right now!`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -121,7 +121,7 @@ module.exports = class GiveCommand extends Command {
                 
 Please type \`${confirmationCode}\` to approve of this transaction.`)
       .setColor(0xFFFF00)
-      .setFooter('i!help', this.client.user.displayAvatarURL())
+      .setFooter('/help', this.client.user.displayAvatarURL())
       .setTimestamp();
 
     const response = await this.client.awaitReply(message, { embeds: [embed] });
@@ -148,7 +148,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
         .setTitle(profile.name)
         .setDescription(`$${receiveAmount} has successfully been donated to ${targetUser.username}`)
         .setColor(0x00FF00)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
@@ -158,7 +158,7 @@ Please type \`${confirmationCode}\` to approve of this transaction.`)
         .setTitle(profile.name)
         .setDescription(`Prompt cancelled`)
         .setColor(0xFF0000)
-        .setFooter('i!help', this.client.user.displayAvatarURL())
+        .setFooter('/help', this.client.user.displayAvatarURL())
         .setTimestamp();
 
       return message.reply({ embeds: [embed] });
