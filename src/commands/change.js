@@ -160,16 +160,16 @@ module.exports = class ChangeCommand extends Command {
     // default:
     //     embed = new Discord.MessageEmbed()
     //         .setAuthor({
-    name: message.author?.tag ?? message.user?.tag,
-      iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
-  })
+  //   name: message.author?.tag ?? message.user?.tag,
+  //     iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+  // })
   //         .setTitle(profile.name)
   //         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
   //         .setColor(0xFF0000)
   //         .setFooter({
-  text: '/help',
-  iconURL: this.client.user.displayAvatarURL()
-})
+//   text: '/help',
+//   iconURL: this.client.user.displayAvatarURL()
+// })
     //         .setTimestamp();
 
     //     message.reply({embeds: [embed]});
