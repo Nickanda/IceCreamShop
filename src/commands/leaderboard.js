@@ -29,11 +29,17 @@ module.exports = class LeaderboardCommand extends Command {
     await this.client.wait(500);
 
     const embed = new Discord.MessageEmbed()
-      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+      .setAuthor({
+        name: message.author?.tag ?? message.user?.tag,
+        iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+      })
       .setTitle(profile.name)
       .setDescription(`Top 10 Money Leaderboard: \n${lbInsert}`)
       .setColor(0x00FF00)
-      .setFooter('/help', this.client.user.displayAvatarURL())
+      .setFooter({
+        text: '/help',
+        iconURL: this.client.user.displayAvatarURL()
+      })
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

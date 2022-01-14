@@ -22,7 +22,10 @@ module.exports = class BotStatsCommand extends Command {
       .addField("Library", `Discord.JS v${Discord.version}`, true)
       .setColor(0x00FF00)
       .setThumbnail(this.client.user.displayAvatarURL())
-      .setFooter('/help', this.client.user.displayAvatarURL())
+      .setFooter({
+        text: '/help',
+        iconURL: this.client.user.displayAvatarURL()
+      })
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

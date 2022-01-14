@@ -48,19 +48,28 @@ module.exports = class SupportCommand extends Command {
           .setDescription("Thanks for voting! You have been rewarded $100 for voting for our bot. Make sure to vote again in 12 hours!")
           .setColor(0x00FF00)
           .setThumbnail(this.client.user.displayAvatarURL())
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
       } else {
         const embed = new Discord.MessageEmbed()
-          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+          .setAuthor({
+            name: message.author?.tag ?? message.user?.tag,
+            iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+          })
           .setTitle(profile.name)
           .setDescription(`Error while claiming vote rewards:
             
 Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt)))}.`)
           .setColor(0xFF0000)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -71,7 +80,10 @@ Please wait ${this.formatDate(43200000 - (Date.now() - Date.parse(vote.createdAt
         .setDescription("You have not voted yet! You can vote here: https://top.gg/bot/765627044687249439/vote")
         .setColor(0xFF0000)
         .setThumbnail(this.client.user.displayAvatarURL())
-        .setFooter('/help', this.client.user.displayAvatarURL())
+        .setFooter({
+          text: '/help',
+          iconURL: this.client.user.displayAvatarURL()
+        })
         .setTimestamp();
 
       message.reply({ embeds: [embed] });

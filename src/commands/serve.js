@@ -74,49 +74,73 @@ module.exports = class ServeCommand extends Command {
           });
 
           const embed = new Discord.MessageEmbed()
-            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+            .setAuthor({
+              name: message.author?.tag ?? message.user?.tag,
+              iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+            })
             .setTitle(profile.name)
             .setDescription(`You earned $${addAmount} for serving your customers.`)
             .setColor(0x00FF00)
-            .setFooter('/help', this.client.user.displayAvatarURL())
+            .setFooter({
+              text: '/help',
+              iconURL: this.client.user.displayAvatarURL()
+            })
             .setTimestamp();
 
           message.reply({ embeds: [embed] });
         } else {
           const embed = new Discord.MessageEmbed()
-            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+            .setAuthor({
+              name: message.author?.tag ?? message.user?.tag,
+              iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+            })
             .setTitle(profile.name)
             .setDescription(`Error while serving your customers:
                 
 Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
             .setColor(0xFF0000)
-            .setFooter('/help', this.client.user.displayAvatarURL())
+            .setFooter({
+              text: '/help',
+              iconURL: this.client.user.displayAvatarURL()
+            })
             .setTimestamp();
 
           message.reply({ embeds: [embed] });
         }
       } else {
         const embed = new Discord.MessageEmbed()
-          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+          .setAuthor({
+            name: message.author?.tag ?? message.user?.tag,
+            iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+          })
           .setTitle(profile.name)
           .setDescription(`Error while serving your customers:
                 
 Please wait ${this.formatDate(cooldown.duration - (Date.now() - Date.parse(cooldown.createdAt)))}.`)
           .setColor(0xFF0000)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
       }
     } catch (e) {
       const embed = new Discord.MessageEmbed()
-        .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+        .setAuthor({
+          name: message.author?.tag ?? message.user?.tag,
+          iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+        })
         .setTitle(profile.name)
         .setDescription(`Error while serving your customers:
                 
 ${e}`)
         .setColor(0xFF0000)
-        .setFooter('/help', this.client.user.displayAvatarURL())
+        .setFooter({
+          text: '/help',
+          iconURL: this.client.user.displayAvatarURL()
+        })
         .setTimestamp();
 
       message.reply({ embeds: [embed] });
