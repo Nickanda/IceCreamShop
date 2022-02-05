@@ -8,7 +8,7 @@ const express = require('express');
 const Client = require('./src/structures/Client');
 
 const client = new Client({
-  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MEMBERS, Discord.Intents.FLAGS.DIRECT_MESSAGES]
+  intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES]
 });
 
 const Sentry = require("@sentry/node");
