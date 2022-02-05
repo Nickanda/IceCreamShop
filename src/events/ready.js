@@ -76,7 +76,7 @@ module.exports = class ReadyEvent {
 
     setTimeout(() => { }, 250);
 
-    const rest = new REST({ version: '9' }).setToken(client.config.discordToken);
+    const rest = new REST({ version: '9' }).setToken(this.client.config.discordToken);
 
     (async () => {
       try {
