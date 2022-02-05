@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 const got = require('got');
 
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+
 module.exports = class ReadyEvent {
   constructor(client) {
     this.client = client;
@@ -73,12 +76,26 @@ module.exports = class ReadyEvent {
 
     setTimeout(() => { }, 250);
 
-    this.client.application?.commands.set(commandInfo).then(result => {
-      result.forEach(async command => {
-        await this.client.application?.commands.fetch(command.id)
-      });
+    const rest = new REST({ version: '9' }).setToken(client.config.discordToken);
 
-      console.log("All commands have been registered to slash commands successfully!");
-    });
+    (async () => {
+      try {
+        console.log('Started refreshing application (/) commands.');
+
+        await rest.put(
+          Routes.applicationGuildCommands(this.client.user.id),
+          { body: commandInfo },
+        );
+
+        await rest.put(
+          Routes.applicationGuildCommands(this.client.user.id, "768580865449787404"),
+          { body: [] },
+        );
+
+        console.log('Successfully reloaded application (/) commands.');
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }
 };
