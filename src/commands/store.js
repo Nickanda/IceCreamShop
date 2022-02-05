@@ -64,14 +64,17 @@ module.exports = class StoreCommand extends Command {
       case "ad": case "ads": case "advertisement": case "advertisements":
         let advertisements = "";
         for (const [key, val] of Object.entries(this.client.shopHandler.ads)) {
-          advertisements += `\n${key} Ad: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost for ${this.formatDate(val.duration)})\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+          advertisements += `\n${key} Ad: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost for ${this.formatDate(val.duration)})\n\tTo buy: \`/store buy ${val.id}\`\n`;
         }
 
         embed = new Discord.MessageEmbed()
           .setTitle("Store - Advertisements")
           .setDescription(`The advertisements that we offer at this time are:\n${advertisements}`)
           .setColor(0x00FF00)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -79,14 +82,17 @@ module.exports = class StoreCommand extends Command {
       case "flavor": case "flavors":
         let flavors = "";
         for (const [key, val] of Object.entries(this.client.shopHandler.flavors)) {
-          flavors += `\n${key.toProperCase()}: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+          flavors += `\n${key.toProperCase()}: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`/store buy ${val.id}\`\n`;
         }
 
         embed = new Discord.MessageEmbed()
           .setTitle("Store - Flavors")
           .setDescription(`The flavors that we offer at this time are:\n${flavors}`)
           .setColor(0x00FF00)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -94,14 +100,17 @@ module.exports = class StoreCommand extends Command {
       case "machine": case "machines":
         let machines = "";
         for (const [key, val] of Object.entries(this.client.shopHandler.machines)) {
-          machines += `\n${key} Machine: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`${message.settings.prefix}store buy ${val.id}\`\n`;
+          machines += `\n${key} Machine: $${val.cost} (${Math.round(100 * (val.boost - 1))}% boost)\n\tTo buy: \`/store buy ${val.id}\`\n`;
         }
 
         embed = new Discord.MessageEmbed()
           .setTitle("Store - Machines")
           .setDescription(`The machines that we offer at this time are:\n${machines}`)
           .setColor(0x00FF00)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });
@@ -124,32 +133,50 @@ module.exports = class StoreCommand extends Command {
               if (selected !== "") {
                 if (profile.money > this.client.shopHandler.ads[selected].cost) {
                   embed = new Discord.MessageEmbed()
-                    .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                    .setAuthor({
+                      name: message.author?.tag ?? message.user?.tag,
+                      iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                    })
                     .setTitle(profile.name)
                     .setDescription(`WIP`)
                     .setColor(0x00FF00)
-                    .setFooter('/help', this.client.user.displayAvatarURL())
+                    .setFooter({
+                      text: '/help',
+                      iconURL: this.client.user.displayAvatarURL()
+                    })
                     .setTimestamp();
 
                   message.reply({ embeds: [embed] });
                 } else {
                   embed = new Discord.MessageEmbed()
-                    .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                    .setAuthor({
+                      name: message.author?.tag ?? message.user?.tag,
+                      iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                    })
                     .setTitle(profile.name)
                     .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.ads[selected].cost}`)
                     .setColor(0xFF0000)
-                    .setFooter('/help', this.client.user.displayAvatarURL())
+                    .setFooter({
+                      text: '/help',
+                      iconURL: this.client.user.displayAvatarURL()
+                    })
                     .setTimestamp();
 
                   message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
-                  .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                  .setAuthor({
+                    name: message.author?.tag ?? message.user?.tag,
+                    iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                  })
                   .setTitle(profile.name)
                   .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                   .setColor(0xFF0000)
-                  .setFooter('/help', this.client.user.displayAvatarURL())
+                  .setFooter({
+                    text: '/help',
+                    iconURL: this.client.user.displayAvatarURL()
+                  })
                   .setTimestamp();
 
                 message.reply({ embeds: [embed] });
@@ -182,43 +209,67 @@ module.exports = class StoreCommand extends Command {
                     });
 
                     embed = new Discord.MessageEmbed()
-                      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                      .setAuthor({
+                        name: message.author?.tag ?? message.user?.tag,
+                        iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                      })
                       .setTitle(profile.name)
                       .setDescription(`${selected.toProperCase()} flavor has successfully been bought!`)
                       .setColor(0x00FF00)
-                      .setFooter('/help', this.client.user.displayAvatarURL())
+                      .setFooter({
+                        text: '/help',
+                        iconURL: this.client.user.displayAvatarURL()
+                      })
                       .setTimestamp();
 
                     message.reply({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
-                      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                      .setAuthor({
+                        name: message.author?.tag ?? message.user?.tag,
+                        iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                      })
                       .setTitle(profile.name)
                       .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.flavors[selected].cost}`)
                       .setColor(0xFF0000)
-                      .setFooter('/help', this.client.user.displayAvatarURL())
+                      .setFooter({
+                        text: '/help',
+                        iconURL: this.client.user.displayAvatarURL()
+                      })
                       .setTimestamp();
 
                     message.reply({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
-                    .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                    .setAuthor({
+                      name: message.author?.tag ?? message.user?.tag,
+                      iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                    })
                     .setTitle(profile.name)
                     .setDescription(`You already own this flavor!`)
                     .setColor(0xFF0000)
-                    .setFooter('/help', this.client.user.displayAvatarURL())
+                    .setFooter({
+                      text: '/help',
+                      iconURL: this.client.user.displayAvatarURL()
+                    })
                     .setTimestamp();
 
                   message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
-                  .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                  .setAuthor({
+                    name: message.author?.tag ?? message.user?.tag,
+                    iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                  })
                   .setTitle(profile.name)
                   .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                   .setColor(0xFF0000)
-                  .setFooter('/help', this.client.user.displayAvatarURL())
+                  .setFooter({
+                    text: '/help',
+                    iconURL: this.client.user.displayAvatarURL()
+                  })
                   .setTimestamp();
 
                 message.reply({ embeds: [embed] });
@@ -255,43 +306,67 @@ module.exports = class StoreCommand extends Command {
                     });
 
                     embed = new Discord.MessageEmbed()
-                      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                      .setAuthor({
+                        name: message.author?.tag ?? message.user?.tag,
+                        iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                      })
                       .setTitle(profile.name)
                       .setDescription(`${selected.toProperCase()} Machine has successfully been bought!`)
                       .setColor(0x00FF00)
-                      .setFooter('/help', this.client.user.displayAvatarURL())
+                      .setFooter({
+                        text: '/help',
+                        iconURL: this.client.user.displayAvatarURL()
+                      })
                       .setTimestamp();
 
                     message.reply({ embeds: [embed] });
                   } else {
                     embed = new Discord.MessageEmbed()
-                      .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                      .setAuthor({
+                        name: message.author?.tag ?? message.user?.tag,
+                        iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                      })
                       .setTitle(profile.name)
                       .setDescription(`At this time you can only own up to 5 machines in your shop. This may be expanded in the future.`)
                       .setColor(0xFF0000)
-                      .setFooter('/help', this.client.user.displayAvatarURL())
+                      .setFooter({
+                        text: '/help',
+                        iconURL: this.client.user.displayAvatarURL()
+                      })
                       .setTimestamp();
 
                     message.reply({ embeds: [embed] });
                   }
                 } else {
                   embed = new Discord.MessageEmbed()
-                    .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                    .setAuthor({
+                      name: message.author?.tag ?? message.user?.tag,
+                      iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                    })
                     .setTitle(profile.name)
                     .setDescription(`You do not have enough money to buy this item. Required amount: $${this.client.shopHandler.machines[selected].cost}`)
                     .setColor(0xFF0000)
-                    .setFooter('/help', this.client.user.displayAvatarURL())
+                    .setFooter({
+                      text: '/help',
+                      iconURL: this.client.user.displayAvatarURL()
+                    })
                     .setTimestamp();
 
                   message.reply({ embeds: [embed] });
                 }
               } else {
                 embed = new Discord.MessageEmbed()
-                  .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+                  .setAuthor({
+                    name: message.author?.tag ?? message.user?.tag,
+                    iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+                  })
                   .setTitle(profile.name)
                   .setDescription(`I cannot find the item that correlates to that ID right now. Please check the ID in the store command and try again.`)
                   .setColor(0xFF0000)
-                  .setFooter('/help', this.client.user.displayAvatarURL())
+                  .setFooter({
+                    text: '/help',
+                    iconURL: this.client.user.displayAvatarURL()
+                  })
                   .setTimestamp();
 
                 message.reply({ embeds: [embed] });
@@ -300,11 +375,17 @@ module.exports = class StoreCommand extends Command {
           }
         } else {
           embed = new Discord.MessageEmbed()
-            .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+            .setAuthor({
+              name: message.author?.tag ?? message.user?.tag,
+              iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+            })
             .setTitle(profile.name)
-            .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+            .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`/store <ads/flavors/machines/buy> [ID]\``)
             .setColor(0xFF0000)
-            .setFooter('/help', this.client.user.displayAvatarURL())
+            .setFooter({
+              text: '/help',
+              iconURL: this.client.user.displayAvatarURL()
+            })
             .setTimestamp();
 
           message.reply({ embeds: [embed] });
@@ -312,11 +393,17 @@ module.exports = class StoreCommand extends Command {
         break;
       default:
         embed = new Discord.MessageEmbed()
-          .setAuthor(message.author?.tag ?? message.user?.tag, message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL())
+          .setAuthor({
+            name: message.author?.tag ?? message.user?.tag,
+            iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
+          })
           .setTitle(profile.name)
-          .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}store <ads/flavors/machines/buy> [ID]\``)
+          .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`/store <ads/flavors/machines/buy> [ID]\``)
           .setColor(0xFF0000)
-          .setFooter('/help', this.client.user.displayAvatarURL())
+          .setFooter({
+            text: '/help',
+            iconURL: this.client.user.displayAvatarURL()
+          })
           .setTimestamp();
 
         message.reply({ embeds: [embed] });

@@ -19,7 +19,10 @@ module.exports = class SupportCommand extends Command {
       .addField("Invite Link", "[Invite Me!](https://discord.com/oauth2/authorize?client_id=765627044687249439&scope=applications.commands%20bot&permissions=347200)", true)
       .setColor(0x00FF00)
       .setThumbnail(this.client.user.displayAvatarURL())
-      .setFooter('/help', this.client.user.displayAvatarURL())
+      .setFooter({
+        text: '/help',
+        iconURL: this.client.user.displayAvatarURL()
+      })
       .setTimestamp();
 
     message.reply({ embeds: [embed] });

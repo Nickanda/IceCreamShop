@@ -17,7 +17,7 @@ module.exports = class {
 
     const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
     if (message.content.match(prefixMention)) {
-      return message.reply(`My prefix on this server is \`${settings.prefix}\``);
+      return message.reply(`My prefix on this server is \`/\``);
     }
 
     if (message.content.toLowerCase().indexOf(settings.prefix) !== 0) return;
