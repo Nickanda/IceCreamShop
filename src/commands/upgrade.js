@@ -39,7 +39,7 @@ module.exports = class UpgradeCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}upgrade <machine #>\``)
+        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`/upgrade <machine #>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',

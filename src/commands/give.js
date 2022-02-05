@@ -36,7 +36,7 @@ module.exports = class GiveCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include a user:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
+        .setDescription(`Please follow the proper command format and include a user:\n\n\`/give <@user> <amount>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',
@@ -54,7 +54,7 @@ module.exports = class GiveCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include an amount to donate:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
+        .setDescription(`Please follow the proper command format and include an amount to donate:\n\n\`/give <@user> <amount>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',
@@ -75,7 +75,7 @@ module.exports = class GiveCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format:\n\n\`${message.settings.prefix}give <@user> <amount>\``)
+        .setDescription(`Please follow the proper command format:\n\n\`/give <@user> <amount>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',

@@ -42,7 +42,7 @@ module.exports = class ChangeCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
+        .setDescription(`Please follow the proper command format and include a machine number:\n\n\`/change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',
@@ -60,7 +60,7 @@ module.exports = class ChangeCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include a new flavor:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
+        .setDescription(`Please follow the proper command format and include a new flavor:\n\n\`/change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',
@@ -81,7 +81,7 @@ module.exports = class ChangeCommand extends Command {
           iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
         })
         .setTitle(profile.name)
-        .setDescription(`Please follow the proper command format and include a valid flavor:\n\n\`${message.settings.prefix}change <machine #> <newFlavor>\``)
+        .setDescription(`Please follow the proper command format and include a valid flavor:\n\n\`/change <machine #> <newFlavor>\``)
         .setColor(0xFF0000)
         .setFooter({
           text: '/help',
@@ -164,7 +164,7 @@ module.exports = class ChangeCommand extends Command {
   //     iconURL: message.author?.displayAvatarURL() ?? message.user?.displayAvatarURL()
   // })
   //         .setTitle(profile.name)
-  //         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`${message.settings.prefix}change <flavor> <machine #> <newFlavor>\``)
+  //         .setDescription(`That is currently not a valid choice. Please follow the proper command format:\n\n\`/change <flavor> <machine #> <newFlavor>\``)
   //         .setColor(0xFF0000)
   //         .setFooter({
 //   text: '/help',

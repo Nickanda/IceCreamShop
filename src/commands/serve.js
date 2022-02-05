@@ -87,7 +87,14 @@ module.exports = class ServeCommand extends Command {
             })
             .setTimestamp();
 
-          message.reply({ embeds: [embed] });
+          const row = new Discord.MessageActionRow().addComponents(
+            new Discord.MessageButton()
+              .setCustomId("serve")
+              .setLabel("Serve Customers")
+              .setStyle("PRIMARY")
+          );
+
+          message.reply({ embeds: [embed], components: [row] });
         } else {
           const embed = new Discord.MessageEmbed()
             .setAuthor({
@@ -97,7 +104,7 @@ module.exports = class ServeCommand extends Command {
             .setTitle(profile.name)
             .setDescription(`Error while serving your customers:
                 
-Please refill your machines using the \`${message.settings.prefix}refill\` command!`)
+Please refill your machines using the \`/refill\` command!`)
             .setColor(0xFF0000)
             .setFooter({
               text: '/help',

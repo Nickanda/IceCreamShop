@@ -38,7 +38,7 @@ module.exports = class HelpCommand extends Command {
 
       let embed = new Discord.MessageEmbed()
         .setTitle('Command List')
-        .setDescription(`Use \`${settings.prefix}help <commandname>\` for details`)
+        .setDescription(`Use \`/help <commandname>\` for details`)
         .setFooter('Made with love by NicholasY#4815');
       sorted.forEach((c, index) => {
         const cat = c.help.category.toProperCase();
@@ -48,7 +48,7 @@ module.exports = class HelpCommand extends Command {
           currentCategory = cat;
           output = '```asciidoc\n';
         };
-        output += `${message.settings.prefix}${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
+        output += `/${c.help.name}${' '.repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
       });
       message.reply({ embeds: [embed] });
     } else {
