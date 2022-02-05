@@ -5,6 +5,25 @@ module.exports = class InteractionCreateEvent {
     this.client = client;
   }
 
+  filterCommands(array, options) {
+    switch (options.type) {
+      case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
+        array.push(options.value);
+        break;
+      case "USER":
+        array.push(options.user);
+        break;
+      case "CHANNEL":
+        array.push(options.channel);
+        break;
+      case "ROLE":
+        array.push(options.role);
+        break;
+      default:
+        break;
+    }
+  }
+
   async run(interaction) {
     if (interaction.isCommand()) {
       if (interaction.guild && !interaction.channel.permissionsFor(interaction.guild.me).missing(Discord.Permissions.FLAGS.SEND_MESSAGES)) return;
@@ -30,22 +49,7 @@ module.exports = class InteractionCreateEvent {
                 const interactionOptions = interaction.options.get(option.name, option.required ?? false);
 
                 if (interactionOptions && option.required) {
-                  switch (interactionOptions.type) {
-                    case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
-                      args.push(interactionOptions.value);
-                      break;
-                    case "USER":
-                      args.push(interactionOptions.user);
-                      break;
-                    case "CHANNEL":
-                      args.push(interactionOptions.channel);
-                      break;
-                    case "ROLE":
-                      args.push(interactionOptions.role);
-                      break;
-                    default:
-                      break;
-                  }
+                  this.filterCommands(args, interactionOptions);
                 }
               });
             }
@@ -54,22 +58,7 @@ module.exports = class InteractionCreateEvent {
           const interactionOptions = interaction.options.get(option.name, option.required ?? false);
 
           if (interactionOptions && option.required) {
-            switch (interactionOptions.type) {
-              case "STRING": case "INTEGER": case "BOOLEAN": case "NUMBER":
-                args.push(interactionOptions.value);
-                break;
-              case "USER":
-                args.push(interactionOptions.user);
-                break;
-              case "CHANNEL":
-                args.push(interactionOptions.channel);
-                break;
-              case "ROLE":
-                args.push(interactionOptions.role);
-                break;
-              default:
-                break;
-            }
+            this.filterCommands(args, interactionOptions);
           }
         }
       });
@@ -85,6 +74,8 @@ module.exports = class InteractionCreateEvent {
       } catch (e) {
         message.reply(e);
       }
+    } else if (interaction.isButton()) {
+
     }
   }
 };
