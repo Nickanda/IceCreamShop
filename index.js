@@ -11,14 +11,6 @@ const client = new Client({
   intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.DIRECT_MESSAGES]
 });
 
-const Sentry = require("@sentry/node");
-const Tracing = require("@sentry/tracing");
-
-Sentry.init({
-  dsn: "https://20454f919fd14b11ac6f24fbd436d5ed@o459376.ingest.sentry.io/5458429",
-  tracesSampleRate: 1.0,
-});
-
 const init = async () => {
   klaw("./src/commands").on("data", (item) => {
     const cmdFile = path.parse(item.path);
