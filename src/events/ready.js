@@ -17,12 +17,12 @@ module.exports = class ReadyEvent {
       throw new Error("No default setting available in the settings database.")
     }
 
-    this.client.user.setActivity(`/help | ${this.client.guilds.cache.size} Servers`);
+    this.client.user.setActivity(`discord.gg/sXkpG2J | ${this.client.guilds.cache.size} Servers`);
 
     this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.guilds.cache.size} servers.`, "ready");
 
     setInterval(async () => {
-      this.client.user.setActivity(`/help | ${this.client.guilds.cache.size} Servers`);
+      this.client.user.setActivity(`discord.gg/sXkpG2J | ${this.client.guilds.cache.size} Servers`);
 
       // this.client.dbl.postStats(this.client.guilds.cache.size);
 
