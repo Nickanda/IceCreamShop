@@ -32,6 +32,7 @@ module.exports = class ShopHandler extends StoreHandler {
             flavors: ["vanilla"],
             advertisements: [],
             dailyStreak: 0,
+            lastCleaned: Date.now(),
             premiumExpiration: null,
             createdAt: Date.now()
           }
